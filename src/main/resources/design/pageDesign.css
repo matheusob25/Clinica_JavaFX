@@ -1,0 +1,11 @@
+.white-bg{
+    -fx-background-color: #FFFFFF;
+}
+
+.radius{
+    -fx-background-radius: 6px;
+}
+
+.textfield-1{
+    -fx-border-color: linear-gradient(to bottom right, );
+}
