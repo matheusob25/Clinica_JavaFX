@@ -7,5 +7,23 @@
 }
 
 .textfield-1{
-    -fx-border-color: linear-gradient(to bottom right, );
+    -fx-border-color: #ddd;
+    -fx-border-width: .7px;
+    -fx-font-family: Tahoma;
+}
+.textfield-1:focused{
+    -fx-border-color: linear-gradient(to bottom right, #505fe5,#2b3580);
+    -fx-border-width: 1px;
+
+}
+.btn-1{
+    -fx-background-color: linear-gradient(to bottom right, #505fe5,#2b3580);
+    -fx-cursor: hand ;
+    -fx-text-fill: #fff ;
+    -fx-font-size: 14px;
+    -fx-font-family: Arial;
+}
+.btn-1:hover{
+    -fx-background-color: linear-gradient(to bottom right, #505fe5,#2b3580);
+
 }
