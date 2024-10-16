@@ -6,7 +6,6 @@ import com.example.clinica.model.dao.PacienteDao;
 import com.example.clinica.model.entities.Paciente;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.List;
 
 public class PacienteDaoJDBC implements PacienteDao {
@@ -30,7 +29,7 @@ public class PacienteDaoJDBC implements PacienteDao {
             st.setString(3,paciente.getNumber());
             st.setDate(4, Date.valueOf(paciente.getBirthDate()));
             st.setString(5, paciente.getCpf());
-            st.setInt(  5, paciente.getAddress().getId());
+            st.setLong(  5, paciente.getAddress().getId());
             st.setInt(6, paciente.getAnamnese().getId());
 
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Address {
-    private Integer id;
+    private Long id;
     private String descricao;
     private Bairro bairro;
     private String referencia;
@@ -12,18 +12,18 @@ public class Address {
 
     }
 
-    public Address(Integer id, String descricao, Bairro bairro, String referencia) {
+    public Address(Long id, String descricao, Bairro bairro, String referencia) {
         this.id = id;
         this.descricao = descricao;
         this.bairro = bairro;
         this.referencia = referencia;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
