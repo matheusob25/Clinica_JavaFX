@@ -29,14 +29,21 @@
                 <String fx:value="btn-1" />
                 <String fx:value="radius" />
             </styleClass></Button>
-        <PasswordField fx:id="login_password" layoutX="45.0" layoutY="260.0" prefHeight="39.0" prefWidth="310.0" promptText="Digite a senha do usuário" stylesheets="@../../../design/pageDesign.css">
+        <PasswordField fx:id="login_password" layoutX="45.0" layoutY="260.0" prefHeight="39.0" prefWidth="310.0" promptText="Digite a senha de usuário" stylesheets="@../../../design/pageDesign.css">
             <styleClass>
                 <String fx:value="textfield-1" />
                 <String fx:value="radius" />
-            </styleClass></PasswordField>
+            </styleClass>
+      </PasswordField>
         <FontAwesomeIconView fill="#364ac9" glyphName="USER" layoutX="181.0" layoutY="73.0" size="50" text="" wrappingWidth="38.0" />
-        <CheckBox fx:id="login_checkBox" layoutX="45.0" layoutY="307.0" mnemonicParsing="false" styleClass="radius" stylesheets="@../../../design/pageDesign.css" text="Mostrar senha" />
+        <CheckBox fx:id="login_checkBox" layoutX="45.0" layoutY="307.0" mnemonicParsing="false" onAction="#onLoginCheckBoxAction" styleClass="radius" stylesheets="@../../../design/pageDesign.css" text="Mostrar senha" />
         <MaterialDesignIconView fill="#2c4bc9" glyphName="TOOTH" layoutX="175.0" layoutY="499.0" size="50" />
+      <TextField fx:id="login_visible_password" layoutX="45.0" layoutY="260.0" prefHeight="39.0" prefWidth="310.0" promptText="Digite a senha de usuário" stylesheets="@../../../design/pageDesign.css" visible="false">
+         <styleClass>
+            <String fx:value="textfield-1" />
+            <String fx:value="radius" />
+         </styleClass>
+      </TextField>
     </children>
    <padding>
       <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />

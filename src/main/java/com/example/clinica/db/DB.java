@@ -15,6 +15,7 @@ public class DB {
 
                Properties props = loadProperties();
                String url = props.getProperty("dburl");
+               props.setProperty("password", System.getenv("DB_PASSWORD"));
                connection = DriverManager.getConnection(url,props);
            }catch (SQLException e) {
                throw new DbException(e.getMessage());
