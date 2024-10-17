@@ -3,6 +3,7 @@ package com.example.clinica;
 import com.example.clinica.model.dao.DaoFactory;
 import com.example.clinica.model.dao.impl.AdminDaoJDBC;
 import com.example.clinica.model.entities.Admin;
+import com.example.clinica.model.services.AdminSession;
 import com.example.clinica.utils.PasswordEncryptor;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -24,9 +25,10 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-//        Admin admin = new Admin("dono", PasswordEncryptor.hash("12345678"));
-//        adminDaoJDBC.insert(admin);
-//        System.out.println(admin.getName()+ " => "+ admin.getPassword());
+//      Admin admin = new Admin("dono", PasswordEncryptor.hash("12345678"));
+//      adminDaoJDBC.insert(admin);
+//      System.out.println(admin.getName()+ " => "+ admin.getPassword());
+
         launch();
 
     }

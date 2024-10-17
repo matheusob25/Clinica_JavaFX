@@ -11,6 +11,7 @@ import java.util.List;
 public class AdminDaoJDBC implements AdminDao {
 
     private Connection connection;
+
     public AdminDaoJDBC(Connection connection) {
         this.connection = connection;
     }
@@ -47,7 +48,7 @@ public class AdminDaoJDBC implements AdminDao {
         ResultSet rs = null;
         try {
             st = connection.prepareStatement(
-                    "SELECT adms.admin_nome, adms.admin_senha FROM tb_admins as adms WHERE adms.admin_nome = ?" );
+                    "SELECT adms.admin_id, adms.admin_nome, adms.admin_senha FROM tb_admins as adms WHERE adms.admin_nome = ?" );
 
             st.setString(1, name);
             rs = st.executeQuery();
