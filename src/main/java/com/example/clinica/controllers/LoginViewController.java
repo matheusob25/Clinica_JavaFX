@@ -4,7 +4,6 @@ import com.example.clinica.alerts.AlertMessage;
 
 import com.example.clinica.model.dao.DaoFactory;
 import com.example.clinica.model.services.AuthenticateService;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -47,20 +46,31 @@ public class LoginViewController {
 
         }
     }
-    @FXML
-    protected void onLoginButtonAction(ActionEvent event) {
-        boolean login = false;
-        if (loginCheckBox.isSelected() && loginPassword != null && loginName != null) {
-            login = authService.login(loginName.getText(), loginVisiblePassword.getText());
-        }else if((!loginCheckBox.isSelected()) && loginPassword != null && loginName != null){
-            login = authService.login(loginName.getText(), loginPassword.getText());
+    private void passwordVisibleOrInvisible() {
+        if (loginVisiblePassword.isVisible()) {
+            if(!loginPassword.getText().equals(loginVisiblePassword.getText())) {
+                loginPassword.setText(loginVisiblePassword.getText());
+            }
         }else{
-            alertMessage.errorMessage("Senha ou nome vazios");
+            if(!loginVisiblePassword.getText().equals(loginPassword.getText())) {
+                loginVisiblePassword.setText(loginPassword.getText());
+            }
         }
-        if (login) {
-            alertMessage.successMessage("Login efetuado com sucesso");
+    }
+
+    @FXML
+    protected void onLoginButtonAction() {
+        passwordVisibleOrInvisible();
+        boolean login = false;
+        if(loginPassword.getText().isEmpty() || loginName.getText().isEmpty()) {
+            alertMessage.errorMessage("Por favor preencha todos os campos");
+        }
+        login = authService.login(loginName.getText(), loginPassword.getText());
+
+        if (!login) {
+            alertMessage.errorMessage("nome ou senha não coincidem");
         }else{
-            alertMessage.errorMessage("senha ou nome inválidos");
+            alertMessage.successMessage("Login efetuado com sucesso");
         }
     }
 }
