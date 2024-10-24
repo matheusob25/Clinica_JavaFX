@@ -6,7 +6,7 @@ import javafx.scene.control.ButtonType;
 import java.util.Optional;
 
 public class AlertMessage {
-    private Alert alert;
+    private static Alert alert;
 
     public void errorMessage(String message){
         alert = new Alert(Alert.AlertType.ERROR);
@@ -22,7 +22,7 @@ public class AlertMessage {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    public boolean confirmationMessage(String message){
+    public static boolean confirmationMessage(String message){
         alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Mensagem de Confirmação");
         alert.setHeaderText(null);

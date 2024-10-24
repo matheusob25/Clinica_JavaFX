@@ -1,14 +1,14 @@
 package com.example.clinica.controllers;
 
+import com.example.clinica.alerts.AlertMessage;
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
@@ -24,6 +24,30 @@ public class MainViewController implements Initializable {
     private Label mainLabelDate;
     @FXML
     private Label mainLabelHour;
+
+    @FXML
+    private Label mainLabelLogout;
+    @FXML
+    private MaterialDesignIconView mainIconLogout;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setMainLabelDate();
+        setMainLabelHour();
+        onClickLogout();
+    }
+    private void onClickLogout(){
+        mainLabelLogout.setOnMouseClicked(event -> {
+            handleClick(mainLabelDate, mainIconLogout);
+        });
+        mainIconLogout.setOnMouseClicked(event -> {
+            handleClick(mainLabelDate, mainIconLogout);
+        });
+    }
+    private void handleClick(Label label, MaterialDesignIconView iconView){
+        AlertMessage.confirmationMessage("Logout");
+    }
+
 
     private void setMainLabelDate(){
         Runnable task = () -> {
@@ -44,11 +68,5 @@ public class MainViewController implements Initializable {
    public static ScheduledExecutorService getScheduler() {
         return scheduler;
    }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        setMainLabelDate();
-        setMainLabelHour();
 
-
-    }
 }

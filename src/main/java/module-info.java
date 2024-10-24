@@ -1,8 +1,9 @@
 module com.example.clinica {
-    requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
     requires jbcrypt;
+    requires de.jensd.fx.glyphs.materialdesignicons;
+    requires javafx.controls;
 
 
     opens com.example.clinica to javafx.fxml;
