@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -29,6 +30,10 @@ public class MainViewController implements Initializable {
     private Label mainLabelLogout;
     @FXML
     private MaterialDesignIconView mainIconLogout;
+
+    @FXML
+    private BorderPane mainBorderPane;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
