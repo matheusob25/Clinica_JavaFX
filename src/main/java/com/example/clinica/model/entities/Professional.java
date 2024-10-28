@@ -1,25 +1,25 @@
 package com.example.clinica.model.entities;
 
 
-public class Profissional {
+public class Professional {
     private Long id;
     private String name;
-    private String numero;
+    private String number;
     private String descricao;
 
-    public Profissional(String name, String numero, String descricao) {
+    public Professional(String name, String number, String descricao) {
         this.name = name;
-        this.numero = numero;
+        this.number = number;
         this.descricao = descricao;
     }
 
 
-    public String getNumero() {
-        return numero;
+    public String getNumber() {
+        return number;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public String getDescricao() {
@@ -32,10 +32,10 @@ public class Profissional {
 
     @Override
     public String toString() {
-        return "Profissional => " +
+        return "Professional => " +
                 "id: " + id +
                 ", nome: " + name +
-                ", numero: " + numero +
+                ", number: " + number +
                 ", descricao: " + descricao;
     }
 

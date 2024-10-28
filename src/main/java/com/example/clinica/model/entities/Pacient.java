@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Paciente implements Serializable {
+public class Pacient implements Serializable {
 
     private Integer id;
     private String name;
@@ -15,10 +15,10 @@ public class Paciente implements Serializable {
     private Address address;
     private Anamnese anamnese;
 
-    public Paciente(){
+    public Pacient(){
 
     }
-    public Paciente(String name, String email, String number,LocalDate birthDate, String cpf, Address address) {
+    public Pacient(String name, String email, String number, LocalDate birthDate, String cpf, Address address) {
         this.name = name;
         this.email = email;
         this.number = number;
@@ -93,8 +93,8 @@ public class Paciente implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Paciente paciente = (Paciente) o;
-        return Objects.equals(id, paciente.id);
+        Pacient pacient = (Pacient) o;
+        return Objects.equals(id, pacient.id);
     }
 
     @Override

@@ -2,20 +2,21 @@ package com.example.clinica.model.dao.impl;
 
 import com.example.clinica.db.DB;
 import com.example.clinica.db.DbException;
-import com.example.clinica.model.dao.PacienteDao;
-import com.example.clinica.model.entities.Paciente;
+import com.example.clinica.model.dao.PacientDao;
+import com.example.clinica.model.entities.Pacient;
 
 import java.sql.*;
 import java.util.List;
 
-public class PacienteDaoJDBC implements PacienteDao {
+public class PacientDaoJDBC implements PacientDao {
 
     private Connection connection;
-    public PacienteDaoJDBC(Connection connection) {
+
+    public PacientDaoJDBC(Connection connection) {
         this.connection = connection;
     }
     @Override
-    public void insert(Paciente paciente) {
+    public void insert(Pacient pacient) {
         PreparedStatement st = null;
         try{
             st = connection.prepareStatement(
@@ -24,13 +25,13 @@ public class PacienteDaoJDBC implements PacienteDao {
                             +" VALUES (?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS
             );
 
-            st.setString(1,paciente.getName());
-            st.setString(2,paciente.getEmail());
-            st.setString(3,paciente.getNumber());
-            st.setDate(4, Date.valueOf(paciente.getBirthDate()));
-            st.setString(5, paciente.getCpf());
-            st.setLong(  5, paciente.getAddress().getId());
-            st.setInt(6, paciente.getAnamnese().getId());
+            st.setString(1, pacient.getName());
+            st.setString(2, pacient.getEmail());
+            st.setString(3, pacient.getNumber());
+            st.setDate(4, Date.valueOf(pacient.getBirthDate()));
+            st.setString(5, pacient.getCpf());
+            st.setLong(  5, pacient.getAddress().getId());
+            st.setInt(6, pacient.getAnamnese().getId());
 
 
             int rowsAffected = st.executeUpdate();
@@ -40,7 +41,7 @@ public class PacienteDaoJDBC implements PacienteDao {
                 while (rs.next()) {
                     int id = rs.getInt(1);
                     System.out.println("Done! Id = " + id);
-                    paciente.setId(id);
+                    pacient.setId(id);
                 }
                 DB.closeResultSet(rs);
             }else{
@@ -56,7 +57,7 @@ public class PacienteDaoJDBC implements PacienteDao {
     }
 
     @Override
-    public void update(Paciente paciente) {
+    public void update(Pacient pacient) {
 
     }
 
@@ -66,12 +67,12 @@ public class PacienteDaoJDBC implements PacienteDao {
     }
 
     @Override
-    public Paciente findById(Integer id) {
+    public Pacient findById(Integer id) {
         return null;
     }
 
     @Override
-    public List<Paciente> findAll() {
+    public List<Pacient> findAll() {
         return List.of();
     }
 }

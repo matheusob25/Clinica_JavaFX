@@ -1,14 +1,14 @@
 package com.example.clinica.model.entities;
 
-public class Bairro {
+public class Neighborhood {
     private Integer id;
     private String nome;
     private City city;
 
-    public Bairro() {
+    public Neighborhood() {
     }
 
-    public Bairro(Integer id, String nome, City city) {
+    public Neighborhood(Integer id, String nome, City city) {
         this.id = id;
         this.nome = nome;
         this.city = city;
@@ -40,7 +40,7 @@ public class Bairro {
 
     @Override
     public String toString() {
-        return "Bairro{" +
+        return "Neighborhood{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", city=" + city +

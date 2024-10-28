@@ -25,7 +25,6 @@ public class MainViewController implements Initializable {
     private Label mainLabelDate;
     @FXML
     private Label mainLabelHour;
-
     @FXML
     private Label mainLabelLogout;
     @FXML
@@ -41,6 +40,10 @@ public class MainViewController implements Initializable {
         setMainLabelHour();
         onClickLogout();
     }
+    public void shutdownScheduler() {
+        getScheduler().shutdownNow();
+    }
+
     private void onClickLogout(){
         mainLabelLogout.setOnMouseClicked(event -> {
             handleClick(mainLabelDate, mainIconLogout);

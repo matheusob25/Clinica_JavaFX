@@ -4,8 +4,16 @@ import com.example.clinica.alerts.AlertMessage;
 
 import com.example.clinica.model.dao.DaoFactory;
 import com.example.clinica.model.services.AuthenticateService;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.LoadException;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class LoginViewController {
 
@@ -59,7 +67,7 @@ public class LoginViewController {
     }
 
     @FXML
-    protected void onLoginButtonAction() {
+    private synchronized void onLoginButtonAction(Event event) {
         passwordVisibleOrInvisible();
         boolean login = false;
         if(loginPassword.getText().isEmpty() || loginName.getText().isEmpty()) {
@@ -70,7 +78,19 @@ public class LoginViewController {
         if (!login) {
             alertMessage.errorMessage("nome ou senha não coincidem");
         }else{
-            alertMessage.successMessage("Login efetuado com sucesso");
+            try{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
+                Scene scene = new Scene(loader.load());
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+                ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
+
+            }catch (LoadException e){
+                alertMessage.errorMessage(e.getMessage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

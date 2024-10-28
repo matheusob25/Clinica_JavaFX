@@ -8,10 +8,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class MainApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setMinWidth(400);
         stage.setMinHeight(600);
@@ -19,12 +19,12 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
-        stage.setOnCloseRequest(event -> {
-            // Encerrar o ScheduledExecutorService quando a janela for fechada
-            if (MainViewController.getScheduler() != null && !MainViewController.getScheduler().isShutdown()) {
-                MainViewController.getScheduler().shutdown();
-            }
-        });
+    }
+    @Override
+    public void stop() throws Exception {
+        MainViewController controller = new MainViewController();
+        controller.shutdownScheduler();
+        super.stop();
     }
 
     public static void main(String[] args) {

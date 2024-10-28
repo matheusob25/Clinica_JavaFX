@@ -16,7 +16,7 @@
                 <TableColumn prefWidth="75.0" text="Nome" />
                 <TableColumn prefWidth="75.0" text="Idade " />
                   <TableColumn prefWidth="75.0" text="Email" />
-                  <TableColumn prefWidth="75.0" text="Número" />
+                  <TableColumn prefWidth="75.0" text="Número" /
                   <TableColumn prefWidth="75.0" text="CPF" />
                   <TableColumn prefWidth="75.0" text="Ação" />
               </columns>
@@ -26,7 +26,7 @@
             </TableView>
          </children>
       </AnchorPane>
-      <TextField layoutX="26.0" layoutY="46.0" prefHeight="31.0" prefWidth="231.0" promptText="Pesquisar paciente" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="46.0" />
+      <TextField layoutX="26.0" layoutY="46.0" prefHeight="31.0" prefWidth="231.0" promptText="Pesquisar pacient" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="46.0" />
       <Label layoutX="26.0" layoutY="22.0" prefHeight="18.0" prefWidth="231.0" styleClass="header-1" stylesheets="@../../../design/MainDesign.css" text="Informações dos Pacientes">
          <font>
             <Font size="14.0" />

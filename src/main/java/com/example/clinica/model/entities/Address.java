@@ -1,22 +1,19 @@
 package com.example.clinica.model.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Address {
     private Long id;
     private String descricao;
-    private Bairro bairro;
-    private String referencia;
+    private Neighborhood neighborhood;
+    private String reference;
     public Address() {
 
     }
 
-    public Address(Long id, String descricao, Bairro bairro, String referencia) {
+    public Address(Long id, String descricao, Neighborhood neighborhood, String reference) {
         this.id = id;
         this.descricao = descricao;
-        this.bairro = bairro;
-        this.referencia = referencia;
+        this.neighborhood = neighborhood;
+        this.reference = reference;
     }
 
     public Long getId() {
@@ -35,20 +32,20 @@ public class Address {
         this.descricao = descricao;
     }
 
-    public Bairro getBairro() {
-        return bairro;
+    public Neighborhood getBairro() {
+        return neighborhood;
     }
 
-    public void setBairro(Bairro bairro) {
-        this.bairro = bairro;
+    public void setBairro(Neighborhood neighborhood) {
+        this.neighborhood = neighborhood;
     }
 
-    public String getReferencia() {
-        return referencia;
+    public String getReference() {
+        return reference;
     }
 
-    public void setReferencia(String referencia) {
-        this.referencia = referencia;
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
     @Override
@@ -56,8 +53,8 @@ public class Address {
         return "Address{" +
                 "id=" + id +
                 ", descricao='" + descricao + '\'' +
-                ", bairro=" + bairro +
-                ", referencia='" + referencia + '\'' +
+                ", neighborhood=" + neighborhood +
+                ", reference='" + reference + '\'' +
                 '}';
     }
 }
