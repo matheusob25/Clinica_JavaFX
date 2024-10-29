@@ -2,6 +2,7 @@ package com.example.clinica.model.dao.impl;
 
 import com.example.clinica.db.DB;
 import com.example.clinica.db.DbException;
+import com.example.clinica.model.dao.AddressDao;
 import com.example.clinica.model.dao.AdminDao;
 import com.example.clinica.model.entities.Admin;
 
@@ -112,3 +113,4 @@ public class AdminDaoJDBC implements AdminDao {
 
     }
 }
+

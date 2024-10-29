@@ -4,6 +4,9 @@ import java.util.Objects;
 
 public class Anamnese {
     private Long id;
+    private String toothColor;
+    private String toothEsc;
+    private String toothShape;
     private String sensitivityAnesthesia;
     private String sensitivityAntibiotics;
     private String tc;
@@ -17,12 +20,16 @@ public class Anamnese {
     private Boolean sensitiveTooth;
     private String pregnancy;
     private String diabetes;
+    private String additionalAnnotations;
 
     public Anamnese() {
     }
 
-    public Anamnese(Long id, String sensitivityAnesthesia, String sensitivityAntibiotics, String tc, String ts, String paMax, String paMin, String medicationUse, String cancerHistory, String seriousIllness, String oralHygiene, Boolean sensitiveTooth, String pregnancy, String diabetes) {
+    public Anamnese(Long id,String toothColor,String toothEsc, String toothShape, String sensitivityAnesthesia, String sensitivityAntibiotics, String tc, String ts, String paMax, String paMin, String medicationUse, String cancerHistory, String seriousIllness, String oralHygiene, Boolean sensitiveTooth, String pregnancy, String diabetes, String additionalAnnotations) {
         this.id = id;
+        this.toothColor = toothColor;
+        this.toothEsc = toothEsc;
+        this.toothShape = toothShape;
         this.sensitivityAnesthesia = sensitivityAnesthesia;
         this.sensitivityAntibiotics = sensitivityAntibiotics;
         this.tc = tc;
@@ -36,6 +43,31 @@ public class Anamnese {
         this.sensitiveTooth = sensitiveTooth;
         this.pregnancy = pregnancy;
         this.diabetes = diabetes;
+        this.additionalAnnotations = additionalAnnotations;
+    }
+
+    public String getToothColor() {
+        return toothColor;
+    }
+
+    public void setToothColor(String toothColor) {
+        this.toothColor = toothColor;
+    }
+
+    public String getToothEsc() {
+        return toothEsc;
+    }
+
+    public void setToothEsc(String toothEsc) {
+        this.toothEsc = toothEsc;
+    }
+
+    public String getToothShape() {
+        return toothShape;
+    }
+
+    public void setToothShape(String toothShape) {
+        this.toothShape = toothShape;
     }
 
     public String getSensitivityAnesthesia() {
@@ -140,6 +172,12 @@ public class Anamnese {
 
     public void setDiabetes(String diabetes) {
         this.diabetes = diabetes;
+    }
+    public String getAdditionalAnnotations() {
+        return additionalAnnotations;
+    }
+    public void setAdditionalAnnotations(String additionalAnnotations) {
+        this.additionalAnnotations = additionalAnnotations;
     }
 
     public Long getId() {

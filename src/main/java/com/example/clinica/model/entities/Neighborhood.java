@@ -2,15 +2,15 @@ package com.example.clinica.model.entities;
 
 public class Neighborhood {
     private Long id;
-    private String nome;
+    private String name;
     private City city;
 
     public Neighborhood() {
     }
 
-    public Neighborhood(Long id, String nome, City city) {
+    public Neighborhood(Long id, String name, City city) {
         this.id = id;
-        this.nome = nome;
+        this.name = name;
         this.city = city;
     }
 
@@ -23,11 +23,11 @@ public class Neighborhood {
     }
 
     public String getNome() {
-        return nome;
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String name) {
+        this.name = name;
     }
 
     public City getCity() {
@@ -40,9 +40,9 @@ public class Neighborhood {
 
     @Override
     public String toString() {
-        return "Neighborhood{" +
+        return "NeighborhoodDao{" +
                 "id=" + id +
-                ", nome='" + nome + '\'' +
+                ", name='" + name + '\'' +
                 ", city=" + city +
                 '}';
     }

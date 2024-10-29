@@ -27,7 +27,7 @@ public class City {
 
     @Override
     public String toString() {
-        return "City{" +
+        return "CityDao{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

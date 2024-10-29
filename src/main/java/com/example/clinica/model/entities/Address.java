@@ -2,16 +2,16 @@ package com.example.clinica.model.entities;
 
 public class Address {
     private Long id;
-    private String descricao;
+    private String description;
     private Neighborhood neighborhood;
     private String reference;
     public Address() {
 
     }
 
-    public Address(Long id, String descricao, Neighborhood neighborhood, String reference) {
+    public Address(Long id, String description, Neighborhood neighborhood, String reference) {
         this.id = id;
-        this.descricao = descricao;
+        this.description = description;
         this.neighborhood = neighborhood;
         this.reference = reference;
     }
@@ -25,11 +25,11 @@ public class Address {
     }
 
     public String getDescricao() {
-        return descricao;
+        return description;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescricao(String description) {
+        this.description = description;
     }
 
     public Neighborhood getBairro() {
@@ -52,7 +52,7 @@ public class Address {
     public String toString() {
         return "Address{" +
                 "id=" + id +
-                ", descricao='" + descricao + '\'' +
+                ", description='" + description + '\'' +
                 ", neighborhood=" + neighborhood +
                 ", reference='" + reference + '\'' +
                 '}';

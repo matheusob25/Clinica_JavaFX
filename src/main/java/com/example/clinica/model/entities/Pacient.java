@@ -12,19 +12,32 @@ public class Pacient implements Serializable {
     private String number;
     private LocalDate birthDate;
     private String cpf;
+    private LocalDate startTreatment;
+    private LocalDate endTreatment;
+    private String profession;
+    private String maritalStatus;
+    private String dlne;
     private Address address;
     private Anamnese anamnese;
 
     public Pacient(){
 
     }
-    public Pacient(String name, String email, String number, LocalDate birthDate, String cpf, Address address) {
+
+    public Pacient(Long id, String name, String email, String number, LocalDate birthDate, String cpf, LocalDate startTreatment, LocalDate endTreatment, String profession, String maritalStatus, String dlne, Address address, Anamnese anamnese) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.number = number;
         this.birthDate = birthDate;
         this.cpf = cpf;
+        this.startTreatment = startTreatment;
+        this.endTreatment = endTreatment;
+        this.profession = profession;
+        this.maritalStatus = maritalStatus;
+        this.dlne = dlne;
         this.address = address;
+        this.anamnese = anamnese;
     }
 
     public Long getId() {
@@ -65,6 +78,46 @@ public class Pacient implements Serializable {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public LocalDate getStartTreatment() {
+        return startTreatment;
+    }
+
+    public void setStartTreatment(LocalDate startTreatment) {
+        this.startTreatment = startTreatment;
+    }
+
+    public LocalDate getEndTreatment() {
+        return endTreatment;
+    }
+
+    public void setEndTreatment(LocalDate endTreatment) {
+        this.endTreatment = endTreatment;
+    }
+
+    public String getProfession() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public String getMaritalStatus() {
+        return maritalStatus;
+    }
+
+    public void setMaritalStatus(String maritalStatus) {
+        this.maritalStatus = maritalStatus;
+    }
+
+    public String getDlne() {
+        return dlne;
+    }
+
+    public void setDlne(String dlne) {
+        this.dlne = dlne;
     }
 
     public Address getAddress() {
