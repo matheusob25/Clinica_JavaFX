@@ -1,5 +1,7 @@
 package com.example.clinica.controllers;
 
+
+import com.example.clinica.MainApplication;
 import com.example.clinica.alerts.AlertMessage;
 
 import com.example.clinica.model.dao.DaoFactory;
@@ -12,7 +14,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class LoginViewController {
@@ -34,7 +35,7 @@ public class LoginViewController {
         // Inicialmente, o campo loginVisiblePassword deve estar invisível e não gerenciado
         loginVisiblePassword.setVisible(false);
         loginVisiblePassword.setManaged(false);
-        authService = new AuthenticateService(DaoFactory.createAdminDao());
+        authService = new AuthenticateService();
     }
 
     @FXML
@@ -79,7 +80,7 @@ public class LoginViewController {
             alertMessage.errorMessage("nome ou senha não coincidem");
         }else{
             try{
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("main-view.fxml"));
+                FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
                 Scene scene = new Scene(loader.load());
                 Stage stage = new Stage();
                 stage.setScene(scene);

@@ -8,8 +8,8 @@ public interface PacientDao {
 
     void insert(Pacient pacient);
     void update(Pacient pacient);
-    void deleteById(Integer id);
-    Pacient findById(Integer id);
+    void deleteById(Long id);
+    Pacient findById(Long id);
     List<Pacient> findAll();
 
 }

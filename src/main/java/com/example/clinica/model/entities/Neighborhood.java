@@ -1,24 +1,24 @@
 package com.example.clinica.model.entities;
 
 public class Neighborhood {
-    private Integer id;
+    private Long id;
     private String nome;
     private City city;
 
     public Neighborhood() {
     }
 
-    public Neighborhood(Integer id, String nome, City city) {
+    public Neighborhood(Long id, String nome, City city) {
         this.id = id;
         this.nome = nome;
         this.city = city;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
