@@ -66,3 +66,28 @@
     -fx-text-fill: white;
 
 }
+
+.custom-checkbox .box {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5,0,0,0);
+    -fx-background-color: #ffffff;
+    -fx-mark-color: #394add; /* Cor do check dentro do quadrado */
+    -fx-border-radius: 5px;
+}
+
+.date-picker {
+    -fx-border-radius: 1px;
+    -fx-padding: 1;
+    -fx-font-size: 13px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 5,0,0,0);
+}
+
+.date-picker .arrow {
+    -fx-background-color: #4d4dbf;
+
+}
+
+/*.date-picker-popup {*/
+/*    -fx-background-color: #571111;*/
+/*    -fx-border-color: #6060ff;*/
+/*    -fx-border-radius: 5;*/
+/*}*/

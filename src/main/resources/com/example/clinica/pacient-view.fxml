@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -7,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="559.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clinica.controllers.">
+<AnchorPane prefHeight="559.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clinica.controllers.PacientViewController">
    <children>
       <AnchorPane layoutX="19.0" layoutY="97.0" prefHeight="447.0" prefWidth="694.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="97.0">
          <children>
@@ -16,7 +17,7 @@
                 <TableColumn prefWidth="75.0" text="Nome" />
                 <TableColumn prefWidth="75.0" text="Idade " />
                   <TableColumn prefWidth="75.0" text="Email" />
-                  <TableColumn prefWidth="75.0" text="Número" /
+                  <TableColumn prefWidth="75.0" text="Número" />
                   <TableColumn prefWidth="75.0" text="CPF" />
                   <TableColumn prefWidth="75.0" text="Ação" />
               </columns>
@@ -26,11 +27,12 @@
             </TableView>
          </children>
       </AnchorPane>
-      <TextField layoutX="26.0" layoutY="46.0" prefHeight="31.0" prefWidth="231.0" promptText="Pesquisar pacient" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="46.0" />
-      <Label layoutX="26.0" layoutY="22.0" prefHeight="18.0" prefWidth="231.0" styleClass="header-1" stylesheets="@../../../design/MainDesign.css" text="Informações dos Pacientes">
+      <TextField layoutX="26.0" layoutY="46.0" prefHeight="31.0" prefWidth="231.0" promptText="Pesquisar paciente" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="46.0" />
+      <Label layoutX="26.0" layoutY="22.0" prefHeight="18.0" prefWidth="231.0" styleClass="header-1" stylesheets="@../../../design/MainDesign.css" text="Pacientes" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="22.0">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
+      <Button layoutX="533.0" layoutY="46.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="201.0" styleClass="bg-color" stylesheets="@../../../design/MainDesign.css" text="Adicionar Novo Paciente" textFill="WHITE" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="46.0" />
    </children>
 </AnchorPane>

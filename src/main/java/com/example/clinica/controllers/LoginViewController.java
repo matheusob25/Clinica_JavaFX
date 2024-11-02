@@ -9,16 +9,18 @@ import com.example.clinica.model.services.AuthenticateService;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.fxml.LoadException;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class LoginViewController {
+public class LoginViewController implements Initializable {
 
-    private final AlertMessage alertMessage = new AlertMessage();
     private AuthenticateService authService;
     @FXML
     private TextField loginName;
@@ -30,8 +32,9 @@ public class LoginViewController {
     private Button loginButton;
     @FXML
     private TextField loginVisiblePassword;
-    @FXML
-    public void initialize() {
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         // Inicialmente, o campo loginVisiblePassword deve estar invisível e não gerenciado
         loginVisiblePassword.setVisible(false);
         loginVisiblePassword.setManaged(false);
@@ -72,12 +75,12 @@ public class LoginViewController {
         passwordVisibleOrInvisible();
         boolean login = false;
         if(loginPassword.getText().isEmpty() || loginName.getText().isEmpty()) {
-            alertMessage.errorMessage("Por favor preencha todos os campos");
+            AlertMessage.errorMessage("Por favor preencha todos os campos");
         }
         login = authService.login(loginName.getText(), loginPassword.getText());
 
         if (!login) {
-            alertMessage.errorMessage("nome ou senha não coincidem");
+            AlertMessage.errorMessage("nome ou senha não coincidem");
         }else{
             try{
                 FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
@@ -88,7 +91,7 @@ public class LoginViewController {
                 ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
 
             }catch (LoadException e){
-                alertMessage.errorMessage(e.getMessage());
+                AlertMessage.errorMessage(e.getMessage());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

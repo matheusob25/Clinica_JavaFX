@@ -1,13 +1,20 @@
 package com.example.clinica.controllers;
 
+import com.example.clinica.MainApplication;
 import com.example.clinica.alerts.AlertMessage;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -29,9 +36,56 @@ public class MainViewController implements Initializable {
     private Label mainLabelLogout;
     @FXML
     private MaterialDesignIconView mainIconLogout;
-
     @FXML
     private BorderPane mainBorderPane;
+    @FXML
+    private Button mainViewPacientsBttn;
+    @FXML
+    private Label mainViewGeneralInfo;
+
+    @FXML
+    private Button mainViewGeneralInfoBttn;
+
+    @FXML
+    private AnchorPane mainViewCenterAnchorPane;
+    @FXML
+    private AnchorPane mainViewGeneralInfoAnchorPane;
+
+
+
+    @FXML
+    void onMainViewGeneralInfoBttnAction(ActionEvent event) {
+        returnToMain();
+        mainViewGeneralInfo.setVisible(true);
+
+    }
+
+    @FXML
+    void onMainViewPacientsBttnAction() {
+        loadView("pacient-view.fxml");
+        mainViewGeneralInfo.setVisible(false);
+    }
+    private synchronized void loadView(String absolutePath) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource(absolutePath));
+            AnchorPane newAnchorPane = fxmlLoader.load();
+
+            mainViewCenterAnchorPane.getChildren().clear();
+            mainViewCenterAnchorPane.getChildren().add(newAnchorPane);
+
+            AnchorPane.setTopAnchor(newAnchorPane, 0.0);
+            AnchorPane.setBottomAnchor(newAnchorPane, 0.0);
+            AnchorPane.setLeftAnchor(newAnchorPane, 0.0);
+            AnchorPane.setRightAnchor(newAnchorPane, 0.0);
+
+        }catch (IOException e){
+            AlertMessage.errorMessage(e.getMessage());
+        }
+    }
+    private synchronized void returnToMain() {
+        mainViewCenterAnchorPane.getChildren().clear();
+        mainViewCenterAnchorPane.getChildren().add(mainViewGeneralInfoAnchorPane);
+    }
 
 
     @Override
@@ -40,9 +94,7 @@ public class MainViewController implements Initializable {
         setMainLabelHour();
         onClickLogout();
     }
-    public void shutdownScheduler() {
-        getScheduler().shutdownNow();
-    }
+
 
     private void onClickLogout(){
         mainLabelLogout.setOnMouseClicked(event -> {

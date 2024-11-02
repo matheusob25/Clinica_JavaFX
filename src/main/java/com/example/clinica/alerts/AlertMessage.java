@@ -8,14 +8,14 @@ import java.util.Optional;
 public class AlertMessage {
     private static Alert alert;
 
-    public void errorMessage(String message){
+    public static void errorMessage(String message){
         alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Mensagem de Erro");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
-    public void successMessage(String message){
+    public static void successMessage(String message){
         alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Mensagem de Informação");
         alert.setHeaderText(null);
