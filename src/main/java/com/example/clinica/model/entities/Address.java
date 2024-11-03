@@ -24,19 +24,19 @@ public class Address {
         this.id = id;
     }
 
-    public String getDescricao() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescricao(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public Neighborhood getBairro() {
+    public Neighborhood getNeighborhood() {
         return neighborhood;
     }
 
-    public void setBairro(Neighborhood neighborhood) {
+    public void setNeighborhood(Neighborhood neighborhood) {
         this.neighborhood = neighborhood;
     }
 

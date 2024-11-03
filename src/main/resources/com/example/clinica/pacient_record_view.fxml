@@ -15,7 +15,7 @@
 
 <AnchorPane prefHeight="601.0" prefWidth="828.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clinica.controllers.PacientRecordViewController">
    <children>
-      <BorderPane fx:id="formPacientRegistry" prefHeight="573.0" prefWidth="828.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane fx:id="formPacientRegistry" prefHeight="573.0" prefWidth="828.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <AnchorPane prefHeight="559.0" prefWidth="828.0" BorderPane.alignment="CENTER">
                <children>
@@ -183,7 +183,7 @@
             </AnchorPane>
          </center>
       </BorderPane>
-      <BorderPane fx:id="formPacientAnamnesis" layoutX="10.0" layoutY="10.0" prefHeight="601.0" prefWidth="838.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane fx:id="formPacientAnamnesis" layoutX="10.0" layoutY="10.0" prefHeight="601.0" prefWidth="838.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <AnchorPane prefHeight="559.0" prefWidth="828.0" BorderPane.alignment="CENTER">
                <children>

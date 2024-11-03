@@ -2,12 +2,14 @@ package com.example.clinica.model.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Objects;
 
 public class Pacient implements Serializable {
 
     private Long id;
     private String name;
+    private Integer age;
     private String email;
     private String number;
     private LocalDate birthDate;
@@ -54,6 +56,9 @@ public class Pacient implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+    public Integer getAge() {
+        return Period.between(birthDate, LocalDate.now()).getYears();
     }
 
     public String getEmail() {

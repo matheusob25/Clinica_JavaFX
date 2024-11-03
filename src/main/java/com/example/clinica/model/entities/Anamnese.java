@@ -4,50 +4,28 @@ import java.util.Objects;
 
 public class Anamnese {
     private Long id;
-    private String toothColor;
-    private String toothEsc;
-    private String toothShape;
     private String sensitivityAnesthesia;
     private String sensitivityAntibiotics;
     private String medicationUse;
+    private String seriousIllness;
+    private Boolean sensitiveTooth;
+    private Boolean pregnancy;
+    private Boolean diabetes;
     private String additionalAnnotations;
 
     public Anamnese() {
     }
-    public Anamnese (Long id, String toothColor, String toothEsc, String toothShape, String sensitivityAnesthesia, String sensitivityAntibiotics, String medicationUse, String additionalAnnotations) {
+
+    public Anamnese(Long id, String sensitivityAnesthesia, String sensitivityAntibiotics, String medicationUse, String seriousIllness, Boolean sensitiveTooth, Boolean pregnancy, Boolean diabetes, String additionalAnnotations) {
         this.id = id;
-        this.toothColor = toothColor;
-        this.toothEsc = toothEsc;
-        this.toothShape = toothShape;
         this.sensitivityAnesthesia = sensitivityAnesthesia;
         this.sensitivityAntibiotics = sensitivityAntibiotics;
         this.medicationUse = medicationUse;
+        this.seriousIllness = seriousIllness;
+        this.sensitiveTooth = sensitiveTooth;
+        this.pregnancy = pregnancy;
+        this.diabetes = diabetes;
         this.additionalAnnotations = additionalAnnotations;
-    }
-
-
-    public String getToothColor() {
-        return toothColor;
-    }
-
-    public void setToothColor(String toothColor) {
-        this.toothColor = toothColor;
-    }
-
-    public String getToothEsc() {
-        return toothEsc;
-    }
-
-    public void setToothEsc(String toothEsc) {
-        this.toothEsc = toothEsc;
-    }
-
-    public String getToothShape() {
-        return toothShape;
-    }
-
-    public void setToothShape(String toothShape) {
-        this.toothShape = toothShape;
     }
 
     public String getSensitivityAnesthesia() {
@@ -71,6 +49,38 @@ public class Anamnese {
 
     public void setMedicationUse(String medicationUse) {
         this.medicationUse = medicationUse;
+    }
+
+    public String getSeriousIllness() {
+        return seriousIllness;
+    }
+
+    public void setSeriousIllness(String seriousIllness) {
+        this.seriousIllness = seriousIllness;
+    }
+
+    public Boolean getSensitiveTooth() {
+        return sensitiveTooth;
+    }
+
+    public void setSensitiveTooth(Boolean sensitiveTooth) {
+        this.sensitiveTooth = sensitiveTooth;
+    }
+
+    public Boolean getPregnancy() {
+        return pregnancy;
+    }
+
+    public void setPregnancy(Boolean pregnancy) {
+        this.pregnancy = pregnancy;
+    }
+
+    public Boolean getDiabetes() {
+        return diabetes;
+    }
+
+    public void setDiabetes(Boolean diabetes) {
+        this.diabetes = diabetes;
     }
 
     public String getAdditionalAnnotations() {

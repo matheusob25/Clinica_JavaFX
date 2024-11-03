@@ -2,6 +2,7 @@ package com.example.clinica.controllers;
 
 import com.example.clinica.MainApplication;
 import com.example.clinica.alerts.AlertMessage;
+import com.example.clinica.model.services.PacientService;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -23,6 +24,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 public class MainViewController implements Initializable {
 
@@ -54,7 +56,7 @@ public class MainViewController implements Initializable {
 
 
     @FXML
-    void onMainViewGeneralInfoBttnAction(ActionEvent event) {
+    void onMainViewGeneralInfoBttnAction() {
         returnToMain();
         mainViewGeneralInfo.setVisible(true);
 
@@ -62,10 +64,13 @@ public class MainViewController implements Initializable {
 
     @FXML
     void onMainViewPacientsBttnAction() {
-        loadView("pacient-view.fxml");
+        loadView("pacient-view.fxml", (PacientViewController pacientViewController) -> {
+            pacientViewController.setPacientService(new PacientService());
+
+        });
         mainViewGeneralInfo.setVisible(false);
     }
-    private synchronized void loadView(String absolutePath) {
+    private synchronized void loadView(String absolutePath, Consumer<T> consumer) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource(absolutePath));
             AnchorPane newAnchorPane = fxmlLoader.load();

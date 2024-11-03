@@ -87,7 +87,7 @@ public class AdminDaoJDBC implements AdminDao {
             int rowsAffected = st.executeUpdate();
             if (rowsAffected > 0) {
                 ResultSet rs = st.getGeneratedKeys();
-                while (rs.next()) {
+                if (rs.next()) {
                     Long id = rs.getLong(1);
                     System.out.println("Done! Id = " + id);
                     admin.setId(id);

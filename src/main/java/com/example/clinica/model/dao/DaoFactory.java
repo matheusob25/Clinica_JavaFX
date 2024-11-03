@@ -1,10 +1,7 @@
 package com.example.clinica.model.dao;
 
 import com.example.clinica.db.DB;
-import com.example.clinica.model.dao.impl.AddressDaoJDBC;
-import com.example.clinica.model.dao.impl.AdminDaoJDBC;
-import com.example.clinica.model.dao.impl.AnamneseDaoJDBC;
-import com.example.clinica.model.dao.impl.PacientDaoJDBC;
+import com.example.clinica.model.dao.impl.*;
 import com.example.clinica.model.entities.Anamnese;
 
 public class DaoFactory {
@@ -19,6 +16,13 @@ public class DaoFactory {
     }
     public static AddressDao createAddressDao() {
         return new AddressDaoJDBC(DB.getConnection());
+
+    }
+    public static NeighborhoodDao createNeighborhoodDao() {
+        return new NeighborhoodDaoJDBC(DB.getConnection());
+    }
+    public static CityDao createCityDao() {
+        return new CityDaoJDBC(DB.getConnection());
     }
 
 

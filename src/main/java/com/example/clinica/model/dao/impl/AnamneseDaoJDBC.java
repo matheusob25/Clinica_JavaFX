@@ -16,52 +16,42 @@ public class AnamneseDaoJDBC implements AnamneseDao {
     }
     @Override
     public void insert(Anamnese anamnese) {
-//        PreparedStatement st = null;
-//        try {
-//            st = connection.prepareStatement(
-//            "INSERT INTO tb_anamneses (anamnese_cor_dentes, anamnese_esc_dentes," +
-//                "anamnese_forma_dentes, anamnese_sens_anestesia, anamnese_TC, anamnese_TS, " +
-//                "anamnese_PA_MAX,anamnese_PA_MIM, anamnese_sens_antibioticos, anamnese_uso_medicacao," +
-//                "anamnese_relato_cancer, anamnese_doenca_grave, anamnese_higiene_oral, anamnese_dente_sensivel," +
-//                "anamnese_gravidez, anamnese_diabete, anamnese_anotacoes_adicionais) " +
-//                "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS
-//            );
-//            st.setString(1,anamnese.getToothColor());
-//            st.setString(2,anamnese.getToothEsc());
-//            st.setString(3,anamnese.getToothShape());
-//            st.setString(4,anamnese.getSensitivityAnesthesia());
-//            st.setString(5,anamnese.getTc());
-//            st.setString(6,anamnese.getTs());
-//            st.setString(7,anamnese.getPaMax());
-//            st.setString(8,anamnese.getPaMin());
-//            st.setString(9,anamnese.getSensitivityAntibiotics());
-//            st.setString(10,anamnese.getMedicationUse());
-//            st.setString(11,anamnese.getCancerHistory());
-//            st.setString(12,anamnese.getSeriousIllness());
-//            st.setString(13,anamnese.getOralHygiene());
-//            st.setBoolean(14,anamnese.getSensitiveTooth());
-//            st.setString(15,anamnese.getPregnancy());
-//            st.setString(16,anamnese.getDiabetes());
-//            st.setString(17,anamnese.getAdditionalAnnotations());
-//
-//            int rowsAffected = st.executeUpdate();
-//            if (rowsAffected > 0) {
-//                ResultSet rs = st.getGeneratedKeys();
-//                while (rs.next()) {
-//                    Long id = rs.getLong(1);
-//                    System.out.println("Done! Id = " + id);
-//                    anamnese.setId(id);
-//                }
-//                DB.closeResultSet(rs);
-//            }else{
-//                throw new DbException("Erro ao inserir anamnese");
-//            }
-//
-//        }catch (SQLException e){
-//            throw new DbException(e.getMessage());
-//        }finally {
-//            DB.closeStatement(st);
-//        }
+        PreparedStatement st = null;
+        try {
+            st = connection.prepareStatement(
+            "INSERT INTO tb_anamneses (anamnese_sens_anestesia," +
+                "anamnese_sens_antibioticos, anamnese_uso_medicacao," +
+                "anamnese_doenca_grave, anamnese_dente_sensivel," +
+                "anamnese_gravidez, anamnese_diabete, anamnese_anotacoes_adicionais) " +
+                "VALUES (?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS
+            );
+            st.setString(1,anamnese.getSensitivityAnesthesia());
+            st.setString(2,anamnese.getSensitivityAntibiotics());
+            st.setString(3,anamnese.getMedicationUse());
+            st.setString(4,anamnese.getSeriousIllness());
+            st.setBoolean(5,anamnese.getSensitiveTooth());
+            st.setBoolean(6,anamnese.getPregnancy());
+            st.setBoolean(7,anamnese.getDiabetes());
+            st.setString(8,anamnese.getAdditionalAnnotations());
+
+            int rowsAffected = st.executeUpdate();
+            if (rowsAffected > 0) {
+                ResultSet rs = st.getGeneratedKeys();
+                if(rs.next()) {
+                    Long id = rs.getLong(1);
+                    System.out.println("Done! Id = " + id);
+                    anamnese.setId(id);
+                }
+                DB.closeResultSet(rs);
+            }else{
+                throw new DbException("Erro ao inserir anamnese");
+            }
+
+        }catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override

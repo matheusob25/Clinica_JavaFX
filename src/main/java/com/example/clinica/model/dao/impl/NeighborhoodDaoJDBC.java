@@ -2,36 +2,36 @@ package com.example.clinica.model.dao.impl;
 
 import com.example.clinica.db.DB;
 import com.example.clinica.db.DbException;
-import com.example.clinica.model.dao.AddressDao;
+import com.example.clinica.model.dao.NeighborhoodDao;
 import com.example.clinica.model.entities.Address;
-import com.example.clinica.model.entities.Pacient;
+import com.example.clinica.model.entities.Neighborhood;
 
 import java.sql.*;
 
-public class AddressDaoJDBC implements AddressDao {
+public class NeighborhoodDaoJDBC implements NeighborhoodDao {
     private Connection connection;
-    public AddressDaoJDBC(Connection connection) {
+    public NeighborhoodDaoJDBC(Connection connection) {
         this.connection = connection;
     }
     @Override
-    public void insert(Address address) {
+    public void insert(Neighborhood neighborhood) {
         PreparedStatement st = null;
         try {
-            st = connection.prepareStatement("INSERT INTO tb_enderecos(endereco_descricao,endereco_referencia,bairro_id) " +
-                    "VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS
+            st = connection.prepareStatement("INSERT INTO tb_bairros(bairro_nome, cidade_id) " +
+                    "VALUES (?,?)", Statement.RETURN_GENERATED_KEYS
             );
 
-            st.setString(1,address.getDescription());
-            st.setString(2, address.getReference());
-            st.setLong(3, address.getNeighborhood().getId());
+            st.setString(1, neighborhood.getNome());
+            st.setLong(2, neighborhood.getCity().getId());
+
 
             int rowsAffected = st.executeUpdate();
             if (rowsAffected > 0) {
                 ResultSet rs = st.getGeneratedKeys();
-                if(rs.next()) {
+                if (rs.next()) {
                     Long id = rs.getLong(1);
                     System.out.println("Done! Id = " + id);
-                    address.setId(id);
+                    neighborhood.setId(id);
                 }
                 DB.closeResultSet(rs);
             }
@@ -43,17 +43,17 @@ public class AddressDaoJDBC implements AddressDao {
     }
 
     @Override
-    public void update(Address address) {
+    public void update(Neighborhood neighborhood) {
 
     }
 
     @Override
-    public void delete(Address address) {
+    public void delete(Neighborhood neighborhood) {
 
     }
 
     @Override
-    public Address getByPacient(Pacient pacient) {
+    public Neighborhood findByAddress(Address address) {
         return null;
     }
 }

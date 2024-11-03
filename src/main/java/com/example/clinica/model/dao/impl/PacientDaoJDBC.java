@@ -49,7 +49,7 @@ public class PacientDaoJDBC implements PacientDao {
 
             if(rowsAffected > 0) {
                 ResultSet rs = st.getGeneratedKeys();
-                while (rs.next()) {
+                if(rs.next()) {
                     Long id = rs.getLong(1);
                     System.out.println("Done! Id = " + id);
                     pacient.setId(id);
@@ -116,10 +116,17 @@ public class PacientDaoJDBC implements PacientDao {
         return address;
     }
 
-    private Anamnese instantiateAnamnese(ResultSet rs) {
+    private Anamnese instantiateAnamnese(ResultSet rs)throws SQLException {
         Anamnese anamnese = new Anamnese();
-
-
+        anamnese.setId(rs.getLong("anamnese_id"));
+        anamnese.setSensitivityAnesthesia(rs.getString("anamnese_sens_anestesia "));
+        anamnese.setSensitivityAntibiotics(rs.getString("anamnese_sens_antibioticos"));
+        anamnese.setMedicationUse(rs.getString("anamnese_uso_medicacao"));
+        anamnese.setSeriousIllness(rs.getString("anamnese_doenca_grave"));
+        anamnese.setSensitiveTooth(rs.getBoolean("anamnese_dente_sensivel "));
+        anamnese.setPregnancy(rs.getBoolean("anamnese_gravidez"));
+        anamnese.setDiabetes(rs.getBoolean("anamnese_diabete"));
+        anamnese.setAdditionalAnnotations(rs.getString("anamnese_anotacoes_adicionais"));
         return anamnese;
     }
 
