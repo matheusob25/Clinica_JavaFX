@@ -66,11 +66,12 @@ public class MainViewController implements Initializable {
     void onMainViewPacientsBttnAction() {
         loadView("pacient-view.fxml", (PacientViewController pacientViewController) -> {
             pacientViewController.setPacientService(new PacientService());
+            pacientViewController.initializePacientsTable();
 
         });
         mainViewGeneralInfo.setVisible(false);
     }
-    private synchronized void loadView(String absolutePath, Consumer<T> consumer) {
+    private synchronized <T> void loadView(String absolutePath, Consumer<T> action) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource(absolutePath));
             AnchorPane newAnchorPane = fxmlLoader.load();
@@ -82,6 +83,9 @@ public class MainViewController implements Initializable {
             AnchorPane.setBottomAnchor(newAnchorPane, 0.0);
             AnchorPane.setLeftAnchor(newAnchorPane, 0.0);
             AnchorPane.setRightAnchor(newAnchorPane, 0.0);
+
+            T controller = fxmlLoader.getController();
+            action.accept(controller);
 
         }catch (IOException e){
             AlertMessage.errorMessage(e.getMessage());

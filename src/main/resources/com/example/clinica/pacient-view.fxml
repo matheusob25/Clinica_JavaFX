@@ -12,14 +12,14 @@
    <children>
       <AnchorPane layoutX="19.0" layoutY="97.0" prefHeight="447.0" prefWidth="694.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="97.0">
          <children>
-            <TableView layoutX="64.0" layoutY="14.0" prefHeight="435.0" prefWidth="660.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="pacientViewTable" layoutX="64.0" layoutY="14.0" prefHeight="435.0" prefWidth="660.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Nome" />
-                <TableColumn prefWidth="75.0" text="Idade " />
-                  <TableColumn prefWidth="75.0" text="Email" />
-                  <TableColumn prefWidth="75.0" text="Número" />
-                  <TableColumn prefWidth="75.0" text="CPF" />
-                  <TableColumn prefWidth="75.0" text="Ação" />
+                <TableColumn prefWidth="75.0" text="Nome" fx:id="pacientViewColumnName"/>
+                <TableColumn prefWidth="75.0" text="Idade " fx:id="pacientViewColumnAge" />
+                  <TableColumn prefWidth="75.0" text="Email" fx:id="pacientViewColumnEmail" />
+                  <TableColumn prefWidth="75.0" text="Número" fx:id="pacientViewColumnNumber" />
+                  <TableColumn prefWidth="75.0" text="CPF" fx:id="pacientViewColumnCPF"/>
+                  <TableColumn prefWidth="75.0" text="Ação" fx:id="pacientViewColumnAction" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

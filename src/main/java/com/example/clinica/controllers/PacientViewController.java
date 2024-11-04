@@ -4,7 +4,8 @@ import com.example.clinica.MainApplication;
 import com.example.clinica.alerts.AlertMessage;
 import com.example.clinica.model.entities.Pacient;
 import com.example.clinica.model.services.PacientService;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,10 +22,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class PacientViewController implements Initializable {
     private PacientService pacientService;
+    @FXML
+    private TableView<Pacient> pacientViewTable;
 
     @FXML
     private TableColumn<?,?> pacientViewColumnAction;
@@ -44,8 +48,8 @@ public class PacientViewController implements Initializable {
     @FXML
     private TableColumn<Pacient, String> pacientViewColumnNumber;
 
-    @FXML
-    private TableView<Pacient> pacientViewTable;
+    private ObservableList<Pacient> obsPacients;
+
 
     @FXML
     private Button pacientViewAddNewBttn;
@@ -87,6 +91,14 @@ public class PacientViewController implements Initializable {
         pacientViewColumnNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
         pacientViewColumnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 
+    }
+    public void initializePacientsTable(){
+        if(pacientService == null){
+            throw new IllegalStateException("Service was not instantiated");
+        }
+        List<Pacient> pacients = pacientService.findAll();
+        obsPacients = FXCollections.observableArrayList(pacients);
+        pacientViewTable.setItems(obsPacients);
     }
 
 
