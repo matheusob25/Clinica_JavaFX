@@ -6,14 +6,13 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.ConstraintsBase;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -95,7 +94,7 @@ public class PacientRecordViewController implements Initializable {
     }
 
 
-    private void setInitialState(ActionEvent event) {
+    private void setInitialState() {
         formPacientAddress.setVisible(false);
         formPacientAnamnesis.setVisible(false);
         formPacientRegistry.setVisible(true);
@@ -122,8 +121,56 @@ public class PacientRecordViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setFormPacientMaritalStatus();
-        setInitialState(new ActionEvent());
+        setInitialState();
+        initializeNodes();
 
+    }
+    private void initializeNodes(){
+        TextField dateEditor = formPacientBirthDate.getEditor();
+        dateEditor.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[\\d/]*")) {
+                dateEditor.setText(newValue.replaceAll("[^\\d/]", ""));
+            }
+        });
+        TextField dateEditor2 = formPacientStartTreat.getEditor();
+        dateEditor2.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[\\d/]*")) {
+                dateEditor2.setText(newValue.replaceAll("[^\\d/]", ""));
+            }
+        });
+        TextField dateEditor3 = formPacientEndTreat.getEditor();
+        dateEditor3.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[\\d/]*")) {
+                dateEditor3.setText(newValue.replaceAll("[^\\d/]", ""));
+            }
+        });
+        formPacientNumber.setTextFormatter(new TextFormatter<String>(change -> {
+            String text = change.getControlNewText();
+
+            // Remove todos os caracteres que não são dígitos
+            text = text.replaceAll("[^\\d]", "");
+
+            // Aplica a formatação (62) 99903-1509
+            if (text.length() > 11) {
+                text = text.substring(0, 11); // Limita a 11 dígitos
+            }
+            String formatted = text;
+            if (text.length() > 2) {
+                formatted = "(" + text.substring(0, 2) + ") " + text.substring(2);
+            }
+            if (text.length() > 7) {
+                formatted = formatted.substring(0, 9) + "-" + formatted.substring(9);
+            }
+
+            change.setText(formatted);
+            change.setRange(0, change.getControlText().length());
+            return change;
+        }));
+        formPacientCPF.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("[\\d]*")) {
+                formPacientCPF.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
 
     }
 
