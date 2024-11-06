@@ -1,5 +1,6 @@
 package com.example.clinica.controllers;
 
+import com.example.clinica.model.entities.Pacient;
 import com.example.clinica.model.services.PacientService;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -17,58 +18,81 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PacientRecordViewController implements Initializable {
+
     private PacientService pacientService;
+    private Pacient entity;
 
     @FXML
-    private BorderPane formPacientAddress;
+    private BorderPane formPacientRegistry;
+    @FXML
+    private DatePicker formPacientBirthDate;
+    @FXML
+    private TextField formPacientCPF;
+    @FXML
+    private TextField formPacientDLNE;
+    @FXML
+    private TextField formPacientEmail;
+    @FXML
+    private DatePicker formPacientEndTreat;
+    @FXML
+    private ComboBox<String> formPacientMaritalStatus;
+    @FXML
+    private TextField formPacientName;
+    @FXML
+    private TextField formPacientNumber;
+    @FXML
+    private TextField formPacientSecondNumber;
+    @FXML
+    private TextField formPacientProfession;
+    @FXML
+    private DatePicker formPacientStartTreat;
+    @FXML
+    private Button formPacientRegistryProceed;
 
+
+
+    // address fields
+    @FXML
+    private BorderPane formPacientAddress;
+    @FXML
+    private TextField formPacientAddressInfo;
+    @FXML
+    private TextField formPacientNeighborhood;
+    @FXML
+    private TextArea formPacientReference;
+    @FXML
+    private TextField formPacientCity;
+    @FXML
+    private Button formPacientAddressProceed;
+    @FXML
+    private Button formPacientAddressReturn;
+
+
+    //anamnesis fields
     @FXML
     private BorderPane formPacientAnamnesis;
     @FXML
-    private BorderPane formPacientRegistry;
-
+    private CheckBox formPacientSensitiveTooth;
     @FXML
-    private DatePicker formPacientBirthDate;
-
+    private TextField formPacientSeriousIllness;
     @FXML
-    private TextField formPacientCPF;
-
+    private CheckBox formPacientPregnancy;
     @FXML
-    private TextField formPacientDLNE;
-
+    private TextField formPacientMedicationUse;
     @FXML
-    private TextField formPacientEmail;
-
+    private CheckBox formPacientDiabetes;
     @FXML
-    private DatePicker formPacientEndTreat;
-
+    private TextField formPacientAnesthesia;
     @FXML
-    private ComboBox<String> formPacientMaritalStatus;
-
+    private TextField formPacientAntibiotics;
     @FXML
-    private TextField formPacientName;
-
-    @FXML
-    private TextField formPacientNumber;
-
-    @FXML
-    private TextField formPacientProfession;
-
-    @FXML
-    private DatePicker formPacientStartTreat;
-
-    @FXML
-    private Button formPacientRegistryProceed;
+    private TextArea formPacientAnnotations;
     @FXML
     private Button formPacientAnamnesisFinish;
-
     @FXML
     private Button formPacientAnamnesisReturn;
-    @FXML
-    private Button formPacientAddressProceed;
 
-    @FXML
-    private Button formPacientAddressReturn;
+
 
     @FXML
     public void switchForms(ActionEvent event) {
@@ -118,6 +142,10 @@ public class PacientRecordViewController implements Initializable {
         this.pacientService = pacientService;
     }
 
+    public void setEntity(Pacient entity) {
+        this.entity = entity;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setFormPacientMaritalStatus();
@@ -150,27 +178,46 @@ public class PacientRecordViewController implements Initializable {
             // Remove todos os caracteres que não são dígitos
             text = text.replaceAll("[^\\d]", "");
 
-            // Aplica a formatação (62) 99903-1509
             if (text.length() > 11) {
                 text = text.substring(0, 11); // Limita a 11 dígitos
             }
-            String formatted = text;
-            if (text.length() > 2) {
-                formatted = "(" + text.substring(0, 2) + ") " + text.substring(2);
-            }
-            if (text.length() > 7) {
-                formatted = formatted.substring(0, 9) + "-" + formatted.substring(9);
-            }
 
-            change.setText(formatted);
+            change.setText(text);
             change.setRange(0, change.getControlText().length());
             return change;
         }));
-        formPacientCPF.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("[\\d]*")) {
-                formPacientCPF.setText(newValue.replaceAll("[^\\d]", ""));
+        formPacientSecondNumber.setTextFormatter(new TextFormatter<String>(change -> {
+            String text = change.getControlNewText();
+
+            // Remove todos os caracteres que não são dígitos
+            text = text.replaceAll("[^\\d]", "");
+
+            if (text.length() > 11) {
+                text = text.substring(0, 11); // Limita a 11 dígitos
             }
-        });
+
+            change.setText(text);
+            change.setRange(0, change.getControlText().length());
+            return change;
+        }));
+        formPacientCPF.setTextFormatter(new TextFormatter<String>(change -> {
+            String text = change.getControlNewText();
+
+            // Remove todos os caracteres que não são dígitos
+            text = text.replaceAll("[^\\d]", "");
+
+            if (text.length() > 11) {
+                text = text.substring(0, 11); // Limita a 14 dígitos
+            }
+
+
+            change.setText(text);
+            change.setRange(0, change.getControlText().length());
+            return change;
+        }));
+
+    }
+    public void updateFormData(){
 
     }
 

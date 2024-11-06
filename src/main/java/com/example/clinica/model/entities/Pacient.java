@@ -12,6 +12,7 @@ public class Pacient implements Serializable {
     private Integer age;
     private String email;
     private String number;
+    private String numberTwo;
     private LocalDate birthDate;
     private String cpf;
     private LocalDate startTreatment;
@@ -26,11 +27,12 @@ public class Pacient implements Serializable {
 
     }
 
-    public Pacient(Long id, String name, String email, String number, LocalDate birthDate, String cpf, LocalDate startTreatment, LocalDate endTreatment, String profession, String maritalStatus, String dlne, Address address, Anamnese anamnese) {
+    public Pacient(Long id, String name, String email, String number, String numberTwo, LocalDate birthDate, String cpf, LocalDate startTreatment, LocalDate endTreatment, String profession, String maritalStatus, String dlne, Address address, Anamnese anamnese) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.number = number;
+        this.numberTwo = numberTwo;
         this.birthDate = birthDate;
         this.cpf = cpf;
         this.startTreatment = startTreatment;
@@ -57,6 +59,7 @@ public class Pacient implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
     public Integer getAge() {
         return Period.between(birthDate, LocalDate.now()).getYears();
     }
@@ -75,6 +78,14 @@ public class Pacient implements Serializable {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public String getNumberTwo() {
+        return numberTwo;
+    }
+
+    public void setNumberTwo(String numberTwo) {
+        this.numberTwo = numberTwo;
     }
 
     public String getCpf() {

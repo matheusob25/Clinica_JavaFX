@@ -25,24 +25,25 @@ public class PacientDaoJDBC implements PacientDao {
         try{
             st = connection.prepareStatement(
                     "INSERT INTO tb_pacientes "
-                            +"(paciente_nome, paciente_email, paciente_numero, paciente_data_nascimento, " +
-                            "paciente_cpf,paciente_inicio_tratamento,paciente_termino_tratamento,paciente_profissao," +
-                            "paciente_estado_civil,paciente_dlne, endereco_id, anamnese_id)"
-                            +" VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS
+                         +"(paciente_nome, paciente_email, paciente_numero,paciente_segundo_numero, paciente_data_nascimento, "
+                         +"paciente_cpf,paciente_inicio_tratamento,paciente_termino_tratamento,paciente_profissao,"
+                         +"paciente_estado_civil,paciente_dlne, endereco_id, anamnese_id)"
+                         +" VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS
             );
 
             st.setString(1, pacient.getName());
             st.setString(2, pacient.getEmail());
             st.setString(3, pacient.getNumber());
-            st.setDate(4, Date.valueOf(pacient.getBirthDate()));
-            st.setString(5, pacient.getCpf());
-            st.setDate(6,Date.valueOf(pacient.getStartTreatment()));
-            st.setDate(7,Date.valueOf(pacient.getEndTreatment()));
-            st.setString(8,pacient.getProfession());
-            st.setString(9,pacient.getMaritalStatus());
-            st.setString(10,pacient.getDlne());
-            st.setLong(11, pacient.getAddress().getId());
-            st.setLong(12, pacient.getAnamnese().getId());
+            st.setString(4,pacient.getNumberTwo());
+            st.setDate(5, Date.valueOf(pacient.getBirthDate()));
+            st.setString(6, pacient.getCpf());
+            st.setDate(7,Date.valueOf(pacient.getStartTreatment()));
+            st.setDate(8,Date.valueOf(pacient.getEndTreatment()));
+            st.setString(9,pacient.getProfession());
+            st.setString(10,pacient.getMaritalStatus());
+            st.setString(11,pacient.getDlne());
+            st.setLong(12, pacient.getAddress().getId());
+            st.setLong(13, pacient.getAnamnese().getId());
 
 
             int rowsAffected = st.executeUpdate();

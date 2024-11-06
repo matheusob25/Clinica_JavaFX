@@ -32,7 +32,7 @@
                      </styleClass>
                   </TextField>
                <Label layoutX="46.0" layoutY="244.0" prefHeight="16.0" prefWidth="99.0" text="Email" />
-               <TextField fx:id="formPacientEmail" layoutX="46.0" layoutY="269.0" prefHeight="37.0" prefWidth="736.0" promptText="exemplo@gmail.com" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="269.0">
+               <TextField fx:id="formPacientEmail" layoutX="46.0" layoutY="269.0" prefHeight="37.0" prefWidth="350.0" promptText="exemplo@gmail.com" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="269.0">
                      <styleClass>
                         <String fx:value="shadow" />
                         <String fx:value="radius" />
@@ -46,7 +46,7 @@
                      </styleClass>
                   </TextField>
                <Label layoutX="413.0" layoutY="98.0" prefHeight="16.0" prefWidth="195.0" text="CPF" AnchorPane.leftAnchor="413.0" AnchorPane.topAnchor="98.0" />
-               <Label layoutX="415.0" layoutY="172.0" prefHeight="16.0" prefWidth="266.0" text="DLNE" AnchorPane.leftAnchor="415.0" AnchorPane.topAnchor="172.0" />
+               <Label layoutX="415.0" layoutY="172.0" prefHeight="16.0" prefWidth="266.0" text="Segundo número (Opcional)" AnchorPane.leftAnchor="415.0" AnchorPane.topAnchor="172.0" />
                <Label layoutX="413.0" layoutY="317.0" prefHeight="16.0" prefWidth="265.0" text="Estado civil" AnchorPane.leftAnchor="413.0" AnchorPane.topAnchor="317.0" />
                <Label layoutX="47.0" layoutY="317.0" prefHeight="16.0" prefWidth="144.0" text="Profissão" />
                <TextField fx:id="formPacientProfession" layoutX="47.0" layoutY="342.0" prefHeight="37.0" prefWidth="350.0" promptText="digite a profissão" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="342.0">
@@ -68,7 +68,7 @@
                         <String fx:value="radius" />
                      </styleClass>
                   </TextField>
-                  <TextField fx:id="formPacientDLNE" layoutX="414.0" layoutY="195.0" prefHeight="37.0" prefWidth="367.0" stylesheets="@../../../design/MainDesign.css">
+                  <TextField fx:id="formPacientSecondNumber" layoutX="414.0" layoutY="195.0" prefHeight="37.0" prefWidth="367.0" stylesheets="@../../../design/MainDesign.css">
                      <styleClass>
                         <String fx:value="shadow" />
                         <String fx:value="radius" />
@@ -91,6 +91,13 @@
                         <String fx:value="white-bg" />
                      </styleClass>
                   </ComboBox>
+                  <Label layoutX="414.0" layoutY="244.0" prefHeight="16.0" prefWidth="266.0" text="DLNE" />
+                  <TextField fx:id="formPacientDLNE" layoutX="414.0" layoutY="269.0" prefHeight="37.0" prefWidth="367.0" stylesheets="@../../../design/MainDesign.css">
+                     <styleClass>
+                        <String fx:value="shadow" />
+                        <String fx:value="radius" />
+                     </styleClass>
+                  </TextField>
                </children>
             </AnchorPane>
          </center>
@@ -136,15 +143,15 @@
                   <AnchorPane prefHeight="555.0" prefWidth="783.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Label prefHeight="16.0" prefWidth="124.0" text="Endereço" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="41.0" />
-                        <TextField prefHeight="41.0" prefWidth="724.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="66.0">
+                        <TextField fx:id="formPacientAddressInfo" prefHeight="41.0" prefWidth="724.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="66.0">
                            <styleClass>
                               <String fx:value="radius" />
                               <String fx:value="shadow" />
                            </styleClass>
                         </TextField>
-                        <Label layoutX="45.0" layoutY="299.0" prefHeight="16.0" prefWidth="225.0" text="Referencia (Opcional)" AnchorPane.leftAnchor="47.0" />
+                        <Label layoutX="45.0" layoutY="299.0" prefHeight="16.0" prefWidth="225.0" text="Referência (Opcional)" AnchorPane.leftAnchor="47.0" />
                         <Label prefHeight="16.0" prefWidth="123.0" text="Bairro" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="124.0" />
-                        <TextField prefHeight="41.0" prefWidth="723.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="152.0">
+                        <TextField fx:id="formPacientNeighborhood" prefHeight="41.0" prefWidth="723.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="152.0">
                            <styleClass>
                               <String fx:value="shadow" />
                               <String fx:value="radius" />
@@ -158,7 +165,7 @@
                            </styleClass>
                         </Button>
                         <Label layoutX="45.0" layoutY="205.0" prefHeight="16.0" prefWidth="124.0" text="Cidade" />
-                        <TextField prefHeight="41.0" prefWidth="721.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="230.0">
+                        <TextField fx:id="formPacientCity" prefHeight="41.0" prefWidth="721.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="47.0" AnchorPane.topAnchor="230.0">
                            <styleClass>
                               <String fx:value="radius" />
                               <String fx:value="shadow" />
@@ -171,7 +178,7 @@
                               <String fx:value="shadow" />
                            </styleClass>
                         </Button>
-                        <TextArea layoutX="47.0" layoutY="332.0" prefHeight="109.0" prefWidth="735.0" stylesheets="@../../../design/MainDesign.css" wrapText="true" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="47.0">
+                        <TextArea fx:id="formPacientReference" layoutX="47.0" layoutY="325.0" prefHeight="116.0" prefWidth="734.0" stylesheets="@../../../design/MainDesign.css" wrapText="true" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="47.0">
                            <styleClass>
                               <String fx:value="radius" />
                               <String fx:value="shadow" />
@@ -188,21 +195,21 @@
             <AnchorPane prefHeight="559.0" prefWidth="828.0" BorderPane.alignment="CENTER">
                <children>
                   <Label layoutX="47.0" layoutY="41.0" prefHeight="16.0" prefWidth="195.0" text="Alergia a anestesia" AnchorPane.leftAnchor="48.0" AnchorPane.topAnchor="41.0" />
-                  <TextField layoutX="47.0" layoutY="66.0" prefHeight="41.0" prefWidth="265.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="66.0">
+                  <TextField fx:id="formPacientAnesthesia" layoutX="47.0" layoutY="66.0" prefHeight="41.0" prefWidth="265.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="66.0">
                      <styleClass>
                         <String fx:value="radius" />
                         <String fx:value="shadow" />
                      </styleClass>
                   </TextField>
                   <Label layoutX="47.0" layoutY="213.0" prefHeight="16.0" prefWidth="123.0" text="Doença grave" />
-                  <TextField layoutX="47.0" layoutY="238.0" prefHeight="41.0" prefWidth="265.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="238.0">
+                  <TextField fx:id="formPacientSeriousIllness" layoutX="47.0" layoutY="238.0" prefHeight="41.0" prefWidth="265.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="238.0">
                      <styleClass>
                         <String fx:value="shadow" />
                         <String fx:value="radius" />
                      </styleClass>
                   </TextField>
-                  <Label layoutX="47.0" layoutY="127.0" prefHeight="16.0" prefWidth="177.0" text="Alergia a Antibióticos" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="124.0" />
-                  <TextField layoutX="47.0" layoutY="152.0" prefHeight="41.0" prefWidth="265.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="152.0">
+                  <Label layoutX="47.0" layoutY="127.0" prefHeight="16.0" prefWidth="177.0" text="Alergia a antibióticos" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="124.0" />
+                  <TextField fx:id="formPacientAntibiotics" layoutX="47.0" layoutY="152.0" prefHeight="41.0" prefWidth="265.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="152.0">
                      <styleClass>
                         <String fx:value="shadow" />
                         <String fx:value="radius" />
@@ -217,7 +224,7 @@
                         <String fx:value="shadow" />
                      </styleClass>
                   </Button>
-                  <TextField layoutX="515.0" layoutY="66.0" prefHeight="41.0" prefWidth="265.0" stylesheets="@../../../design/MainDesign.css">
+                  <TextField fx:id="formPacientMedicationUse" layoutX="515.0" layoutY="66.0" prefHeight="41.0" prefWidth="265.0" stylesheets="@../../../design/MainDesign.css">
                      <styleClass>
                         <String fx:value="shadow" />
                         <String fx:value="radius" />
@@ -230,22 +237,22 @@
                         <String fx:value="shadow" />
                      </styleClass>
                   </Button>
-                  <CheckBox layoutX="515.0" layoutY="142.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="176.0" styleClass="custom-checkbox" stylesheets="@../../../design/MainDesign.css" text="Dente sensivel">
+                  <CheckBox fx:id="formPacientSensitiveTooth" layoutX="515.0" layoutY="142.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="176.0" styleClass="custom-checkbox" stylesheets="@../../../design/MainDesign.css" text="Dente sensivel">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox layoutX="515.0" layoutY="203.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="128.0" styleClass="custom-checkbox" stylesheets="@../../../design/MainDesign.css" text="Diabetes">
+                  <CheckBox fx:id="formPacientDiabetes" layoutX="515.0" layoutY="203.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="128.0" styleClass="custom-checkbox" stylesheets="@../../../design/MainDesign.css" text="Diabetes">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </CheckBox>
-                  <CheckBox layoutX="515.0" layoutY="259.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="128.0" styleClass="custom-checkbox" stylesheets="@../../../design/MainDesign.css" text="Gravidez">
+                  <CheckBox fx:id="formPacientPregnancy" layoutX="515.0" layoutY="259.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="128.0" styleClass="custom-checkbox" stylesheets="@../../../design/MainDesign.css" text="Gravidez">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </CheckBox>
-                  <TextArea layoutX="46.0" layoutY="323.0" prefHeight="117.0" prefWidth="735.0" stylesheets="@../../../design/MainDesign.css" wrapText="true" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="323.0">
+                  <TextArea fx:id="formPacientAnnotations" layoutX="46.0" layoutY="323.0" prefHeight="117.0" prefWidth="735.0" stylesheets="@../../../design/MainDesign.css" wrapText="true" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="323.0">
                      <styleClass>
                         <String fx:value="shadow" />
                         <String fx:value="radius" />
