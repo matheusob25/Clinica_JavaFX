@@ -3,12 +3,9 @@ package com.example.clinica.model.dao.impl;
 import com.example.clinica.db.DB;
 import com.example.clinica.db.DbException;
 import com.example.clinica.model.dao.PacientDao;
-import com.example.clinica.model.entities.Address;
-import com.example.clinica.model.entities.Anamnese;
-import com.example.clinica.model.entities.Pacient;
+import com.example.clinica.model.entities.*;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +24,8 @@ public class PacientDaoJDBC implements PacientDao {
                     "INSERT INTO tb_pacientes "
                          +"(paciente_nome, paciente_email, paciente_numero,paciente_segundo_numero, paciente_data_nascimento, "
                          +"paciente_cpf,paciente_inicio_tratamento,paciente_termino_tratamento,paciente_profissao,"
-                         +"paciente_estado_civil,paciente_dlne, endereco_id, anamnese_id)"
-                         +" VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS
+                         +"paciente_estado_civil,paciente_dlne,paciente_status, endereco_id, anamnese_id)"
+                         +" VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS
             );
 
             st.setString(1, pacient.getName());
@@ -42,8 +39,9 @@ public class PacientDaoJDBC implements PacientDao {
             st.setString(9,pacient.getProfession());
             st.setString(10,pacient.getMaritalStatus());
             st.setString(11,pacient.getDlne());
-            st.setLong(12, pacient.getAddress().getId());
-            st.setLong(13, pacient.getAnamnese().getId());
+            st.setBoolean(12, true);
+            st.setLong(13, pacient.getAddress().getId());
+            st.setLong(14, pacient.getAnamnese().getId());
 
 
             int rowsAffected = st.executeUpdate();
@@ -70,7 +68,35 @@ public class PacientDaoJDBC implements PacientDao {
 
     @Override
     public void update(Pacient pacient) {
+        PreparedStatement st = null;
+        try{
+            st = connection.prepareStatement(
+                    "UPDATE tb_pacientes SET paciente_nome = ?, paciente_email = ?, paciente_numero = ?, "
+                       + "paciente_segundo_numero = ?, paciente_data_nascimento = ?, paciente_cpf = ?, "
+                       + "paciente_inicio_tratamento = ?, paciente_termino_tratamento = ?,  paciente_profissao = ?, "
+                       + "paciente_estado_civil = ?, paciente_dlne = ?"
+                       + "WHERE paciente_id = ?;"
+            );
 
+            st.setString(1, pacient.getName());
+            st.setString(2, pacient.getEmail());
+            st.setString(2, pacient.getNumber());
+            st.setString(2, pacient.getNumberTwo());
+            st.setDate(3, Date.valueOf(pacient.getBirthDate()));
+            st.setString(4, pacient.getCpf());
+            st.setDate(5, Date.valueOf(pacient.getStartTreatment()));
+            st.setDate(6, Date.valueOf(pacient.getEndTreatment()));
+            st.setString(7, pacient.getProfession());
+            st.setString(8, pacient.getMaritalStatus());
+            st.setString(9, pacient.getDlne());
+            st.setLong(10, pacient.getId());
+
+            st.executeUpdate();
+        }catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override
@@ -84,10 +110,12 @@ public class PacientDaoJDBC implements PacientDao {
         ResultSet rs = null;
         try {
             st = connection.prepareStatement(
-                    "SELECT pac.*, ana.*, ende.* FROM tb_pacientes as pac " +
-                        "LEFT JOIN tb_anamneses AS ana ON pac.anamnese_id = ana.anamnese_id " +
-                        "LEFT JOIN tb_enderecos AS ende ON pac.endereco_id = ende.endereco_id " +
-                        "WHERE pac.paciente_id = ?" +
+                    "SELECT paciente.*, anamneses.*, enderecos.* FROM tb_pacientes as paciente " +
+                        "LEFT JOIN tb_anamneses AS anamneses ON paciente.anamnese_id = anamneses.anamnese_id " +
+                        "LEFT JOIN tb_enderecos AS enderecos ON paciente.endereco_id = enderecos.endereco_id " +
+                        "LEFT JOIN tb_bairros AS bairros ON enderecos.bairro_id = bairros.bairro_id"+
+                        "LEFT JOIN tb_cidades AS cidades ON bairros.cidade_id = cidades.cidade_id "+
+                        "WHERE paciente.paciente_id = ?" +
                         " ORDER BY paciente_nome"
 
             );
@@ -97,7 +125,9 @@ public class PacientDaoJDBC implements PacientDao {
             if(rs.next()){
                 Anamnese anamnese = instantiateAnamnese(rs);
                 Address address = instantiateAddress(rs);
-                return instantiatePacient(rs, anamnese,address);
+                Neighborhood neighborhood = instantiateNeighborhood(rs);
+                City city = instantiateCity(rs);
+                return instantiatePacient(rs, anamnese,address,neighborhood, city);
             }
             return null;
 
@@ -109,12 +139,22 @@ public class PacientDaoJDBC implements PacientDao {
         }
     }
 
-    private Address instantiateAddress(ResultSet rs) {
+    private Address instantiateAddress(ResultSet rs)throws SQLException {
         Address address = new Address();
-
-
+        address.setDescription(rs.getString("endereco_descricao"));
+        address.setReference(rs.getString("endereco_referencia"));
 
         return address;
+    }
+    private Neighborhood instantiateNeighborhood(ResultSet rs) throws SQLException {
+        Neighborhood neighborhood = new Neighborhood();
+        neighborhood.setName(rs.getString("bairro_nome"));
+        return neighborhood;
+    }
+    private City instantiateCity(ResultSet rs) throws SQLException {
+        City city = new City();
+        city.setName(rs.getString("cidade_nome"));
+        return city;
     }
 
     private Anamnese instantiateAnamnese(ResultSet rs)throws SQLException {
@@ -166,10 +206,12 @@ public class PacientDaoJDBC implements PacientDao {
         pacient.setCpf(rs.getString("paciente_cpf"));
         return pacient;
     }
-    private Pacient instantiatePacient(ResultSet rs, Anamnese anamnese, Address address)throws SQLException {
+    private Pacient instantiatePacient(ResultSet rs, Anamnese anamnese, Address address, Neighborhood neighborhood, City city)throws SQLException {
         Pacient pacient = instantiatePacient(rs);
         pacient.setAnamnese(anamnese);
         pacient.setAddress(address);
+        pacient.getAddress().setNeighborhood(neighborhood);
+        pacient.getAddress().getNeighborhood().setCity(city);
         return pacient;
     }
 

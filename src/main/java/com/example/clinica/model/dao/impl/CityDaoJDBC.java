@@ -45,7 +45,18 @@ public class CityDaoJDBC implements CityDao {
 
     @Override
     public void update(City city) {
+        PreparedStatement st = null;
+        try {
+            st = connection.prepareStatement("UPDATE tb_cidades SET cidade_nome = ? WHERE cidade_id = ?");
+            st.setString(1, city.getName());
+            st.setLong(2, city.getId());
+            st.executeUpdate();
 
+        }catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override

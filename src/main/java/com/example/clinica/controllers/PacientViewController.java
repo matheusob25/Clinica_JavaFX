@@ -2,7 +2,7 @@ package com.example.clinica.controllers;
 
 import com.example.clinica.MainApplication;
 import com.example.clinica.alerts.AlertMessage;
-import com.example.clinica.model.entities.Pacient;
+import com.example.clinica.model.entities.*;
 import com.example.clinica.model.services.PacientService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,8 +20,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -57,19 +55,25 @@ public class PacientViewController implements Initializable {
     public void setPacientService(PacientService pacientService) {
         this.pacientService = pacientService;
     }
+
     @FXML
-    void onpacientViewAddNewBttn() {
-        loadView();
+    void onPacientViewAddNewBttn() {
+        Pacient pacient = new Pacient();
+        loadView(pacient);
     }
 
-    private synchronized void loadView(){
+    private synchronized void loadView(Pacient pacient){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("pacient_record_view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
+            PacientRecordViewController controller = fxmlLoader.getController();
+            controller.setEntity(pacient);
+            controller.updateFormData();
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setResizable(false);
-            stage.show();
+            stage.showAndWait();
+
 
         }catch (LoadException e){
             AlertMessage.errorMessage("erro ao carregar pagina: "+ e.getMessage());

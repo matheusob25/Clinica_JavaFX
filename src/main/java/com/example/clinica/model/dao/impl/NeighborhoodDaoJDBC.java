@@ -21,7 +21,7 @@ public class NeighborhoodDaoJDBC implements NeighborhoodDao {
                     "VALUES (?,?)", Statement.RETURN_GENERATED_KEYS
             );
 
-            st.setString(1, neighborhood.getNome());
+            st.setString(1, neighborhood.getName());
             st.setLong(2, neighborhood.getCity().getId());
 
 
@@ -44,7 +44,23 @@ public class NeighborhoodDaoJDBC implements NeighborhoodDao {
 
     @Override
     public void update(Neighborhood neighborhood) {
+        PreparedStatement st = null;
+        try{
+            st = connection.prepareStatement(
+                    "UPDATE tb_bairros SET bairro_nome = ?, cidade_id = ?"
+                       + "WHERE bairro_id = ?;"
+            );
 
+            st.setString(1, neighborhood.getName());
+            st.setLong(2, neighborhood.getCity().getId());
+
+
+            st.executeUpdate();
+        }catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override

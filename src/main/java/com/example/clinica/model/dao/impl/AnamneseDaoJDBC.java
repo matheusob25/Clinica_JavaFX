@@ -56,7 +56,29 @@ public class AnamneseDaoJDBC implements AnamneseDao {
 
     @Override
     public void update(Anamnese anamnese) {
+        PreparedStatement st = null;
+        try {
+            st = connection.prepareStatement(
+                    "UPDATE tb_anamneses SET anamnese_sens_anestesia = ?,"
+                       + "anamnese_sens_antibioticos = ?, anamnese_uso_medicacao = ?,"
+                       + "anamnese_doenca_grave = ?, anamnese_dente_sensivel = ?,"
+                       + "anamnese_gravidez = ?, anamnese_diabete = ?, anamnese_anotacoes_adicionais = ?"
+                       + "WHERE anamnese_id = ?");
 
+            st.setString(1,anamnese.getSensitivityAnesthesia());
+            st.setString(2,anamnese.getSensitivityAntibiotics());
+            st.setString(3,anamnese.getMedicationUse());
+            st.setString(4,anamnese.getSeriousIllness());
+            st.setBoolean(5,anamnese.getSensitiveTooth());
+            st.setBoolean(6,anamnese.getPregnancy());
+            st.setBoolean(7,anamnese.getDiabetes());
+            st.setString(8,anamnese.getAdditionalAnnotations());
+            st.setLong(9,anamnese.getId());
+
+            st.executeUpdate();
+        }catch (SQLException e ){
+            throw new DbException(e.getMessage());
+        }
     }
 
     @Override

@@ -13,11 +13,21 @@ public class PacientService {
        this.pacientDao = DaoFactory.createPacienteDao();
 
     }
-    public void insert(Pacient pacient) {
+    private void insert(Pacient pacient) {
         pacientDao.insert(pacient);
     }
     public List<Pacient> findAll() {
         return pacientDao.findAll();
+    }
+    public void saveOrUpdate(Pacient pacient) {
+        if (pacient.getId() == null) {
+            insert(pacient);
+        }else{
+            update(pacient);
+        }
+    }
+    public void update(Pacient pacient) {
+        pacientDao.update(pacient);
     }
 
 

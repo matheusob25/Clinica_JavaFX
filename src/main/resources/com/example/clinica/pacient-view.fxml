@@ -33,6 +33,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="pacientViewAddNewBttn" layoutX="533.0" layoutY="46.0" mnemonicParsing="false" onAction="#onpacientViewAddNewBttn" prefHeight="31.0" prefWidth="201.0" styleClass="bg-color" stylesheets="@../../../design/MainDesign.css" text="Adicionar Novo Paciente" textFill="WHITE" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="46.0" />
+      <Button fx:id="pacientViewAddNewBttn" layoutX="533.0" layoutY="46.0" mnemonicParsing="false" onAction="#onPacientViewAddNewBttn" prefHeight="31.0" prefWidth="201.0" styleClass="bg-color" stylesheets="@../../../design/MainDesign.css" text="Adicionar Novo Paciente" textFill="WHITE" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="46.0" />
    </children>
 </AnchorPane>

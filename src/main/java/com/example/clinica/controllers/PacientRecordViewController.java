@@ -3,17 +3,11 @@ package com.example.clinica.controllers;
 import com.example.clinica.model.entities.Pacient;
 import com.example.clinica.model.services.PacientService;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ConstraintsBase;
-import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -218,6 +212,39 @@ public class PacientRecordViewController implements Initializable {
 
     }
     public void updateFormData(){
+        if(entity == null || entity.getAnamnese() == null || entity.getAddress() == null
+        || entity.getAddress().getNeighborhood() == null || entity.getAddress().getNeighborhood().getCity() == null){
+            throw new IllegalStateException("Pacient data was null");
+        }
+        // pacient data
+        formPacientName.setText(entity.getName());
+        formPacientBirthDate.setValue(entity.getBirthDate());
+        formPacientCPF.setText(entity.getCpf());
+        formPacientNumber.setText(entity.getNumber());
+        formPacientSecondNumber.setText(entity.getNumberTwo());
+        formPacientEmail.setText(entity.getEmail());
+        formPacientDLNE.setText(entity.getDlne());
+        formPacientProfession.setText(entity.getProfession());
+        formPacientMaritalStatus.getSelectionModel().select(entity.getMaritalStatus());
+        formPacientStartTreat.setValue(entity.getStartTreatment());
+        formPacientEndTreat.setValue(entity.getEndTreatment());
+
+        //pacient address data
+        formPacientAddressInfo.setText(entity.getAddress().getDescription());
+        formPacientNeighborhood.setText(entity.getAddress().getNeighborhood().getName());
+        formPacientCity.setText(entity.getAddress().getNeighborhood().getCity().getName());
+        formPacientReference.setText(entity.getAddress().getReference());
+
+        //pacient anamnesis data
+        formPacientAnesthesia.setText(entity.getAnamnese().getSensitivityAnesthesia());
+        formPacientMedicationUse.setText(entity.getAnamnese().getMedicationUse());
+        formPacientAntibiotics.setText(entity.getAnamnese().getSensitivityAntibiotics());
+        formPacientSensitiveTooth.setSelected(entity.getAnamnese().getSensitiveTooth());
+        formPacientSeriousIllness.setText(entity.getAnamnese().getSeriousIllness());
+        formPacientDiabetes.setSelected(entity.getAnamnese().getDiabetes());
+        formPacientPregnancy.setSelected(entity.getAnamnese().getPregnancy());
+        formPacientAnnotations.setText(entity.getAnamnese().getAdditionalAnnotations());
+
 
     }
 

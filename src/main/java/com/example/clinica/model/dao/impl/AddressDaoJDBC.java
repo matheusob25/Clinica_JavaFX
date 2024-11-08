@@ -44,7 +44,21 @@ public class AddressDaoJDBC implements AddressDao {
 
     @Override
     public void update(Address address) {
+        PreparedStatement st = null;
+        try {
+            st = connection.prepareStatement(
+              "UPDATE tb_enderecos SET endereco_descricao = ?, endereco_referencia = ?, bairro_id = ? "
+                 + "WHERE endereco_id = ?"
+            );
+            st.setString(1,address.getDescription());
+            st.setString(2, address.getReference());
+            st.setLong(3, address.getNeighborhood().getId());
+            st.setLong(4, address.getId());
 
+            st.executeUpdate();
+        }catch (SQLException e ){
+            throw new DbException(e.getMessage());
+        }
     }
 
     @Override
