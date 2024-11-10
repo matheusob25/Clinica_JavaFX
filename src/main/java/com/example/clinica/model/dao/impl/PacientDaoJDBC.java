@@ -141,6 +141,7 @@ public class PacientDaoJDBC implements PacientDao {
 
     private Address instantiateAddress(ResultSet rs)throws SQLException {
         Address address = new Address();
+        address.setId(rs.getLong("endereco_id"));
         address.setDescription(rs.getString("endereco_descricao"));
         address.setReference(rs.getString("endereco_referencia"));
 
@@ -148,11 +149,13 @@ public class PacientDaoJDBC implements PacientDao {
     }
     private Neighborhood instantiateNeighborhood(ResultSet rs) throws SQLException {
         Neighborhood neighborhood = new Neighborhood();
+        neighborhood.setId(rs.getLong("bairro_id"));
         neighborhood.setName(rs.getString("bairro_nome"));
         return neighborhood;
     }
     private City instantiateCity(ResultSet rs) throws SQLException {
         City city = new City();
+        city.setId(rs.getLong("cidade_id"));
         city.setName(rs.getString("cidade_nome"));
         return city;
     }

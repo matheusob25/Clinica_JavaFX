@@ -63,4 +63,32 @@ public class CityDaoJDBC implements CityDao {
     public void delete(City city) {
 
     }
+
+    @Override
+    public City findByName(String name) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = connection.prepareStatement(
+                    "SELECT * FROM tb_cidades WHERE cidade_nome = ?"
+            );
+            st.setString(1, name);
+            rs = st.executeQuery();
+            if (rs.next()) {
+                return instantiateCity(rs);
+            }
+            return null;
+        }catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
+    }
+    private City instantiateCity(ResultSet rs) throws SQLException {
+        City city = new City();
+        city.setId(rs.getLong("cidade_id"));
+        city.setName(rs.getString("cidade_nome"));
+        return city;
+    }
 }

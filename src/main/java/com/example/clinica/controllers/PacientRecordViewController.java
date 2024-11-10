@@ -1,12 +1,16 @@
 package com.example.clinica.controllers;
 
-import com.example.clinica.model.entities.Pacient;
-import com.example.clinica.model.services.PacientService;
+import com.example.clinica.alerts.AlertMessage;
+import com.example.clinica.db.DbException;
+import com.example.clinica.model.entities.*;
+import com.example.clinica.model.services.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,6 +18,10 @@ import java.util.ResourceBundle;
 public class PacientRecordViewController implements Initializable {
 
     private PacientService pacientService;
+    private AddressService addressService;
+    private CityService cityService;
+    private NeighborHoodService neighborHoodService;
+    private AnamneseService anamneseService;
     private Pacient entity;
 
     @FXML
@@ -82,9 +90,25 @@ public class PacientRecordViewController implements Initializable {
     @FXML
     private TextArea formPacientAnnotations;
     @FXML
-    private Button formPacientAnamnesisFinish;
-    @FXML
     private Button formPacientAnamnesisReturn;
+
+    @FXML
+    private Button formPacientSave;
+
+    public void setPacientService(PacientService pacientService) {
+        this.pacientService = pacientService;
+    }
+
+    public void setServices(AnamneseService anamneseService, NeighborHoodService neighborHoodService, CityService cityService, AddressService addressService) {
+        this.anamneseService = anamneseService;
+        this.neighborHoodService = neighborHoodService;
+        this.cityService = cityService;
+        this.addressService = addressService;
+    }
+
+    public void setEntity(Pacient entity) {
+        this.entity = entity;
+    }
 
 
 
@@ -106,9 +130,80 @@ public class PacientRecordViewController implements Initializable {
             formPacientAnamnesis.setVisible(false);
             formPacientRegistry.setVisible(false);
             formPacientAddress.setVisible(true);
-        }else if(event.getSource() == formPacientAnamnesisFinish){
-            System.out.println("Registry pacient");
         }
+    }
+    @FXML
+    public void onFormPacientSaveAction(ActionEvent event){
+        try {
+            entity = getFormData();
+            pacientService.saveOrUpdate(entity);
+            AlertMessage.successMessage("Paciente cadastrado com sucesso!");
+            ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
+        }catch (DbException e){
+            AlertMessage.errorMessage("Error saving pacient",e.getMessage());
+        }
+
+    }
+
+    private Pacient getFormData() {
+        Pacient p = new Pacient();
+        p.setName(formPacientName.getText());
+        p.setBirthDate(formPacientBirthDate.getValue());
+        p.setCpf(formPacientCPF.getText());
+        p.setNumber(formPacientNumber.getText());
+        p.setNumberTwo(formPacientSecondNumber.getText());
+        p.setEmail(formPacientEmail.getText());
+        p.setDlne(formPacientDLNE.getText());
+        p.setProfession(formPacientProfession.getText());
+        p.setMaritalStatus(formPacientMaritalStatus.getValue());
+        p.setStartTreatment(formPacientStartTreat.getValue());
+        p.setEndTreatment(formPacientEndTreat.getValue());
+        getAddressData(p);
+        getAnamnesisData(p);
+        return p;
+    }
+    private Address getAddressData(Pacient p) {
+        if(cityService == null || addressService == null || neighborHoodService == null) {
+            throw new IllegalStateException("Services were not initialized correctly");
+        }
+        City city = cityService.findByName(formPacientCity.getText());
+        if(city == null) {
+            city.setName(formPacientCity.getText());
+            cityService.insert(city);
+        }
+
+        Neighborhood neighborhood = neighborHoodService.findByName(formPacientNeighborhood.getText());
+        if(neighborhood == null) {
+            neighborhood.setName(formPacientNeighborhood.getText());
+            neighborHoodService.insert(neighborhood);
+        }
+        neighborhood.setCity(city);
+
+        Address address = new Address();
+        address.setDescription(formPacientAddressInfo.getText());
+        address.setReference(formPacientReference.getText());
+        address.setNeighborhood(neighborhood);
+
+        addressService.insert(address);
+
+        p.setAddress(address);
+        return address;
+    }
+    private Anamnese getAnamnesisData(Pacient p) {
+        if(anamneseService == null) {
+            throw new IllegalStateException("Services were not initialized correctly");
+        }
+        Anamnese a = new Anamnese();
+        a.setSensitivityAnesthesia(formPacientAnesthesia.getText());
+        a.setSensitivityAntibiotics(formPacientAntibiotics.getText());
+        a.setMedicationUse(formPacientMedicationUse.getText());
+        a.setSeriousIllness(formPacientSeriousIllness.getText());
+        a.setSensitiveTooth(formPacientSensitiveTooth.isSelected());
+        a.setDiabetes(formPacientDiabetes.isSelected());
+        a.setPregnancy(formPacientPregnancy.isSelected());
+        anamneseService.insert(a);
+        p.setAnamnese(a);
+        return a;
     }
 
 
@@ -132,13 +227,6 @@ public class PacientRecordViewController implements Initializable {
     }
 
 
-    public void setPacientService(PacientService pacientService) {
-        this.pacientService = pacientService;
-    }
-
-    public void setEntity(Pacient entity) {
-        this.entity = entity;
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -214,7 +302,7 @@ public class PacientRecordViewController implements Initializable {
     public void updateFormData(){
         if(entity == null || entity.getAnamnese() == null || entity.getAddress() == null
         || entity.getAddress().getNeighborhood() == null || entity.getAddress().getNeighborhood().getCity() == null){
-            throw new IllegalStateException("Pacient data was null");
+            return;
         }
         // pacient data
         formPacientName.setText(entity.getName());

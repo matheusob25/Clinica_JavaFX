@@ -3,7 +3,7 @@ package com.example.clinica.controllers;
 import com.example.clinica.MainApplication;
 import com.example.clinica.alerts.AlertMessage;
 import com.example.clinica.model.entities.*;
-import com.example.clinica.model.services.PacientService;
+import com.example.clinica.model.services.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -68,6 +68,8 @@ public class PacientViewController implements Initializable {
             Scene scene = new Scene(fxmlLoader.load());
             PacientRecordViewController controller = fxmlLoader.getController();
             controller.setEntity(pacient);
+            controller.setPacientService(new PacientService());
+            controller.setServices(new AnamneseService(),new NeighborHoodService(), new CityService(), new AddressService());
             controller.updateFormData();
             Stage stage = new Stage();
             stage.setScene(scene);

@@ -1,6 +1,7 @@
 package com.example.clinica;
 
 import com.example.clinica.controllers.MainViewController;
+import com.example.clinica.model.services.CityService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -36,7 +37,6 @@ public class MainApplication extends Application {
 //      Admin admin = new Admin("dono", PasswordEncryptor.hash("12345678"));
 //      adminDaoJDBC.insert(admin);
 //      System.out.println(admin.getName()+ " => "+ admin.getPassword());
-
         launch();
 
     }

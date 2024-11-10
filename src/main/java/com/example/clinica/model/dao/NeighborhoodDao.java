@@ -7,6 +7,6 @@ public interface NeighborhoodDao {
     void insert(Neighborhood neighborhood);
     void update(Neighborhood neighborhood);
     void delete(Neighborhood neighborhood);
-    Neighborhood findByAddress(Address address);
+    Neighborhood findByName(String name);
 }
 

@@ -69,7 +69,34 @@ public class NeighborhoodDaoJDBC implements NeighborhoodDao {
     }
 
     @Override
-    public Neighborhood findByAddress(Address address) {
-        return null;
+    public Neighborhood findByName(String name) {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = connection.prepareStatement(
+                    "SELECT * FROM tb_bairros WHERE bairro_nome = ?"
+            );
+            st.setString(1, name);
+            rs = st.executeQuery();
+            if (rs.next()) {
+                return instantiateNeighborhood(rs);
+            }
+            return null;
+        }catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
     }
+
+    private Neighborhood instantiateNeighborhood(ResultSet rs)throws SQLException {
+        Neighborhood neighborhood = new Neighborhood();
+        neighborhood.setId(rs.getLong("bairro_id"));
+        neighborhood.setName(rs.getString("bairro_nome"));
+
+        return neighborhood;
+    }
+
+
 }
