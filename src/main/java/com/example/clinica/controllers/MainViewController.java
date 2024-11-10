@@ -68,7 +68,7 @@ public class MainViewController implements Initializable {
     void onMainViewPacientsBttnAction() {
         loadView("pacient-view.fxml", (PacientViewController pacientViewController) -> {
             pacientViewController.setPacientService(new PacientService());
-            pacientViewController.initializePacientsTable();
+            pacientViewController.updateTableViewPacients();
 
         });
         mainViewGeneralInfo.setVisible(false);

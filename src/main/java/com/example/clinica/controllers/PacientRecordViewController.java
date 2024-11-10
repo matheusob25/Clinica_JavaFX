@@ -1,6 +1,7 @@
 package com.example.clinica.controllers;
 
 import com.example.clinica.alerts.AlertMessage;
+import com.example.clinica.controllers.listeners.DataChangeListener;
 import com.example.clinica.db.DbException;
 import com.example.clinica.model.entities.*;
 import com.example.clinica.model.services.*;
@@ -13,6 +14,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class PacientRecordViewController implements Initializable {
@@ -23,6 +26,7 @@ public class PacientRecordViewController implements Initializable {
     private NeighborHoodService neighborHoodService;
     private AnamneseService anamneseService;
     private Pacient entity;
+    private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 
     @FXML
     private BorderPane formPacientRegistry;
@@ -110,6 +114,9 @@ public class PacientRecordViewController implements Initializable {
         this.entity = entity;
     }
 
+    public void subscribeDataChangeListener(DataChangeListener dataChangeListener) {
+        dataChangeListeners.add(dataChangeListener);
+    }
 
 
     @FXML
@@ -137,12 +144,19 @@ public class PacientRecordViewController implements Initializable {
         try {
             entity = getFormData();
             pacientService.saveOrUpdate(entity);
+            notifyDataChangeListeners();
             AlertMessage.successMessage("Paciente cadastrado com sucesso!");
             ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
         }catch (DbException e){
             AlertMessage.errorMessage("Error saving pacient",e.getMessage());
         }
 
+    }
+
+    private void notifyDataChangeListeners() {
+        for(DataChangeListener listener: dataChangeListeners){
+            listener.onDataChanged();
+        }
     }
 
     private Pacient getFormData() {
@@ -168,16 +182,18 @@ public class PacientRecordViewController implements Initializable {
         }
         City city = cityService.findByName(formPacientCity.getText());
         if(city == null) {
+            city = new City();
             city.setName(formPacientCity.getText());
             cityService.insert(city);
         }
 
         Neighborhood neighborhood = neighborHoodService.findByName(formPacientNeighborhood.getText());
         if(neighborhood == null) {
+            neighborhood = new Neighborhood();
             neighborhood.setName(formPacientNeighborhood.getText());
+            neighborhood.setCity(city);
             neighborHoodService.insert(neighborhood);
         }
-        neighborhood.setCity(city);
 
         Address address = new Address();
         address.setDescription(formPacientAddressInfo.getText());

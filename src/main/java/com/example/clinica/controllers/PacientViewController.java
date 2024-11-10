@@ -2,6 +2,7 @@ package com.example.clinica.controllers;
 
 import com.example.clinica.MainApplication;
 import com.example.clinica.alerts.AlertMessage;
+import com.example.clinica.controllers.listeners.DataChangeListener;
 import com.example.clinica.model.entities.*;
 import com.example.clinica.model.services.*;
 import javafx.collections.FXCollections;
@@ -23,7 +24,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class PacientViewController implements Initializable {
+public class PacientViewController implements Initializable, DataChangeListener {
     private PacientService pacientService;
     @FXML
     private TableView<Pacient> pacientViewTable;
@@ -70,6 +71,7 @@ public class PacientViewController implements Initializable {
             controller.setEntity(pacient);
             controller.setPacientService(new PacientService());
             controller.setServices(new AnamneseService(),new NeighborHoodService(), new CityService(), new AddressService());
+            controller.subscribeDataChangeListener(this);
             controller.updateFormData();
             Stage stage = new Stage();
             stage.setScene(scene);
@@ -98,7 +100,7 @@ public class PacientViewController implements Initializable {
         pacientViewColumnCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
 
     }
-    public void initializePacientsTable(){
+    public void updateTableViewPacients(){
         if(pacientService == null){
             throw new IllegalStateException("Service was not instantiated");
         }
@@ -108,5 +110,8 @@ public class PacientViewController implements Initializable {
     }
 
 
-
+    @Override
+    public void onDataChanged() {
+        updateTableViewPacients();
+    }
 }
