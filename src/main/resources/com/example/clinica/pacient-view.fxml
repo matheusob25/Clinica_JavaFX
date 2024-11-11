@@ -10,16 +10,16 @@
 
 <AnchorPane prefHeight="559.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clinica.controllers.PacientViewController">
    <children>
-      <AnchorPane layoutX="19.0" layoutY="97.0" prefHeight="447.0" prefWidth="694.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="97.0">
+      <AnchorPane layoutX="19.0" layoutY="97.0" prefHeight="447.0" prefWidth="694.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="97.0">
          <children>
             <TableView fx:id="pacientViewTable" layoutX="64.0" layoutY="14.0" prefHeight="435.0" prefWidth="660.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Nome" fx:id="pacientViewColumnName"/>
-                <TableColumn prefWidth="75.0" text="Idade " fx:id="pacientViewColumnAge" />
-                  <TableColumn prefWidth="75.0" text="Email" fx:id="pacientViewColumnEmail" />
-                  <TableColumn prefWidth="75.0" text="Número" fx:id="pacientViewColumnNumber" />
-                  <TableColumn prefWidth="75.0" text="CPF" fx:id="pacientViewColumnCPF"/>
-                  <TableColumn prefWidth="75.0" text="Ação" fx:id="pacientViewColumnAction" />
+                <TableColumn fx:id="pacientViewColumnName" prefWidth="75.0" text="Nome" />
+                <TableColumn fx:id="pacientViewColumnAge" prefWidth="75.0" text="Idade " />
+                  <TableColumn fx:id="pacientViewColumnEmail" prefWidth="75.0" text="Email" />
+                  <TableColumn fx:id="pacientViewColumnNumber" prefWidth="75.0" text="Número" />
+                  <TableColumn fx:id="pacientViewColumnCPF" prefWidth="75.0" text="CPF" />
+                  <TableColumn fx:id="pacientViewColumnAction" prefWidth="75.0" text="Ação" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -27,8 +27,8 @@
             </TableView>
          </children>
       </AnchorPane>
-      <TextField layoutX="26.0" layoutY="46.0" prefHeight="31.0" prefWidth="231.0" promptText="Pesquisar paciente" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="46.0" />
-      <Label layoutX="26.0" layoutY="22.0" prefHeight="18.0" prefWidth="231.0" styleClass="header-1" stylesheets="@../../../design/MainDesign.css" text="Pacientes" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="22.0">
+      <TextField layoutX="26.0" layoutY="46.0" prefHeight="31.0" prefWidth="231.0" promptText="Pesquisar paciente" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="46.0" />
+      <Label layoutX="26.0" layoutY="22.0" prefHeight="18.0" prefWidth="231.0" styleClass="header-1" stylesheets="@../../../design/MainDesign.css" text="Pacientes" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="22.0">
          <font>
             <Font size="14.0" />
          </font>

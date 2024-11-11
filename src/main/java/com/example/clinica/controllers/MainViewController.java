@@ -45,6 +45,10 @@ public class MainViewController implements Initializable {
     @FXML
     private Button mainViewPacientsBttn;
     @FXML
+    private Button mainViewProfessionalsBttn;
+    @FXML
+    private Button mainViewUpdatePerfilBttn;
+    @FXML
     private Label mainViewGeneralInfo;
 
     @FXML
@@ -62,6 +66,14 @@ public class MainViewController implements Initializable {
         returnToMain();
         mainViewGeneralInfo.setVisible(true);
 
+    }
+    @FXML
+    void onMainViewUpdatePerfilBttnAction(){
+        loadView("update-profile.fxml", T -> {} );
+    }
+    @FXML
+    void onMainViewProfessionalsBttnAction() {
+        loadView("professional-view.fxml", (ProfessionalViewController professionalViewController) ->{} );
     }
 
     @FXML

@@ -11,7 +11,7 @@
 <AnchorPane prefHeight="559.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clinica.controllers.UpdateProfileController">
    <children>
       <FontAwesomeIconView glyphName="PENCIL_SQUARE_ALT" layoutX="40.0" layoutY="46.0" size="30" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="20.285715103149414" />
-      <Label layoutX="78.0" layoutY="26.0" prefHeight="16.0" prefWidth="110.0" styleClass="header-1" stylesheets="@../../../design/MainDesign.css" text="Atualizar perfil">
+      <Label layoutX="78.0" layoutY="26.0" prefHeight="18.0" prefWidth="171.0" styleClass="header-1" stylesheets="@../../../design/MainDesign.css" text="Atualizar perfil">
          <font>
             <Font size="14.0" />
          </font>

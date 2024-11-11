@@ -49,11 +49,11 @@
                      <children>
                         <MaterialDesignIconView glyphName="TOOTH" layoutX="110.0" layoutY="77.0" size="50" text="" />
                         <FontAwesomeIconView glyphName="USER" layoutX="34.0" layoutY="471.0" size="30" text="" />
-                        <Button alignment="BASELINE_LEFT" layoutX="58.0" layoutY="446.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="172.0" styleClass="btn-1" stylesheets="@../../../design/MainDesign.css" text="Atualizar Perfil" />
+                        <Button fx:id="mainViewUpdatePerfilBttn" alignment="BASELINE_LEFT" layoutX="58.0" layoutY="446.0" mnemonicParsing="false" onAction="#onMainViewUpdatePerfilBttnAction" prefHeight="29.0" prefWidth="172.0" styleClass="btn-1" stylesheets="@../../../design/MainDesign.css" text="Atualizar Perfil" />
                         <Button alignment="BASELINE_LEFT" layoutX="58.0" layoutY="173.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="172.0" styleClass="btn-1" stylesheets="@../../../design/MainDesign.css" text="Agendamentos" />
                         <Button fx:id="mainViewGeneralInfoBttn" alignment="BASELINE_LEFT" layoutX="58.0" layoutY="224.0" mnemonicParsing="false" onAction="#onMainViewGeneralInfoBttnAction" prefHeight="29.0" prefWidth="172.0" styleClass="btn-1" stylesheets="@../../../design/MainDesign.css" text="Informações gerais" />
                         <FontAwesomeIconView glyphName="USER_MD" layoutX="34.0" layoutY="298.0" size="30" />
-                        <Button alignment="BASELINE_LEFT" layoutX="58.0" layoutY="273.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="172.0" styleClass="btn-1" stylesheets="@../../../design/MainDesign.css" text="Profissionais" />
+                        <Button fx:id="mainViewProfessionalsBttn" alignment="BASELINE_LEFT" layoutX="58.0" layoutY="273.0" mnemonicParsing="false" onAction="#onMainViewProfessionalsBttnAction" prefHeight="29.0" prefWidth="172.0" styleClass="btn-1" stylesheets="@../../../design/MainDesign.css" text="Profissionais" />
                         <MaterialDesignIconView fx:id="mainIconLogout" glyphName="LOGOUT" layoutX="120.0" layoutY="554.0" size="30" />
                         <Label fx:id="mainLabelLogout" alignment="CENTER" layoutX="150.0" layoutY="533.0" prefHeight="20.0" prefWidth="34.0" text="Sair" />
                         <Label alignment="BASELINE_LEFT" layoutX="28.0" layoutY="404.0" prefHeight="20.0" prefWidth="148.0" text="Gestão do Perfil" />
