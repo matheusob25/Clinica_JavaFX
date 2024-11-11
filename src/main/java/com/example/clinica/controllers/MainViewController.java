@@ -70,6 +70,7 @@ public class MainViewController implements Initializable {
             pacientViewController.setPacientService(new PacientService());
             pacientViewController.updateTableViewPacients();
 
+
         });
         mainViewGeneralInfo.setVisible(false);
     }

@@ -4,6 +4,7 @@ import com.example.clinica.alerts.AlertMessage;
 import com.example.clinica.controllers.listeners.DataChangeListener;
 import com.example.clinica.db.DbException;
 import com.example.clinica.model.entities.*;
+import com.example.clinica.model.exceptions.ValidationException;
 import com.example.clinica.model.services.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,9 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class PacientRecordViewController implements Initializable {
 
@@ -96,9 +95,34 @@ public class PacientRecordViewController implements Initializable {
     @FXML
     private Button formPacientAnamnesisReturn;
 
+    // label errors
+    @FXML
+    private Label labelBirthDateError;
+    @FXML
+    private Label labelCPFError;
+    @FXML
+    private Label labelNameError;
+    @FXML
+    private Label labelNumberError;
+    @FXML
+    private Label labelAddressError;
+    @FXML
+    private Label labelCityError;
+    @FXML
+    private Label labelNeighborhoodError;
+
     @FXML
     private Button formPacientSave;
 
+    private void configErrorLabels(){
+        labelNameError.setMouseTransparent(true);
+        labelBirthDateError.setMouseTransparent(true);
+        labelCPFError.setMouseTransparent(true);
+        labelNumberError.setMouseTransparent(true);
+        labelAddressError.setMouseTransparent(true);
+        labelCityError.setMouseTransparent(true);
+        labelNeighborhoodError.setMouseTransparent(true);
+    }
     public void setPacientService(PacientService pacientService) {
         this.pacientService = pacientService;
     }
@@ -147,6 +171,10 @@ public class PacientRecordViewController implements Initializable {
             notifyDataChangeListeners();
             AlertMessage.successMessage("Paciente cadastrado com sucesso!");
             ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
+        }catch (ValidationException e) {
+            AlertMessage.errorMessage("Preencha os campos obrigatórios vazios!!");
+            setErrorMessages(e.getErrors());
+
         }catch (DbException e){
             AlertMessage.errorMessage("Error saving pacient",e.getMessage());
         }
@@ -161,6 +189,31 @@ public class PacientRecordViewController implements Initializable {
 
     private Pacient getFormData() {
         Pacient p = new Pacient();
+        ValidationException validationException = new ValidationException("Validation error");
+        if(formPacientName.getText().trim().isEmpty() || formPacientName.getText() == null){
+            validationException.addError("name","campo de nome vazio!");
+        }
+        if(formPacientBirthDate.getValue() == null){
+            validationException.addError("birthDate", "campo de data de nascimento vazio!");
+        }
+        if(formPacientNumber.getText().trim().isEmpty() || formPacientNumber.getText() == null){
+            validationException.addError("number", "campo de número de celular vazio!");
+        }
+        if(formPacientCPF.getText().trim().isEmpty() || formPacientCPF.getText() == null){
+            validationException.addError("CPF", "campo de CPF vazio!");
+        }
+        if (formPacientAddressInfo.getText().trim().isEmpty() || formPacientAddressInfo.getText() == null){
+            validationException.addError("address", "campo de endereço vazio!");
+        }
+        if (formPacientNeighborhood.getText().trim().isEmpty() || formPacientNeighborhood.getText() == null){
+            validationException.addError("neighborhood", "campo de bairro vazio!");
+        }
+        if (formPacientCity.getText().trim().isEmpty() || formPacientCity.getText() == null){
+            validationException.addError("city", "campo de cidade vazio!");
+        }
+        if(validationException.getErrors().size() > 0){
+            throw validationException;
+        }
         p.setName(formPacientName.getText());
         p.setBirthDate(formPacientBirthDate.getValue());
         p.setCpf(formPacientCPF.getText());
@@ -172,8 +225,10 @@ public class PacientRecordViewController implements Initializable {
         p.setMaritalStatus(formPacientMaritalStatus.getValue());
         p.setStartTreatment(formPacientStartTreat.getValue());
         p.setEndTreatment(formPacientEndTreat.getValue());
+
         getAddressData(p);
         getAnamnesisData(p);
+
         return p;
     }
     private Address getAddressData(Pacient p) {
@@ -249,6 +304,8 @@ public class PacientRecordViewController implements Initializable {
         setFormPacientMaritalStatus();
         setInitialState();
         initializeNodes();
+        reloadTextFields();
+        configErrorLabels();
 
     }
     private void initializeNodes(){
@@ -348,8 +405,74 @@ public class PacientRecordViewController implements Initializable {
         formPacientDiabetes.setSelected(entity.getAnamnese().getDiabetes());
         formPacientPregnancy.setSelected(entity.getAnamnese().getPregnancy());
         formPacientAnnotations.setText(entity.getAnamnese().getAdditionalAnnotations());
+    }
+    public void setErrorMessages(Map<String, String> errors) {
+        Set<String> fields = errors.keySet();
+        if(fields.contains("name")){
+            labelNameError.setText(errors.get("name"));
 
+            formPacientName.setPromptText("");
+        }
+        if(fields.contains("birthDate")){
+            labelBirthDateError.setText(errors.get("birthDate"));
 
+            formPacientBirthDate.setPromptText("");
+        }
+        if(fields.contains("cpf")){
+            labelCPFError.setText(errors.get("cpf"));
+            formPacientCPF.setPromptText("");
+        }
+        if(fields.contains("number")){
+            labelNumberError.setText(errors.get("number"));
+            formPacientNumber.setPromptText("");
+
+        }
+        if(fields.contains("address")){
+            labelAddressError.setText(errors.get("address"));
+        }
+        if(fields.contains("city")){
+            labelCityError.setText(errors.get("city"));
+        }
+        if(fields.contains("neighborhood")){
+            labelNeighborhoodError.setText(errors.get("neighborhood"));
+        }
+    }
+    private void reloadTextFields(){
+        formPacientName.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) { // Se o TextField ganha foco
+                labelNameError.setText(""); // Limpa o texto do Label
+            }
+        });
+        formPacientBirthDate.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) { // Se o TextField ganha foco
+                labelBirthDateError.setText(""); // Limpa o texto do Label
+            }
+        });
+        formPacientCPF.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) { // Se o TextField ganha foco
+                labelCPFError.setText(""); // Limpa o texto do Label
+            }
+        });
+        formPacientNumber.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) { // Se o TextField ganha foco
+                labelNumberError.setText(""); // Limpa o texto do Label
+            }
+        });
+        formPacientAddressInfo.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) { // Se o TextField ganha foco
+                labelAddressError.setText(""); // Limpa o texto do Label
+            }
+        });
+        formPacientNeighborhood.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) { // Se o TextField ganha foco
+                labelNeighborhoodError.setText(""); // Limpa o texto do Label
+            }
+        });
+        formPacientCity.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) { // Se o TextField ganha foco
+                labelCityError.setText(""); // Limpa o texto do Label
+            }
+        });
     }
 
 }

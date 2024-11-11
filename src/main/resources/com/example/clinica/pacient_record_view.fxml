@@ -15,15 +15,12 @@
 
 <AnchorPane prefHeight="601.0" prefWidth="828.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clinica.controllers.PacientRecordViewController">
    <children>
-      <BorderPane fx:id="formPacientRegistry" prefHeight="573.0" prefWidth="828.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane fx:id="formPacientRegistry" prefHeight="573.0" prefWidth="828.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <AnchorPane prefHeight="559.0" prefWidth="828.0" BorderPane.alignment="CENTER">
                <children>
-      
-            
-      
-            
-      
+
+
                      <Label layoutX="47.0" layoutY="22.0" prefHeight="16.0" prefWidth="124.0" text="Nome" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="22.0" />
                <TextField fx:id="formPacientName" layoutX="46.0" layoutY="47.0" prefHeight="37.0" prefWidth="736.0" promptText="digite o nome completo do paciente" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="47.0">
                      <styleClass>
@@ -31,8 +28,14 @@
                         <String fx:value="shadow" />
                      </styleClass>
                   </TextField>
-               <Label layoutX="46.0" layoutY="244.0" prefHeight="16.0" prefWidth="99.0" text="Email" />
-               <TextField fx:id="formPacientEmail" layoutX="46.0" layoutY="269.0" prefHeight="37.0" prefWidth="350.0" promptText="exemplo@gmail.com" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="269.0">
+                  <Label layoutX="47.0" layoutY="98.0" prefHeight="16.0" prefWidth="148.0" text="Data de nascimento" />
+                  <DatePicker fx:id="formPacientBirthDate" layoutX="47.0" layoutY="123.0" prefHeight="37.0" prefWidth="350.0" promptText="dd/MM/yyyy" stylesheets="@../../../design/MainDesign.css">
+                     <styleClass>
+                        <String fx:value="shadow" />
+                        <String fx:value="radius" />
+                     </styleClass></DatePicker>
+               <Label layoutX="413.0" layoutY="98.0" prefHeight="16.0" prefWidth="195.0" text="CPF" AnchorPane.leftAnchor="413.0" AnchorPane.topAnchor="98.0" />
+                  <TextField fx:id="formPacientCPF" layoutX="415.0" layoutY="123.0" prefHeight="37.0" prefWidth="368.0" promptText="000.000.000-00" stylesheets="@../../../design/MainDesign.css">
                      <styleClass>
                         <String fx:value="shadow" />
                         <String fx:value="radius" />
@@ -45,52 +48,20 @@
                         <String fx:value="radius" />
                      </styleClass>
                   </TextField>
-               <Label layoutX="413.0" layoutY="98.0" prefHeight="16.0" prefWidth="195.0" text="CPF" AnchorPane.leftAnchor="413.0" AnchorPane.topAnchor="98.0" />
                <Label layoutX="415.0" layoutY="172.0" prefHeight="16.0" prefWidth="266.0" text="Segundo número (Opcional)" AnchorPane.leftAnchor="415.0" AnchorPane.topAnchor="172.0" />
-               <Label layoutX="413.0" layoutY="317.0" prefHeight="16.0" prefWidth="265.0" text="Estado civil" AnchorPane.leftAnchor="413.0" AnchorPane.topAnchor="317.0" />
-               <Label layoutX="47.0" layoutY="317.0" prefHeight="16.0" prefWidth="144.0" text="Profissão" />
-               <TextField fx:id="formPacientProfession" layoutX="47.0" layoutY="342.0" prefHeight="37.0" prefWidth="350.0" promptText="digite a profissão" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="342.0">
-                     <styleClass>
-                        <String fx:value="shadow" />
-                        <String fx:value="radius" />
-                     </styleClass>
-                  </TextField>
-                  <Button fx:id="formPacientRegistryProceed" layoutX="517.0" layoutY="479.0" mnemonicParsing="false" onAction="#switchForms" prefHeight="41.0" prefWidth="265.0" stylesheets="@../../../design/MainDesign.css" text="Prosseguir" textFill="WHITE" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="47.0">
-                     <styleClass>
-                        <String fx:value="bg-color" />
-                        <String fx:value="radius" />
-                        <String fx:value="shadow" />
-                     </styleClass>
-                  </Button>
-                  <TextField fx:id="formPacientCPF" layoutX="415.0" layoutY="123.0" prefHeight="37.0" prefWidth="368.0" promptText="000.000.000-00" stylesheets="@../../../design/MainDesign.css">
-                     <styleClass>
-                        <String fx:value="shadow" />
-                        <String fx:value="radius" />
-                     </styleClass>
-                  </TextField>
                   <TextField fx:id="formPacientSecondNumber" layoutX="414.0" layoutY="195.0" prefHeight="37.0" prefWidth="367.0" stylesheets="@../../../design/MainDesign.css">
                      <styleClass>
                         <String fx:value="shadow" />
                         <String fx:value="radius" />
                      </styleClass>
                   </TextField>
-                  <Label layoutX="47.0" layoutY="98.0" prefHeight="16.0" prefWidth="148.0" text="Data de nascimento" />
-                  <Label layoutX="47.0" layoutY="393.0" prefHeight="16.0" prefWidth="185.0" text="Início do tratamento" />
-                  <Label layoutX="413.0" layoutY="393.0" prefHeight="16.0" prefWidth="192.0" text="Término do tratamento" />
-                  <DatePicker fx:id="formPacientBirthDate" layoutX="47.0" layoutY="123.0" prefHeight="37.0" prefWidth="350.0" promptText="dd/MM/yyyy" stylesheets="@../../../design/MainDesign.css">
+               <Label layoutX="46.0" layoutY="244.0" prefHeight="16.0" prefWidth="99.0" text="Email" />
+               <TextField fx:id="formPacientEmail" layoutX="46.0" layoutY="269.0" prefHeight="37.0" prefWidth="350.0" promptText="exemplo@gmail.com" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="269.0">
                      <styleClass>
                         <String fx:value="shadow" />
                         <String fx:value="radius" />
-                     </styleClass></DatePicker>
-                  <DatePicker fx:id="formPacientStartTreat" layoutX="46.0" layoutY="417.0" prefHeight="37.0" prefWidth="350.0" promptText=" data do início" stylesheets="@../../../design/MainDesign.css" />
-                  <DatePicker fx:id="formPacientEndTreat" layoutX="415.0" layoutY="417.0" prefHeight="37.0" prefWidth="365.0" promptText="data do término" stylesheets="@../../../design/MainDesign.css" />
-                  <ComboBox fx:id="formPacientMaritalStatus" layoutX="413.0" layoutY="343.0" prefHeight="35.0" prefWidth="370.0" promptText="Selecione" stylesheets="@../../../design/MainDesign.css">
-                     <styleClass>
-                        <String fx:value="shadow" />
-                        <String fx:value="radius" />
-                        <String fx:value="white-bg" />
                      </styleClass>
-                  </ComboBox>
+                  </TextField>
                   <Label layoutX="414.0" layoutY="244.0" prefHeight="16.0" prefWidth="266.0" text="DLNE" />
                   <TextField fx:id="formPacientDLNE" layoutX="414.0" layoutY="269.0" prefHeight="37.0" prefWidth="367.0" stylesheets="@../../../design/MainDesign.css">
                      <styleClass>
@@ -98,6 +69,37 @@
                         <String fx:value="radius" />
                      </styleClass>
                   </TextField>
+               <Label layoutX="47.0" layoutY="317.0" prefHeight="16.0" prefWidth="144.0" text="Profissão" />
+               <TextField fx:id="formPacientProfession" layoutX="47.0" layoutY="342.0" prefHeight="37.0" prefWidth="350.0" promptText="digite a profissão" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="47.0" AnchorPane.topAnchor="342.0">
+                     <styleClass>
+                        <String fx:value="shadow" />
+                        <String fx:value="radius" />
+                     </styleClass>
+                  </TextField>
+               <Label layoutX="413.0" layoutY="317.0" prefHeight="16.0" prefWidth="265.0" text="Estado civil" AnchorPane.leftAnchor="413.0" AnchorPane.topAnchor="317.0" />
+                  <ComboBox fx:id="formPacientMaritalStatus" layoutX="413.0" layoutY="343.0" prefHeight="35.0" prefWidth="370.0" promptText="Selecione" stylesheets="@../../../design/MainDesign.css">
+                     <styleClass>
+                        <String fx:value="shadow" />
+                        <String fx:value="radius" />
+                        <String fx:value="white-bg" />
+                     </styleClass>
+                  </ComboBox>
+                  <Label layoutX="47.0" layoutY="393.0" prefHeight="16.0" prefWidth="185.0" text="Início do tratamento" />
+                  <DatePicker fx:id="formPacientStartTreat" layoutX="46.0" layoutY="417.0" prefHeight="37.0" prefWidth="350.0" promptText=" data do início" stylesheets="@../../../design/MainDesign.css" />
+                  <Label layoutX="413.0" layoutY="393.0" prefHeight="16.0" prefWidth="192.0" text="Término do tratamento" />
+                  <DatePicker fx:id="formPacientEndTreat" layoutX="415.0" layoutY="417.0" prefHeight="37.0" prefWidth="365.0" promptText="data do término" stylesheets="@../../../design/MainDesign.css" />
+                  <Button fx:id="formPacientRegistryProceed" layoutX="517.0" layoutY="479.0" mnemonicParsing="false" onAction="#switchForms" prefHeight="41.0" prefWidth="265.0" stylesheets="@../../../design/MainDesign.css" text="Prosseguir" textFill="WHITE" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="47.0">
+                     <styleClass>
+                        <String fx:value="bg-color" />
+                        <String fx:value="radius" />
+                        <String fx:value="shadow" />
+                     </styleClass>
+                  </Button>
+                  <Label fx:id="labelNameError" layoutX="54.0" layoutY="58.0" prefHeight="16.0" prefWidth="305.0" textFill="RED" />
+                  <Label fx:id="labelBirthDateError" layoutX="54.0" layoutY="134.0" prefHeight="16.0" prefWidth="300.0" textFill="RED" />
+                  <Label fx:id="labelCPFError" layoutX="422.0" layoutY="134.0" prefHeight="16.0" prefWidth="338.0" textFill="RED" />
+                  <Label fx:id="labelNumberError" layoutX="54.0" layoutY="206.0" prefHeight="16.0" prefWidth="311.0" textFill="RED" />
+
                </children>
             </AnchorPane>
          </center>
@@ -184,13 +186,16 @@
                               <String fx:value="shadow" />
                            </styleClass>
                         </TextArea>
+                        <Label fx:id="labelAddressError" layoutX="62.0" layoutY="79.0" prefHeight="16.0" prefWidth="450.0" textFill="RED" />
+                        <Label fx:id="labelNeighborhoodError" layoutX="62.0" layoutY="165.0" prefHeight="16.0" prefWidth="455.0" textFill="RED" />
+                        <Label fx:id="labelCityError" layoutX="62.0" layoutY="243.0" prefHeight="16.0" prefWidth="446.0" textFill="RED" />
                      </children>
                   </AnchorPane>
                </children>
             </AnchorPane>
          </center>
       </BorderPane>
-      <BorderPane fx:id="formPacientAnamnesis" layoutX="10.0" layoutY="10.0" prefHeight="601.0" prefWidth="838.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane fx:id="formPacientAnamnesis" layoutX="10.0" layoutY="10.0" prefHeight="601.0" prefWidth="838.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
             <AnchorPane prefHeight="559.0" prefWidth="828.0" BorderPane.alignment="CENTER">
                <children>
