@@ -73,7 +73,9 @@ public class MainViewController implements Initializable {
     }
     @FXML
     void onMainViewProfessionalsBttnAction() {
-        loadView("professional-view.fxml", (ProfessionalViewController professionalViewController) ->{} );
+        loadView("professional-view.fxml", (ProfessionalViewController professionalViewController) ->{
+
+        } );
     }
 
     @FXML
@@ -90,7 +92,6 @@ public class MainViewController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource(absolutePath));
             AnchorPane newAnchorPane = fxmlLoader.load();
-
             mainViewCenterAnchorPane.getChildren().clear();
             mainViewCenterAnchorPane.getChildren().add(newAnchorPane);
 

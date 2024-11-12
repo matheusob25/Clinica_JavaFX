@@ -29,7 +29,9 @@ public class PacientService {
     public void update(Pacient pacient) {
         pacientDao.update(pacient);
     }
-
+    public Pacient findById(Long id) {
+        return pacientDao.findById(id);
+    }
 
 
 }

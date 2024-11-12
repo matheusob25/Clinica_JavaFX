@@ -5,17 +5,21 @@ import com.example.clinica.alerts.AlertMessage;
 import com.example.clinica.controllers.listeners.DataChangeListener;
 import com.example.clinica.model.entities.*;
 import com.example.clinica.model.services.*;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.LoadException;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 
@@ -30,7 +34,7 @@ public class PacientViewController implements Initializable, DataChangeListener 
     private TableView<Pacient> pacientViewTable;
 
     @FXML
-    private TableColumn<?,?> pacientViewColumnAction;
+    private TableColumn<Pacient, Pacient> pacientViewColumnAction;
 
     @FXML
     private TableColumn<Pacient, Integer> pacientViewColumnAge;
@@ -79,6 +83,7 @@ public class PacientViewController implements Initializable, DataChangeListener 
             stage.showAndWait();
 
 
+
         }catch (LoadException e){
             AlertMessage.errorMessage("erro ao carregar pagina: "+ e.getMessage());
 
@@ -107,11 +112,47 @@ public class PacientViewController implements Initializable, DataChangeListener 
         List<Pacient> pacients = pacientService.findAll();
         obsPacients = FXCollections.observableArrayList(pacients);
         pacientViewTable.setItems(obsPacients);
+        initActionButtons();
     }
 
 
     @Override
     public void onDataChanged() {
         updateTableViewPacients();
+    }
+    private void initActionButtons(){
+        pacientViewColumnAction.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+        pacientViewColumnAction.setCellFactory(param -> new TableCell<Pacient,Pacient>() {
+            private final Button updateButton = new Button("Atualizar");
+            private final Button deleteButton = new Button("X");
+
+
+            @Override
+            protected void updateItem(Pacient pacient, boolean empty){
+                super.updateItem(pacient, empty);
+                if (pacient == null) {
+                    setGraphic(null);
+                    return;
+                }else{
+                    HBox hBox = new HBox(5, updateButton, deleteButton);
+                    setGraphic(hBox);
+                }
+                updateButton.setOnAction(event -> {
+                    Pacient pacient2 = pacientService.findById(pacient.getId());
+                    loadView(pacient2);
+                });
+                deleteButton.setOnAction(event -> {
+                    AlertMessage.confirmationMessage("Tem certeza que deseja excluir esse paciente?");
+                });
+            }
+            {
+                updateButton.getStyleClass().add("bg-color");
+                deleteButton.getStyleClass().add("bg-delete-color");
+
+
+            }
+
+        }
+        );
     }
 }

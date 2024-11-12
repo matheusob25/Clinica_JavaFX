@@ -110,10 +110,10 @@ public class PacientDaoJDBC implements PacientDao {
         ResultSet rs = null;
         try {
             st = connection.prepareStatement(
-                    "SELECT paciente.*, anamneses.*, enderecos.* FROM tb_pacientes as paciente " +
+                    "SELECT anamneses.*, enderecos.*, paciente.*, bairros.*, cidades.* FROM tb_pacientes as paciente " +
                         "LEFT JOIN tb_anamneses AS anamneses ON paciente.anamnese_id = anamneses.anamnese_id " +
                         "LEFT JOIN tb_enderecos AS enderecos ON paciente.endereco_id = enderecos.endereco_id " +
-                        "LEFT JOIN tb_bairros AS bairros ON enderecos.bairro_id = bairros.bairro_id"+
+                        "LEFT JOIN tb_bairros AS bairros ON enderecos.bairro_id = bairros.bairro_id "+
                         "LEFT JOIN tb_cidades AS cidades ON bairros.cidade_id = cidades.cidade_id "+
                         "WHERE paciente.paciente_id = ?" +
                         " ORDER BY paciente_nome"
@@ -163,11 +163,11 @@ public class PacientDaoJDBC implements PacientDao {
     private Anamnese instantiateAnamnese(ResultSet rs)throws SQLException {
         Anamnese anamnese = new Anamnese();
         anamnese.setId(rs.getLong("anamnese_id"));
-        anamnese.setSensitivityAnesthesia(rs.getString("anamnese_sens_anestesia "));
+        anamnese.setSensitivityAnesthesia(rs.getString("anamnese_sens_anestesia"));
         anamnese.setSensitivityAntibiotics(rs.getString("anamnese_sens_antibioticos"));
         anamnese.setMedicationUse(rs.getString("anamnese_uso_medicacao"));
         anamnese.setSeriousIllness(rs.getString("anamnese_doenca_grave"));
-        anamnese.setSensitiveTooth(rs.getBoolean("anamnese_dente_sensivel "));
+        anamnese.setSensitiveTooth(rs.getBoolean("anamnese_dente_sensivel"));
         anamnese.setPregnancy(rs.getBoolean("anamnese_gravidez"));
         anamnese.setDiabetes(rs.getBoolean("anamnese_diabete"));
         anamnese.setAdditionalAnnotations(rs.getString("anamnese_anotacoes_adicionais"));

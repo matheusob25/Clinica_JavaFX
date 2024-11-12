@@ -29,7 +29,13 @@
 }
 
 .bg-color{
+    -fx-text-fill: white;
     -fx-background-color: linear-gradient(to bottom right, #505fe5,#2b3580);
+}
+.bg-delete-color{
+    -fx-text-fill: white;
+    -fx-background-color: red;
+
 }
 .btn-1{
     -fx-background-color: #fff;
