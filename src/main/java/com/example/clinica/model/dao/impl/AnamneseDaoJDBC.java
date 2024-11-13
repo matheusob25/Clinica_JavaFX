@@ -62,8 +62,8 @@ public class AnamneseDaoJDBC implements AnamneseDao {
                     "UPDATE tb_anamneses SET anamnese_sens_anestesia = ?,"
                        + "anamnese_sens_antibioticos = ?, anamnese_uso_medicacao = ?,"
                        + "anamnese_doenca_grave = ?, anamnese_dente_sensivel = ?,"
-                       + "anamnese_gravidez = ?, anamnese_diabete = ?, anamnese_anotacoes_adicionais = ?"
-                       + "WHERE anamnese_id = ?");
+                       + "anamnese_gravidez = ?, anamnese_diabete = ?, anamnese_anotacoes_adicionais = ? "
+                       + "WHERE anamnese_id = ?;");
 
             st.setString(1,anamnese.getSensitivityAnesthesia());
             st.setString(2,anamnese.getSensitivityAntibiotics());

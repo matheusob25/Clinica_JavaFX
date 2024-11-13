@@ -34,8 +34,8 @@ public class PacientDaoJDBC implements PacientDao {
             st.setString(4,pacient.getNumberTwo());
             st.setDate(5, Date.valueOf(pacient.getBirthDate()));
             st.setString(6, pacient.getCpf());
-            st.setDate(7,Date.valueOf(pacient.getStartTreatment()));
-            st.setDate(8,Date.valueOf(pacient.getEndTreatment()));
+            st.setDate(7, pacient.getStartTreatment() != null ? Date.valueOf(pacient.getStartTreatment()) : null);
+            st.setDate(8,pacient.getEndTreatment() != null ? Date.valueOf(pacient.getEndTreatment()) : null);
             st.setString(9,pacient.getProfession());
             st.setString(10,pacient.getMaritalStatus());
             st.setString(11,pacient.getDlne());
@@ -74,22 +74,22 @@ public class PacientDaoJDBC implements PacientDao {
                     "UPDATE tb_pacientes SET paciente_nome = ?, paciente_email = ?, paciente_numero = ?, "
                        + "paciente_segundo_numero = ?, paciente_data_nascimento = ?, paciente_cpf = ?, "
                        + "paciente_inicio_tratamento = ?, paciente_termino_tratamento = ?,  paciente_profissao = ?, "
-                       + "paciente_estado_civil = ?, paciente_dlne = ?"
+                       + "paciente_estado_civil = ?, paciente_dlne = ? "
                        + "WHERE paciente_id = ?;"
             );
 
             st.setString(1, pacient.getName());
             st.setString(2, pacient.getEmail());
-            st.setString(2, pacient.getNumber());
-            st.setString(2, pacient.getNumberTwo());
-            st.setDate(3, Date.valueOf(pacient.getBirthDate()));
-            st.setString(4, pacient.getCpf());
-            st.setDate(5, Date.valueOf(pacient.getStartTreatment()));
-            st.setDate(6, Date.valueOf(pacient.getEndTreatment()));
-            st.setString(7, pacient.getProfession());
-            st.setString(8, pacient.getMaritalStatus());
-            st.setString(9, pacient.getDlne());
-            st.setLong(10, pacient.getId());
+            st.setString(3, pacient.getNumber());
+            st.setString(4, pacient.getNumberTwo());
+            st.setDate(5, Date.valueOf(pacient.getBirthDate()));
+            st.setString(6, pacient.getCpf());
+            st.setDate(7, pacient.getStartTreatment() != null ? Date.valueOf(pacient.getStartTreatment()) : null);
+            st.setDate(8, pacient.getEndTreatment() != null ? Date.valueOf(pacient.getEndTreatment()) : null);
+            st.setString(9, pacient.getProfession());
+            st.setString(10, pacient.getMaritalStatus());
+            st.setString(11, pacient.getDlne());
+            st.setLong(12, pacient.getId());
 
             st.executeUpdate();
         }catch (SQLException e){

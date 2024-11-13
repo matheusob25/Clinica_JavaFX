@@ -169,14 +169,14 @@ public class PacientRecordViewController implements Initializable {
             entity = getFormData();
             pacientService.saveOrUpdate(entity);
             notifyDataChangeListeners();
-            AlertMessage.successMessage("Paciente cadastrado com sucesso!");
+            AlertMessage.successMessage("Paciente salvo com sucesso!");
             ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
         }catch (ValidationException e) {
             AlertMessage.errorMessage("Preencha os campos obrigatórios vazios!!");
             setErrorMessages(e.getErrors());
 
         }catch (DbException e){
-            AlertMessage.errorMessage("Error saving pacient",e.getMessage());
+            e.printStackTrace();
         }
 
     }
@@ -188,7 +188,6 @@ public class PacientRecordViewController implements Initializable {
     }
 
     private Pacient getFormData() {
-        Pacient p = new Pacient();
         ValidationException validationException = new ValidationException("Validation error");
         if(formPacientName.getText().trim().isEmpty() || formPacientName.getText() == null){
             validationException.addError("name","campo de nome vazio!");
@@ -214,24 +213,24 @@ public class PacientRecordViewController implements Initializable {
         if(validationException.getErrors().size() > 0){
             throw validationException;
         }
-        p.setName(formPacientName.getText());
-        p.setBirthDate(formPacientBirthDate.getValue());
-        p.setCpf(formPacientCPF.getText());
-        p.setNumber(formPacientNumber.getText());
-        p.setNumberTwo(formPacientSecondNumber.getText());
-        p.setEmail(formPacientEmail.getText());
-        p.setDlne(formPacientDLNE.getText());
-        p.setProfession(formPacientProfession.getText());
-        p.setMaritalStatus(formPacientMaritalStatus.getValue());
-        p.setStartTreatment(formPacientStartTreat.getValue());
-        p.setEndTreatment(formPacientEndTreat.getValue());
+        entity.setName(formPacientName.getText());
+        entity.setBirthDate(formPacientBirthDate.getValue());
+        entity.setCpf(formPacientCPF.getText());
+        entity.setNumber(formPacientNumber.getText());
+        entity.setNumberTwo(formPacientSecondNumber.getText());
+        entity.setEmail(formPacientEmail.getText());
+        entity.setDlne(formPacientDLNE.getText());
+        entity.setProfession(formPacientProfession.getText());
+        entity.setMaritalStatus(formPacientMaritalStatus.getValue());
+        entity.setStartTreatment(formPacientStartTreat.getValue());
+        entity.setEndTreatment(formPacientEndTreat.getValue());
 
-        getAddressData(p);
-        getAnamnesisData(p);
+        getAddressData(entity);
+        getAnamnesisData(entity);
 
-        return p;
+        return entity;
     }
-    private Address getAddressData(Pacient p) {
+    private Address getAddressData(Pacient entity) {
         if(cityService == null || addressService == null || neighborHoodService == null) {
             throw new IllegalStateException("Services were not initialized correctly");
         }
@@ -249,22 +248,31 @@ public class PacientRecordViewController implements Initializable {
             neighborhood.setCity(city);
             neighborHoodService.insert(neighborhood);
         }
-
-        Address address = new Address();
+        Address address;
+        if(entity.getAddress() == null) {
+             address = new Address();
+        }else{
+            address = entity.getAddress();
+        }
         address.setDescription(formPacientAddressInfo.getText());
         address.setReference(formPacientReference.getText());
         address.setNeighborhood(neighborhood);
 
-        addressService.insert(address);
+        addressService.insertOrUpdate(address);
 
-        p.setAddress(address);
+        entity.setAddress(address);
         return address;
     }
     private Anamnese getAnamnesisData(Pacient p) {
         if(anamneseService == null) {
             throw new IllegalStateException("Services were not initialized correctly");
         }
-        Anamnese a = new Anamnese();
+        Anamnese a;
+        if(p.getAnamnese() == null) {
+            a = new Anamnese();
+        }else {
+            a = p.getAnamnese();
+        }
         a.setSensitivityAnesthesia(formPacientAnesthesia.getText());
         a.setSensitivityAntibiotics(formPacientAntibiotics.getText());
         a.setMedicationUse(formPacientMedicationUse.getText());
@@ -272,7 +280,7 @@ public class PacientRecordViewController implements Initializable {
         a.setSensitiveTooth(formPacientSensitiveTooth.isSelected());
         a.setDiabetes(formPacientDiabetes.isSelected());
         a.setPregnancy(formPacientPregnancy.isSelected());
-        anamneseService.insert(a);
+        anamneseService.insertOrUpdate(a);
         p.setAnamnese(a);
         return a;
     }
