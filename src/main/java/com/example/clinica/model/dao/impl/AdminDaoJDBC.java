@@ -110,7 +110,21 @@ public class AdminDaoJDBC implements AdminDao {
 
     @Override
     public void update(Admin admin) {
+        PreparedStatement st = null;
+        try {
+            st = connection.prepareStatement(
+                 "UPDATE tb_admins SET admin_nome = ?, admin_senha = ?"
+                    + " WHERE admin_id = ?;");
+            st.setString(1, admin.getName());
+            st.setString(2, admin.getPassword());
+            st.setLong(3, admin.getId());
+            st.executeUpdate();
 
+        }catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }finally {
+            DB.closeStatement(st);
+        }
     }
 }
 

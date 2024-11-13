@@ -79,7 +79,7 @@ public class LoginViewController implements Initializable {
     @FXML
     private synchronized void onLoginButtonAction(Event event) {
         passwordVisibleOrInvisible();
-        boolean login = false;
+        boolean login;
         if(loginPassword.getText().isEmpty() || loginName.getText().isEmpty()) {
               AlertMessage.errorMessage("Por favor preencha todos os campos");
         }else {

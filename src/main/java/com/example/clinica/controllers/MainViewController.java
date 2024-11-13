@@ -70,8 +70,8 @@ public class MainViewController implements Initializable {
     }
     @FXML
     void onMainViewUpdatePerfilBttnAction(){
-        loadView("update-profile.fxml", (UpdateProfileController updateProfileController) -> {
-            updateProfileController.setAuthenticateService(new AuthenticateService());
+        loadView("profile.fxml", (ProfileController profileController) -> {
+            profileController.setAuthenticateService(new AuthenticateService());
         } );
         mainViewGeneralInfo.setText("Atualizar perfil");
     }

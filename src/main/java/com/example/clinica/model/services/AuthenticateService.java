@@ -12,9 +12,14 @@ public class AuthenticateService {
         this.adminDao = DaoFactory.createAdminDao();
     }
     public boolean login(String name, String password) {
-
-        Admin admin = adminDao.findByName(name);
+        Admin admin = findByName(name);
         return admin != null && PasswordEncryptor.checkPassword(password, admin.getPassword());
-
+    }
+    public Admin findByName(String name) {
+         return adminDao.findByName(name);
+    }
+    public void update(Admin admin) {
+        admin.setPassword(PasswordEncryptor.hash(admin.getPassword()));
+        adminDao.update(admin);
     }
 }
