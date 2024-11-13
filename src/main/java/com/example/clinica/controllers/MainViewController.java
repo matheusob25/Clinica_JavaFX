@@ -2,6 +2,7 @@ package com.example.clinica.controllers;
 
 import com.example.clinica.MainApplication;
 import com.example.clinica.alerts.AlertMessage;
+import com.example.clinica.model.services.AuthenticateService;
 import com.example.clinica.model.services.PacientService;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import javafx.application.Platform;
@@ -69,7 +70,9 @@ public class MainViewController implements Initializable {
     }
     @FXML
     void onMainViewUpdatePerfilBttnAction(){
-        loadView("update-profile.fxml", T -> {} );
+        loadView("update-profile.fxml", (UpdateProfileController updateProfileController) -> {
+            updateProfileController.setAuthenticateService(new AuthenticateService());
+        } );
         mainViewGeneralInfo.setText("Atualizar perfil");
     }
     @FXML
@@ -133,6 +136,7 @@ public class MainViewController implements Initializable {
             Scene loginScene = MainApplication.getScene();
             Stage stage = new Stage();
             stage.setScene(loginScene);
+
             stage.show();
             ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
         }

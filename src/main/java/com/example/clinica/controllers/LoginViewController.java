@@ -69,6 +69,12 @@ public class LoginViewController implements Initializable {
             }
         }
     }
+    private void resetFields(){
+        loginName.clear();
+        loginPassword.clear();
+        loginVisiblePassword.clear();
+        loginCheckBox.setSelected(false);
+    }
 
     @FXML
     private synchronized void onLoginButtonAction(Event event) {
@@ -82,6 +88,7 @@ public class LoginViewController implements Initializable {
             if (!login) {
                 AlertMessage.errorMessage("nome ou senha não coincidem");
             } else {
+                resetFields();
                 try {
                     FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
                     Scene scene = new Scene(loader.load());

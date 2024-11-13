@@ -13,8 +13,8 @@ public class AuthenticateService {
     }
     public boolean login(String name, String password) {
 
-            Admin admin = adminDao.findByName(name);
-            return admin != null && PasswordEncryptor.checkPassword(password.strip(), admin.getPassword());
+        Admin admin = adminDao.findByName(name);
+        return admin != null && PasswordEncryptor.checkPassword(password, admin.getPassword());
 
     }
 }
