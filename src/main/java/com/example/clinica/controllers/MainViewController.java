@@ -64,18 +64,20 @@ public class MainViewController implements Initializable {
     @FXML
     void onMainViewGeneralInfoBttnAction() {
         returnToMain();
-        mainViewGeneralInfo.setVisible(true);
+        mainViewGeneralInfo.setText("Informações gerais");
 
     }
     @FXML
     void onMainViewUpdatePerfilBttnAction(){
         loadView("update-profile.fxml", T -> {} );
+        mainViewGeneralInfo.setText("Atualizar perfil");
     }
     @FXML
     void onMainViewProfessionalsBttnAction() {
         loadView("professional-view.fxml", (ProfessionalViewController professionalViewController) ->{
 
         } );
+        mainViewGeneralInfo.setText("Informações dos profissionais");
     }
 
     @FXML
@@ -86,7 +88,7 @@ public class MainViewController implements Initializable {
 
 
         });
-        mainViewGeneralInfo.setVisible(false);
+        mainViewGeneralInfo.setText("Informações dos pacientes");
     }
     private synchronized <T> void loadView(String absolutePath, Consumer<T> action) {
         try {

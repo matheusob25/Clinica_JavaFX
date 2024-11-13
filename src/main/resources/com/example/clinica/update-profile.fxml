@@ -3,19 +3,16 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="559.0" prefWidth="730.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clinica.controllers.UpdateProfileController">
    <children>
-      <FontAwesomeIconView glyphName="PENCIL_SQUARE_ALT" layoutX="40.0" layoutY="46.0" size="30" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="20.285715103149414" />
-      <Label layoutX="78.0" layoutY="26.0" prefHeight="18.0" prefWidth="171.0" styleClass="header-1" stylesheets="@../../../design/MainDesign.css" text="Atualizar perfil">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
+      <FontAwesomeIconView glyphName="PENCIL_SQUARE_ALT" layoutX="40.0" layoutY="46.0" size="32" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="20.285715103149414" />
       <AnchorPane layoutX="20.0" layoutY="58.0" prefHeight="462.0" prefWidth="650.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="57.0">
          <styleClass>
             <String fx:value="white-bg" />
@@ -30,15 +27,36 @@
                </font>
             </Label>
             <FontAwesomeIconView glyphName="PENCIL_SQUARE_ALT" layoutX="18.0" layoutY="163.0" size="20" AnchorPane.leftAnchor="18.0" />
-            <TextField layoutX="18.0" layoutY="172.0" prefHeight="35.0" prefWidth="305.0" promptText="novo nome" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="172.0" />
+            <TextField layoutX="18.0" layoutY="172.0" prefHeight="35.0" prefWidth="305.0" promptText="novo nome" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="172.0">
+               <styleClass>
+                  <String fx:value="shadow" />
+                  <String fx:value="radius" />
+               </styleClass></TextField>
             <Label layoutX="46.0" layoutY="222.0" prefHeight="18.0" prefWidth="171.0" text="Senha de usuario">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <FontAwesomeIconView glyphName="PENCIL_SQUARE_ALT" layoutX="18.0" layoutY="238.0" size="20" AnchorPane.leftAnchor="18.0" />
-            <TextField layoutX="18.0" layoutY="247.0" prefHeight="35.0" prefWidth="305.0" promptText="nova senha" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="247.0" />
-            <Button layoutX="18.0" layoutY="358.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="305.0" styleClass="bg-color" stylesheets="@../../../design/MainDesign.css" text="Salvar" textFill="WHITE" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="358.0" />
+            <PasswordField fx:id="passwordField" layoutX="18.0" layoutY="247.0" prefHeight="35.0" prefWidth="305.0" stylesheets="@../../../design/MainDesign.css" visible="false" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="247.0">
+               <styleClass>
+                  <String fx:value="radius" />
+                  <String fx:value="shadow" />
+               </styleClass>
+            </PasswordField>
+            <TextField fx:id="visiblePasswordField" layoutX="18.0" layoutY="247.0" prefHeight="35.0" prefWidth="305.0" promptText="nova senha" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="247.0">
+               <styleClass>
+                  <String fx:value="shadow" />
+                  <String fx:value="radius" />
+               </styleClass></TextField>
+            <Button fx:id="saveUpdateBttn" layoutX="18.0" layoutY="358.0" mnemonicParsing="false" onAction="#onSaveUpdateBttnAction" prefHeight="35.0" prefWidth="305.0" styleClass="bg-color" stylesheets="@../../../design/MainDesign.css" text="Salvar" textFill="WHITE" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="327.0" AnchorPane.topAnchor="358.0" />
+            <CheckBox fx:id="checkBoxVisiblePassword" layoutX="28.0" layoutY="291.0" mnemonicParsing="false" onAction="#onCheckBoxVisiblePasswordAction" prefHeight="18.0" prefWidth="20.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="293.0">
+               <styleClass>
+                  <String fx:value="shadow" />
+                  <String fx:value="custom-checkbox" />
+               </styleClass>
+            </CheckBox>
+            <Label layoutX="46.0" layoutY="293.0" prefHeight="18.0" prefWidth="171.0" text="Mostrar senha" />
          </children>
       </AnchorPane>
    </children>

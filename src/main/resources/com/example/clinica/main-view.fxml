@@ -32,7 +32,7 @@
                         </AnchorPane>
                         <Label fx:id="mainLabelDate" alignment="CENTER" layoutX="882.0" layoutY="13.0" prefHeight="16.0" prefWidth="154.0" text="dd/MM/yyyy" AnchorPane.bottomAnchor="11.0" AnchorPane.rightAnchor="64.0" AnchorPane.topAnchor="13.0" />
                         <Label fx:id="mainLabelHour" layoutX="936.0" layoutY="12.0" text="HH/mm" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0" />
-                        <Label fx:id="mainViewGeneralInfo" alignment="BASELINE_LEFT" layoutX="283.0" layoutY="11.0" prefHeight="20.0" prefWidth="241.0" styleClass="header-1" stylesheets="@../../../design/MainDesign.css" text="Informações gerais" AnchorPane.leftAnchor="283.0" AnchorPane.topAnchor="11.0">
+                        <Label fx:id="mainViewGeneralInfo" alignment="BASELINE_LEFT" layoutX="283.0" layoutY="13.0" prefHeight="20.0" prefWidth="307.0" styleClass="header-1" stylesheets="@../../../design/MainDesign.css" text="Informações gerais" AnchorPane.leftAnchor="283.0" AnchorPane.topAnchor="12.0">
                            <font>
                               <Font size="14.0" />
                            </font>

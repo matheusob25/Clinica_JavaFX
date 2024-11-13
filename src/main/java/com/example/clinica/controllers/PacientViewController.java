@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.LoadException;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
 
@@ -125,6 +127,8 @@ public class PacientViewController implements Initializable, DataChangeListener 
         pacientViewColumnAction.setCellFactory(param -> new TableCell<Pacient,Pacient>() {
             private final Button updateButton = new Button("Atualizar");
             private final Button deleteButton = new Button("X");
+            HBox hBox = new HBox(5, updateButton, deleteButton);
+
 
 
             @Override
@@ -134,20 +138,25 @@ public class PacientViewController implements Initializable, DataChangeListener 
                     setGraphic(null);
                     return;
                 }else{
-                    HBox hBox = new HBox(5, updateButton, deleteButton);
                     setGraphic(hBox);
                 }
                 updateButton.setOnAction(event -> {
-                    Pacient pacient2 = pacientService.findById(pacient.getId());
-                    loadView(pacient2);
+                    loadView(pacientService.findById(pacient.getId()));
                 });
                 deleteButton.setOnAction(event -> {
                     AlertMessage.confirmationMessage("Tem certeza que deseja excluir esse paciente?");
+
                 });
             }
             {
+                hBox.setMaxWidth(Double.MAX_VALUE);
+                hBox.setSpacing(10);
+                hBox.setAlignment(Pos.CENTER);
+                updateButton.setMaxWidth(Double.MAX_VALUE);
+                deleteButton.setMaxWidth(Double.MAX_VALUE);
                 updateButton.getStyleClass().add("bg-color");
                 deleteButton.getStyleClass().add("bg-delete-color");
+                HBox.setHgrow(updateButton, Priority.ALWAYS);
 
 
             }

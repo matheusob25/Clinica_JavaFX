@@ -176,7 +176,7 @@ public class PacientRecordViewController implements Initializable {
             setErrorMessages(e.getErrors());
 
         }catch (DbException e){
-            e.printStackTrace();
+            AlertMessage.errorMessage("Erro ao salvar paciente!", e.getMessage());
         }
 
     }

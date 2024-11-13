@@ -75,25 +75,26 @@ public class LoginViewController implements Initializable {
         passwordVisibleOrInvisible();
         boolean login = false;
         if(loginPassword.getText().isEmpty() || loginName.getText().isEmpty()) {
-            AlertMessage.errorMessage("Por favor preencha todos os campos");
-        }
-        login = authService.login(loginName.getText(), loginPassword.getText());
+              AlertMessage.errorMessage("Por favor preencha todos os campos");
+        }else {
+            login = authService.login(loginName.getText(), loginPassword.getText());
 
-        if (!login) {
-            AlertMessage.errorMessage("nome ou senha não coincidem");
-        }else{
-            try{
-                FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
-                Scene scene = new Scene(loader.load());
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.show();
-                ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
+            if (!login) {
+                AlertMessage.errorMessage("nome ou senha não coincidem");
+            } else {
+                try {
+                    FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
+                    Scene scene = new Scene(loader.load());
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.show();
+                    ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
 
-            }catch (LoadException e){
-                AlertMessage.errorMessage(e.getMessage());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+                } catch (LoadException e) {
+                    AlertMessage.errorMessage(e.getMessage());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }
