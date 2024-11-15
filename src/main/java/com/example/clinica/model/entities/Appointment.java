@@ -1,5 +1,7 @@
 package com.example.clinica.model.entities;
 
+import com.example.clinica.model.entities.enums.Status;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
@@ -9,19 +11,19 @@ public class Appointment {
     private String description;
     private LocalDateTime dateTime;
     private LocalTime duration;
-    private Boolean status;
+    private Integer status;
     private Pacient pacient;
     private Professional professional;
     public Appointment() {
 
     }
 
-    public Appointment(Long id, String description, LocalDateTime dateTime, LocalTime duration, Boolean status, Pacient pacient, Professional professional) {
+    public Appointment(Long id, String description, LocalDateTime dateTime, LocalTime duration, Status status, Pacient pacient, Professional professional) {
         this.id = id;
         this.description = description;
         this.dateTime = dateTime;
         this.duration = duration;
-        this.status = status;
+        setStatus(status);
         this.pacient = pacient;
         this.professional = professional;
     }
@@ -37,7 +39,14 @@ public class Appointment {
     public String getDescription() {
         return description;
     }
-
+    public Status getStatus() {
+        return Status.valueOf(status);
+    }
+    public void setStatus(Status status) {
+        if(status != null){
+            this.status = status.getValue();
+        }
+    }
     public void setDescription(String description) {
         this.description = description;
     }
@@ -56,14 +65,6 @@ public class Appointment {
 
     public void setDuration(LocalTime duration) {
         this.duration = duration;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
     }
 
     public Pacient getPacient() {

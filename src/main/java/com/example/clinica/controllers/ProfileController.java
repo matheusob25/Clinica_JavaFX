@@ -81,6 +81,9 @@ public class ProfileController implements Initializable{
             if(login){
                 Admin admin = authenticateService.findByName(nameField.getText());
                 createDialogView(event, admin);
+                nameField.clear();
+                passwordField.clear();
+                visiblePasswordField.clear();
 
             }else{
                 AlertMessage.errorMessage("Nome ou senha atuais incorretos, atualização de perfil cancelada");

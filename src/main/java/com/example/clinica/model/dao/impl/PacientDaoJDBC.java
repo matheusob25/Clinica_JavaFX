@@ -101,7 +101,18 @@ public class PacientDaoJDBC implements PacientDao {
 
     @Override
     public void deleteById(Long id) {
-
+        PreparedStatement st = null;
+        try {
+            st = connection.prepareStatement(
+                    "UPDATE tb_pacientes SET paciente_status = ? "
+                       + "WHERE paciente_id = ?"
+            );
+            st.setBoolean(1, false);
+            st.setLong(2, id);
+            st.executeUpdate();
+        }catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }
     }
 
     @Override
@@ -110,14 +121,13 @@ public class PacientDaoJDBC implements PacientDao {
         ResultSet rs = null;
         try {
             st = connection.prepareStatement(
-                    "SELECT anamneses.*, enderecos.*, paciente.*, bairros.*, cidades.* FROM tb_pacientes as paciente " +
+                   "SELECT anamneses.*, enderecos.*, paciente.*, bairros.*, cidades.* FROM tb_pacientes as paciente " +
                         "LEFT JOIN tb_anamneses AS anamneses ON paciente.anamnese_id = anamneses.anamnese_id " +
                         "LEFT JOIN tb_enderecos AS enderecos ON paciente.endereco_id = enderecos.endereco_id " +
                         "LEFT JOIN tb_bairros AS bairros ON enderecos.bairro_id = bairros.bairro_id "+
                         "LEFT JOIN tb_cidades AS cidades ON bairros.cidade_id = cidades.cidade_id "+
-                        "WHERE paciente.paciente_id = ?" +
-                        " ORDER BY paciente_nome"
-
+                        "WHERE paciente.paciente_id = ? AND paciente.paciente_status > 0 " +
+                        "ORDER BY paciente_nome"
             );
 
             st.setLong(1, id);
@@ -180,8 +190,9 @@ public class PacientDaoJDBC implements PacientDao {
         ResultSet rs = null;
         try {
             st = connection.prepareStatement(
-                    "SELECT paciente_id, paciente_nome, paciente_email, paciente_numero, paciente_data_nascimento, paciente_cpf " +
-                        "FROM tb_pacientes ORDER BY paciente_nome"
+                    "SELECT paciente_id, paciente_nome, paciente_email, paciente_numero, paciente_data_nascimento, paciente_cpf "
+                       + "FROM tb_pacientes WHERE paciente_status > 0 "
+                       + "ORDER BY paciente_nome"
             );
             rs = st.executeQuery();
             List<Pacient> pacients = new ArrayList<>();

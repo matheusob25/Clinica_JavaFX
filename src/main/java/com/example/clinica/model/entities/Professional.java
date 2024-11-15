@@ -7,12 +7,23 @@ public class Professional {
     private String number;
     private String descricao;
 
-    public Professional(String name, String number, String descricao) {
+    public Professional() {
+    }
+
+    public Professional(Long id, String name, String number, String descricao) {
+        this.id = id;
         this.name = name;
         this.number = number;
         this.descricao = descricao;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNumber() {
         return number;

@@ -2,6 +2,7 @@ package com.example.clinica.controllers;
 
 import com.example.clinica.MainApplication;
 import com.example.clinica.alerts.AlertMessage;
+import com.example.clinica.model.services.AppointmentService;
 import com.example.clinica.model.services.AuthenticateService;
 import com.example.clinica.model.services.PacientService;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
@@ -32,7 +33,8 @@ import java.util.function.Consumer;
 public class MainViewController implements Initializable {
 
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
+    private PacientService pacientService;
+    private AppointmentService appointmentService;
     @FXML
     private Label mainLabelDate;
     @FXML

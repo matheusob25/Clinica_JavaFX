@@ -1,16 +1,10 @@
 package com.example.clinica;
 
 import com.example.clinica.controllers.MainViewController;
-import com.example.clinica.model.dao.DaoFactory;
-import com.example.clinica.model.dao.impl.AdminDaoJDBC;
-import com.example.clinica.model.entities.Admin;
-import com.example.clinica.model.services.CityService;
-import com.example.clinica.utils.PasswordEncryptor;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class MainApplication extends Application {

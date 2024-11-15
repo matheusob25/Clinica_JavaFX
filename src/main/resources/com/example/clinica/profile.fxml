@@ -21,7 +21,7 @@
          </styleClass>
          <children>
             <FontAwesomeIconView glyphName="USER_ALT" layoutX="18.0" layoutY="111.0" size="50" AnchorPane.leftAnchor="18.0" />
-            <Label layoutX="46.0" layoutY="147.0" prefHeight="18.0" prefWidth="171.0" text="Nome atual do usuário">
+            <Label layoutX="46.0" layoutY="147.0" prefHeight="18.0" prefWidth="276.0" text="Nome atual do usuário">
                <font>
                   <Font size="14.0" />
                </font>
@@ -32,7 +32,7 @@
                   <String fx:value="shadow" />
                   <String fx:value="radius" />
                </styleClass></TextField>
-            <Label layoutX="46.0" layoutY="222.0" prefHeight="18.0" prefWidth="171.0" text="Senha atual do usuário">
+            <Label layoutX="46.0" layoutY="222.0" prefHeight="18.0" prefWidth="276.0" text="Senha atual do usuário">
                <font>
                   <Font size="14.0" />
                </font>

@@ -24,7 +24,9 @@ public class DaoFactory {
     public static CityDao createCityDao() {
         return new CityDaoJDBC(DB.getConnection());
     }
-
+    public static AppointmentDao createAppointmentDao() {
+        return new AppointmentDaoJDBC(DB.getConnection());
+    }
 
 
 

@@ -50,7 +50,7 @@
                         <MaterialDesignIconView glyphName="TOOTH" layoutX="110.0" layoutY="77.0" size="50" text="" />
                         <FontAwesomeIconView glyphName="USER" layoutX="34.0" layoutY="471.0" size="30" text="" />
                         <Button fx:id="mainViewUpdatePerfilBttn" alignment="BASELINE_LEFT" layoutX="58.0" layoutY="446.0" mnemonicParsing="false" onAction="#onMainViewUpdatePerfilBttnAction" prefHeight="29.0" prefWidth="172.0" styleClass="btn-1" stylesheets="@../../../design/MainDesign.css" text="Atualizar Perfil" />
-                        <Button alignment="BASELINE_LEFT" layoutX="58.0" layoutY="173.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="172.0" styleClass="btn-1" stylesheets="@../../../design/MainDesign.css" text="Agendamentos" />
+                        <Button alignment="BASELINE_LEFT" layoutX="58.0" layoutY="173.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="184.0" styleClass="btn-1" stylesheets="@../../../design/MainDesign.css" text="Agendar Atendimento" />
                         <Button fx:id="mainViewGeneralInfoBttn" alignment="BASELINE_LEFT" layoutX="58.0" layoutY="224.0" mnemonicParsing="false" onAction="#onMainViewGeneralInfoBttnAction" prefHeight="29.0" prefWidth="172.0" styleClass="btn-1" stylesheets="@../../../design/MainDesign.css" text="Informações gerais" />
                         <FontAwesomeIconView glyphName="USER_MD" layoutX="34.0" layoutY="298.0" size="30" />
                         <Button fx:id="mainViewProfessionalsBttn" alignment="BASELINE_LEFT" layoutX="58.0" layoutY="273.0" mnemonicParsing="false" onAction="#onMainViewProfessionalsBttnAction" prefHeight="29.0" prefWidth="172.0" styleClass="btn-1" stylesheets="@../../../design/MainDesign.css" text="Profissionais" />
@@ -111,7 +111,7 @@
                                                       <String fx:value="radius" />
                                                    </styleClass>
                                                    <children>
-                                                      <Label alignment="BASELINE_LEFT" layoutX="44.0" layoutY="16.0" prefHeight="20.0" prefWidth="168.0" text="Todos Agendamentos" textFill="WHITE" AnchorPane.topAnchor="16.0" />
+                                                      <Label alignment="BASELINE_LEFT" layoutX="44.0" layoutY="16.0" prefHeight="20.0" prefWidth="168.0" text="Todos Atendimentos" textFill="WHITE" AnchorPane.topAnchor="16.0" />
                                                       <Label alignment="CENTER" layoutX="81.0" layoutY="47.0" prefHeight="20.0" prefWidth="31.0" text="0" textFill="WHITE" />
                                                       <MaterialDesignIconView fill="WHITE" glyphName="CALENDAR_CLOCK" layoutX="6.0" layoutY="36.0" size="27" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="12.375" />
                                                    </children>
@@ -139,11 +139,11 @@
                                        <children>
                                           <TableView layoutX="9.0" prefHeight="389.0" prefWidth="801.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <columns>
-                                              <TableColumn prefWidth="75.0" text="Data" />
-                                              <TableColumn prefWidth="226.0" text="Profissional agendado" />
-                                                <TableColumn minWidth="0.0" prefWidth="219.0" text="Paciente agendado" />
+                                              <TableColumn prefWidth="130.0" text="Data e horário" />
+                                                <TableColumn prefWidth="99.0" text="Duração" />
+                                              <TableColumn prefWidth="224.0" text="Profissional agendado" />
+                                                <TableColumn minWidth="0.0" prefWidth="176.0" text="Paciente agendado" />
                                                 <TableColumn minWidth="0.0" prefWidth="122.0" text="Status" />
-                                                <TableColumn minWidth="0.0" prefWidth="133.0" text="Ação" />
                                             </columns>
                                              <columnResizePolicy>
                                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -151,7 +151,7 @@
                                           </TableView>
                                        </children>
                                     </AnchorPane>
-                                    <Label alignment="BASELINE_LEFT" layoutX="20.0" layoutY="4.0" prefHeight="20.0" prefWidth="241.0" styleClass="header-1" stylesheets="@../../../design/MainDesign.css" text="Agendamentos para hoje">
+                                    <Label alignment="BASELINE_LEFT" layoutX="20.0" layoutY="4.0" prefHeight="20.0" prefWidth="386.0" styleClass="header-1" stylesheets="@../../../design/MainDesign.css" text="Atendimentos agendados para hoje">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
