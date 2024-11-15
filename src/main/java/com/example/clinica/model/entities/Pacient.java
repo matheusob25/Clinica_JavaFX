@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Pacient implements Serializable {
-
     private Long id;
     private String name;
     private Integer age;

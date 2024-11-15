@@ -11,6 +11,8 @@ public interface PacientDao {
     void deleteById(Long id);
     Pacient findById(Long id);
     List<Pacient> findAll();
+    Long count();
+
 
 }
 

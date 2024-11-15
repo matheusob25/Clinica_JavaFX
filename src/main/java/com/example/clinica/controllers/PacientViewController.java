@@ -144,7 +144,10 @@ public class PacientViewController implements Initializable, DataChangeListener 
                     loadView(pacientService.findById(pacient.getId()));
                 });
                 deleteButton.setOnAction(event -> {
-                    AlertMessage.confirmationMessage("Tem certeza que deseja excluir esse paciente?");
+                    if(AlertMessage.confirmationMessage("Tem certeza que deseja excluir esse paciente?")){
+                        pacientService.delete(pacient.getId());
+                        updateTableViewPacients();
+                    }
 
                 });
             }

@@ -2,7 +2,7 @@ package com.example.clinica.model.dao;
 
 import com.example.clinica.db.DB;
 import com.example.clinica.model.dao.impl.*;
-import com.example.clinica.model.entities.Anamnese;
+
 
 public class DaoFactory {
     public static PacientDao createPacienteDao() {
@@ -26,6 +26,9 @@ public class DaoFactory {
     }
     public static AppointmentDao createAppointmentDao() {
         return new AppointmentDaoJDBC(DB.getConnection());
+    }
+    public static ProfessionalDao createProfessionalDao() {
+        return new ProfessionalDaoJDBC(DB.getConnection());
     }
 
 

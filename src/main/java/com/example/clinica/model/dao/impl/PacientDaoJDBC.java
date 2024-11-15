@@ -208,6 +208,28 @@ public class PacientDaoJDBC implements PacientDao {
         }
     }
 
+    @Override
+    public Long count() {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = connection.prepareStatement(
+                    "SELECT count(*) FROM tb_pacientes;"
+            );
+            rs = st.executeQuery();
+            if(rs.next()){
+                return rs.getLong(1);
+            }else{
+                return null;
+            }
+        }catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
+    }
+
     private Pacient instantiatePacient(ResultSet rs) throws SQLException {
         Pacient pacient = new Pacient();
         pacient.setId(rs.getLong("paciente_id"));

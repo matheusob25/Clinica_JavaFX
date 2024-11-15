@@ -33,5 +33,9 @@ public class PacientService {
         return pacientDao.findById(id);
     }
 
+    public void delete(Long id) {
+        pacientDao.deleteById(id);
+    }
+
 
 }
