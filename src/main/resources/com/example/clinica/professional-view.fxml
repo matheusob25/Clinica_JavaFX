@@ -12,12 +12,12 @@
    <children>
       <AnchorPane layoutX="18.0" layoutY="89.0" prefHeight="447.0" prefWidth="694.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="97.0">
          <children>
-            <TableView prefHeight="447.0" prefWidth="694.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="tableProfessionals" prefHeight="447.0" prefWidth="694.0" stylesheets="@../../../design/MainDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Nome" />
-                <TableColumn prefWidth="75.0" text="Número" />
-                  <TableColumn prefWidth="75.0" text="Descrição" />
-                  <TableColumn prefWidth="75.0" text="Ação" />
+                <TableColumn fx:id="columnName" prefWidth="75.0" text="Nome" />
+                <TableColumn fx:id="columnNumber" prefWidth="75.0" text="Número" />
+                  <TableColumn fx:id="columnDescription" prefWidth="75.0" text="Descrição" />
+                  <TableColumn fx:id="columnAction" prefWidth="75.0" text="Ação" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -30,7 +30,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="26.0" layoutY="48.0" prefHeight="31.0" prefWidth="231.0" promptText="Pesquise o profissional" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="46.0" />
-      <Button layoutX="650.0" layoutY="46.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="231.0" styleClass="bg-color" stylesheets="@../../../design/MainDesign.css" text="Adicionar novo Profissional" textFill="WHITE" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="46.0" />
+      <TextField fx:id="searchProfessionalField" layoutX="26.0" layoutY="48.0" prefHeight="31.0" prefWidth="231.0" promptText="Pesquise o profissional" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="46.0" />
+      <Button fx:id="addNewProfessionalBttn" layoutX="650.0" layoutY="46.0" mnemonicParsing="false" onAction="#onAddNewProfessionalBttnAction" prefHeight="31.0" prefWidth="231.0" styleClass="bg-color" stylesheets="@../../../design/MainDesign.css" text="Adicionar novo Profissional" textFill="WHITE" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="46.0" />
    </children>
 </AnchorPane>

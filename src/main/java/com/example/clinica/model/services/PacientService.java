@@ -36,6 +36,12 @@ public class PacientService {
     public void delete(Long id) {
         pacientDao.deleteById(id);
     }
+    public Long count() {
+        return pacientDao.count();
+    }
+    public Long countActivePacients(){
+        return pacientDao.countActivePacients();
+    }
 
 
 }

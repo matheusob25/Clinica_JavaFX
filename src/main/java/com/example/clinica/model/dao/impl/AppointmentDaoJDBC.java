@@ -237,4 +237,26 @@ public class AppointmentDaoJDBC implements AppointmentDao {
             DB.closeStatement(st);
         }
     }
+
+    @Override
+    public Long count() {
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = connection.prepareStatement(
+                    "SELECT count(*) FROM tb_atendimentos;"
+            );
+            rs = st.executeQuery();
+            if(rs.next()){
+                return rs.getLong(1);
+            }else{
+                return null;
+            }
+        }catch (SQLException e){
+            throw new DbException(e.getMessage());
+        }finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
+    }
 }

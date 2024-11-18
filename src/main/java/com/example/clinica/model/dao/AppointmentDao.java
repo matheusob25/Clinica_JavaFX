@@ -14,4 +14,5 @@ public interface AppointmentDao {
     List<Appointment> findAll();
     List<Appointment> findByPatient(Long pacientId);
     List<Appointment> findByProfessional(Long professionalId);
+    Long count();
 }

@@ -5,6 +5,7 @@ import com.example.clinica.alerts.AlertMessage;
 import com.example.clinica.model.services.AppointmentService;
 import com.example.clinica.model.services.AuthenticateService;
 import com.example.clinica.model.services.PacientService;
+import com.example.clinica.model.services.ProfessionalService;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -35,6 +36,7 @@ public class MainViewController implements Initializable {
     private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     private PacientService pacientService;
     private AppointmentService appointmentService;
+    private ProfessionalService professionalService;
     @FXML
     private Label mainLabelDate;
     @FXML
@@ -62,11 +64,41 @@ public class MainViewController implements Initializable {
     @FXML
     private AnchorPane mainViewGeneralInfoAnchorPane;
 
+    @FXML
+    private Label mainViewCountActivePacients;
 
+    @FXML
+    private Label mainViewCountProfessionals;
+
+    @FXML
+    private Label mainViewCountAppointments;
+
+    @FXML
+    private Label mainViewCountAllPacients;
+
+
+
+    public void setServices(PacientService pacientService, AppointmentService appointmentService, ProfessionalService professionalService) {
+        this.pacientService = pacientService;
+        this.appointmentService = appointmentService;
+        this.professionalService = professionalService;
+    }
+
+    public void updateScrollPaneData(){
+        if(pacientService == null || appointmentService == null || professionalService == null){
+            throw new IllegalStateException("Some service is null");
+        }
+        mainViewCountAllPacients.setText(String.valueOf(pacientService.count()));
+        mainViewCountActivePacients.setText(String.valueOf(pacientService.countActivePacients()));
+        mainViewCountAppointments.setText(String.valueOf(appointmentService.count()));
+        mainViewCountProfessionals.setText(String.valueOf(professionalService.count()));
+
+    }
 
     @FXML
     void onMainViewGeneralInfoBttnAction() {
         returnToMain();
+        updateScrollPaneData();
         mainViewGeneralInfo.setText("Informações gerais");
 
     }
@@ -80,7 +112,7 @@ public class MainViewController implements Initializable {
     @FXML
     void onMainViewProfessionalsBttnAction() {
         loadView("professional-view.fxml", (ProfessionalViewController professionalViewController) ->{
-
+            professionalViewController.setService(new ProfessionalService());
         } );
         mainViewGeneralInfo.setText("Informações dos profissionais");
     }
@@ -125,6 +157,7 @@ public class MainViewController implements Initializable {
         setMainLabelDate();
         setMainLabelHour();
         onClickLogout();
+
     }
 
 

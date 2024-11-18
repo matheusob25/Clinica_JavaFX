@@ -92,6 +92,11 @@
 
 }
 
+
+.container {
+    -fx-padding: 10;
+}
+
 /*.date-picker-popup {*/
 /*    -fx-background-color: #571111;*/
 /*    -fx-border-color: #6060ff;*/

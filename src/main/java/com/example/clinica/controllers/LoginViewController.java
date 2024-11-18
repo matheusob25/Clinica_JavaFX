@@ -5,7 +5,11 @@ import com.example.clinica.MainApplication;
 import com.example.clinica.alerts.AlertMessage;
 
 import com.example.clinica.model.dao.DaoFactory;
+import com.example.clinica.model.services.AppointmentService;
 import com.example.clinica.model.services.AuthenticateService;
+import com.example.clinica.model.services.PacientService;
+import com.example.clinica.model.services.ProfessionalService;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -77,7 +81,7 @@ public class LoginViewController implements Initializable {
     }
 
     @FXML
-    private synchronized void onLoginButtonAction(Event event) {
+    private void onLoginButtonAction(ActionEvent event) {
         passwordVisibleOrInvisible();
         boolean login;
         if(loginPassword.getText().isEmpty() || loginName.getText().isEmpty()) {
@@ -89,20 +93,26 @@ public class LoginViewController implements Initializable {
                 AlertMessage.errorMessage("nome ou senha não coincidem");
             } else {
                 resetFields();
-                try {
-                    FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
-                    Scene scene = new Scene(loader.load());
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
-                    ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
-
-                } catch (LoadException e) {
-                    AlertMessage.errorMessage(e.getMessage());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                loadView(event);
             }
+        }
+    }
+    private synchronized void loadView(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
+            Scene scene = new Scene(loader.load());
+            MainViewController controller = loader.getController();
+            controller.setServices(new PacientService(), new AppointmentService(), new ProfessionalService());
+            controller.updateScrollPaneData();
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+            ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
+
+        } catch (LoadException e) {
+            AlertMessage.errorMessage(e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

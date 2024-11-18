@@ -12,7 +12,7 @@ public interface PacientDao {
     Pacient findById(Long id);
     List<Pacient> findAll();
     Long count();
-
+    Long countActivePacients();
 
 }
 

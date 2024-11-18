@@ -8,6 +8,7 @@ import com.example.clinica.model.services.*;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,8 +21,10 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -64,15 +67,15 @@ public class PacientViewController implements Initializable, DataChangeListener 
     }
 
     @FXML
-    void onPacientViewAddNewBttn() {
+    void onPacientViewAddNewBttn(ActionEvent event) {
         Pacient pacient = new Pacient();
-        loadView(pacient);
+        loadView(event,pacient);
     }
 
-    private synchronized void loadView(Pacient pacient){
+    private synchronized void loadView(ActionEvent event,Pacient pacient){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("pacient_record_view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
+            AnchorPane pane = fxmlLoader.load();
             PacientRecordViewController controller = fxmlLoader.getController();
             controller.setEntity(pacient);
             controller.setPacientService(new PacientService());
@@ -80,7 +83,9 @@ public class PacientViewController implements Initializable, DataChangeListener 
             controller.subscribeDataChangeListener(this);
             controller.updateFormData();
             Stage stage = new Stage();
-            stage.setScene(scene);
+            stage.initOwner(((Node) event.getSource()).getScene().getWindow());
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setScene(new Scene(pane));
             stage.setResizable(false);
             stage.showAndWait();
 
@@ -141,7 +146,7 @@ public class PacientViewController implements Initializable, DataChangeListener 
                     setGraphic(hBox);
                 }
                 updateButton.setOnAction(event -> {
-                    loadView(pacientService.findById(pacient.getId()));
+                    loadView(event,pacientService.findById(pacient.getId()));
                 });
                 deleteButton.setOnAction(event -> {
                     if(AlertMessage.confirmationMessage("Tem certeza que deseja excluir esse paciente?")){
