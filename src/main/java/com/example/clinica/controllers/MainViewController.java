@@ -112,7 +112,8 @@ public class MainViewController implements Initializable {
     @FXML
     void onMainViewProfessionalsBttnAction() {
         loadView("professional-view.fxml", (ProfessionalViewController professionalViewController) ->{
-            professionalViewController.setService(new ProfessionalService());
+            professionalViewController.setService(professionalService);
+            professionalViewController.updateTableViewProfessionals();
         } );
         mainViewGeneralInfo.setText("Informações dos profissionais");
     }
