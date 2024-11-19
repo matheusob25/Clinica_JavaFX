@@ -158,6 +158,7 @@ public class ProfessionalViewController implements Initializable, DataChangeList
         );
     }
 
+
     @Override
     public void onDataChanged() {
         updateTableViewProfessionals();

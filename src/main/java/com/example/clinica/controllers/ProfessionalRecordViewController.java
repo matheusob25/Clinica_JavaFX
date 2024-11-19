@@ -9,10 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -60,7 +57,7 @@ public class ProfessionalRecordViewController implements Initializable {
 
     @FXML
     void onCancelBttnAction(ActionEvent event) {
-
+        ((Stage)((Node)event.getSource()).getScene().getWindow()).close();
     }
 
     @FXML
@@ -131,7 +128,7 @@ public class ProfessionalRecordViewController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        initializeNodes();
     }
     public void updateFormData(){
         if(professional == null){
@@ -140,5 +137,20 @@ public class ProfessionalRecordViewController implements Initializable {
         nameField.setText(professional.getName());
         numberField.setText(professional.getNumber());
         descriptionTextArea.setText(professional.getDescription());
+    }
+
+    private void initializeNodes(){
+        numberField.setTextFormatter(new TextFormatter<String>( change -> {
+            String text = change.getControlNewText();
+
+            text = text.replaceAll("[^\\d]", "");
+
+            if (text.length() > 11){
+                text = text.substring(0, 11);
+            }
+            change.setText(text);
+            change.setRange(0, change.getControlText().length());
+            return change;
+        }));
     }
 }

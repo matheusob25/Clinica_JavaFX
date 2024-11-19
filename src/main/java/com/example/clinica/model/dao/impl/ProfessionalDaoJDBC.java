@@ -73,6 +73,7 @@ public class ProfessionalDaoJDBC implements ProfessionalDao {
             st = connection.prepareStatement(
                     "DELETE FROM tb_profissionais WHERE profissional_id = ? "
             );
+            st.setLong(1, id);
             st.executeUpdate();
         }catch (SQLException e){
             throw new DbException(e.getMessage());
