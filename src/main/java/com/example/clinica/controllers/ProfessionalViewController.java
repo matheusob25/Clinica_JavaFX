@@ -2,6 +2,7 @@ package com.example.clinica.controllers;
 
 import com.example.clinica.MainApplication;
 import com.example.clinica.alerts.AlertMessage;
+import com.example.clinica.controllers.listeners.DataChangeListener;
 import com.example.clinica.model.entities.Pacient;
 import com.example.clinica.model.entities.Professional;
 import com.example.clinica.model.services.*;
@@ -30,7 +31,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ProfessionalViewController implements Initializable {
+public class ProfessionalViewController implements Initializable, DataChangeListener {
     private Professional entity;
     private ProfessionalService professionalService;
 
@@ -61,11 +62,18 @@ public class ProfessionalViewController implements Initializable {
 
     @FXML
     void onAddNewProfessionalBttnAction(ActionEvent event) {
+        Professional newProfessional = new Professional();
+        loadView(event,newProfessional);
     }
     private synchronized void loadView(ActionEvent event,Professional professional){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("professional_record_view.fxml"));
             AnchorPane pane = fxmlLoader.load();
+            ProfessionalRecordViewController controller = fxmlLoader.getController();
+            controller.setProfessionalService(professionalService);
+            controller.subscribeDataChangeListener(this);
+            controller.setProfessional(professional);
+            controller.updateFormData();
 
             Stage stage = new Stage();
             stage.initOwner(((Node) event.getSource()).getScene().getWindow());
@@ -100,7 +108,7 @@ public class ProfessionalViewController implements Initializable {
         List<Professional> professionals = professionalService.findAll();
         obsProfessionals = FXCollections.observableArrayList(professionals);
         tableProfessionals.setItems(obsProfessionals);
-
+        initActionButtons();
     }
 
 
@@ -148,5 +156,10 @@ public class ProfessionalViewController implements Initializable {
 
                 }
         );
+    }
+
+    @Override
+    public void onDataChanged() {
+        updateTableViewProfessionals();
     }
 }

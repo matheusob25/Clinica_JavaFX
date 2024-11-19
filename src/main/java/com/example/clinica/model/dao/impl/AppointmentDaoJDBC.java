@@ -146,7 +146,7 @@ public class AppointmentDaoJDBC implements AppointmentDao {
         professional.setId(rs.getLong("profissional_id"));
         professional.setName(rs.getString("profissional_nome"));
         professional.setNumber(rs.getString("profissional_numero"));
-        professional.setDescricao(rs.getString("profissional_descricao"));
+        professional.setDescription(rs.getString("profissional_descricao"));
         return professional;
     }
 

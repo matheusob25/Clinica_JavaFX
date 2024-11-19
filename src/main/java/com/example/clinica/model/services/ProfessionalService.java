@@ -17,6 +17,13 @@ public class ProfessionalService {
     public void update(Professional professional) {
         professionalDao.update(professional);
     }
+    public void saveOrUpdate(Professional professional) {
+        if (professional.getId() == null) {
+            insert(professional);
+        }else{
+            update(professional);
+        }
+    }
     public void delete(Long id) {
         if(id == null ){
             throw new IllegalArgumentException("id can not be null");

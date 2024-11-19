@@ -27,7 +27,7 @@ public class ProfessionalDaoJDBC implements ProfessionalDao {
             );
             st.setString(1, professional.getName());
             st.setString(2, professional.getNumber());
-            st.setString(3, professional.getDescricao());
+            st.setString(3, professional.getDescription());
 
             int rowsAffected = st.executeUpdate();
             if (rowsAffected > 0) {
@@ -56,7 +56,7 @@ public class ProfessionalDaoJDBC implements ProfessionalDao {
             );
             st.setString(1, professional.getName());
             st.setString(2, professional.getNumber());
-            st.setString(3, professional.getDescricao());
+            st.setString(3, professional.getDescription());
             st.setLong(4, professional.getId());
             st.executeUpdate();
         }catch (SQLException e){
@@ -149,7 +149,7 @@ public class ProfessionalDaoJDBC implements ProfessionalDao {
         professional.setId(rs.getLong("profissional_id"));
         professional.setName(rs.getString("profissional_nome"));
         professional.setNumber(rs.getString("profissional_numero"));
-        professional.setDescricao(rs.getString("profissional_descricao"));
+        professional.setDescription(rs.getString("profissional_descricao"));
         return professional;
     }
 }

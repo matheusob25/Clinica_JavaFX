@@ -5,16 +5,16 @@ public class Professional {
     private Long id;
     private String name;
     private String number;
-    private String descricao;
+    private String description;
 
     public Professional() {
     }
 
-    public Professional(Long id, String name, String number, String descricao) {
+    public Professional(Long id, String name, String number, String description) {
         this.id = id;
         this.name = name;
         this.number = number;
-        this.descricao = descricao;
+        this.description = description;
     }
 
     public Long getId() {
@@ -33,21 +33,21 @@ public class Professional {
         this.number = number;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
     public String toString() {
         return "Professional => " +
                 "id: " + id +
-                ", nome: " + name +
+                ", name: " + name +
                 ", number: " + number +
-                ", descricao: " + descricao;
+                ", description: " + description;
     }
 
     public String getName() {
