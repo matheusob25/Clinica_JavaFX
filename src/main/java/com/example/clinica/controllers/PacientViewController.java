@@ -8,6 +8,7 @@ import com.example.clinica.model.services.*;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,10 +17,7 @@ import javafx.fxml.LoadException;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -56,11 +54,30 @@ public class PacientViewController implements Initializable, DataChangeListener 
     @FXML
     private TableColumn<Pacient, String> pacientViewColumnNumber;
 
-    private ObservableList<Pacient> obsPacients;
+    private FilteredList<Pacient> tablePacients;
 
 
     @FXML
     private Button pacientViewAddNewBttn;
+
+    @FXML
+    private TextField searchPacientField;
+
+
+    public void dynamicSearch () {
+        searchPacientField.textProperty().addListener((observable, oldValue, newValue) -> {
+            tablePacients.setPredicate(item -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+                return item.getName().toLowerCase().contains(lowerCaseFilter) || item.getCpf().toLowerCase().contains(lowerCaseFilter); // Filtragem case-insensitive
+            });
+        });
+    }
+
+
 
     public void setPacientService(PacientService pacientService) {
         this.pacientService = pacientService;
@@ -70,6 +87,12 @@ public class PacientViewController implements Initializable, DataChangeListener 
     void onPacientViewAddNewBttn(ActionEvent event) {
         Pacient pacient = new Pacient();
         loadView(event,pacient);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        dynamicSearch();
+        initializeNodes();
     }
 
     private synchronized void loadView(ActionEvent event,Pacient pacient){
@@ -99,11 +122,6 @@ public class PacientViewController implements Initializable, DataChangeListener 
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeNodes();
-    }
-
     private void initializeNodes() {
         pacientViewColumnName.setCellValueFactory(new PropertyValueFactory<>("name"));
         pacientViewColumnAge.setCellValueFactory(new PropertyValueFactory<>("age"));
@@ -117,8 +135,10 @@ public class PacientViewController implements Initializable, DataChangeListener 
             throw new IllegalStateException("Service was not instantiated");
         }
         List<Pacient> pacients = pacientService.findAll();
-        obsPacients = FXCollections.observableArrayList(pacients);
-        pacientViewTable.setItems(obsPacients);
+        ObservableList<Pacient> observablePacients = FXCollections.observableArrayList(pacients);
+
+        tablePacients = new FilteredList<>(observablePacients);
+        pacientViewTable.setItems(tablePacients);
         initActionButtons();
     }
 

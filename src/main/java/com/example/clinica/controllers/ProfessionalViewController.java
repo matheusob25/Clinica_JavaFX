@@ -9,6 +9,7 @@ import com.example.clinica.model.services.*;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +33,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ProfessionalViewController implements Initializable, DataChangeListener {
-    private Professional entity;
     private ProfessionalService professionalService;
 
     @FXML
@@ -54,11 +54,24 @@ public class ProfessionalViewController implements Initializable, DataChangeList
 
     @FXML
     private TextField searchProfessionalField;
-    private ObservableList<Professional>  obsProfessionals;
+    private FilteredList<Professional>  tableListProfessionals;
 
     public void setService(ProfessionalService service) {
         this.professionalService = service;
     }
+    public void dynamicSearch () {
+        searchProfessionalField.textProperty().addListener((observable, oldValue, newValue) -> {
+            tableListProfessionals.setPredicate(item -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                String lowerCaseFilter = newValue.toLowerCase();
+                return item.getName().toLowerCase().contains(lowerCaseFilter); // Filtragem case-insensitive
+            });
+        });
+    }
+
 
     @FXML
     void onAddNewProfessionalBttnAction(ActionEvent event) {
@@ -95,6 +108,7 @@ public class ProfessionalViewController implements Initializable, DataChangeList
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeNodes();
+        dynamicSearch();
     }
     private void initializeNodes(){
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -106,8 +120,9 @@ public class ProfessionalViewController implements Initializable, DataChangeList
             throw new IllegalStateException("Professional service is null");
         }
         List<Professional> professionals = professionalService.findAll();
-        obsProfessionals = FXCollections.observableArrayList(professionals);
-        tableProfessionals.setItems(obsProfessionals);
+        ObservableList<Professional> professionalObservableList = FXCollections.observableList(professionals);
+        tableListProfessionals = new FilteredList<>(professionalObservableList);
+        tableProfessionals.setItems(tableListProfessionals);
         initActionButtons();
     }
 

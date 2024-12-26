@@ -24,7 +24,6 @@ public class Pacient implements Serializable {
     private Anamnese anamnese;
 
     public Pacient(){
-
     }
 
     public Pacient(Long id, String name, String email, String number, String numberTwo, LocalDate birthDate, String cpf, LocalDate startTreatment, LocalDate endTreatment, String profession, String maritalStatus, String dlne, Address address, Anamnese anamnese) {

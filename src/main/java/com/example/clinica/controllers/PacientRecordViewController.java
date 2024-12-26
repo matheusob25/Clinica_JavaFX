@@ -383,7 +383,7 @@ public class PacientRecordViewController implements Initializable {
     public void updateFormData(){
         if(entity == null || entity.getAnamnese() == null || entity.getAddress() == null
         || entity.getAddress().getNeighborhood() == null || entity.getAddress().getNeighborhood().getCity() == null){
-           throw new IllegalStateException("Pacient is null!");
+           return;
         }
         // pacient data
         formPacientName.setText(entity.getName());

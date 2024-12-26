@@ -8,6 +8,7 @@ import com.example.clinica.model.services.PacientService;
 import com.example.clinica.model.services.ProfessionalService;
 import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -76,6 +77,9 @@ public class MainViewController implements Initializable {
     @FXML
     private Label mainViewCountAllPacients;
 
+    @FXML
+    private Button mainViewScheduleAppointmentBttn;
+
 
 
     public void setServices(PacientService pacientService, AppointmentService appointmentService, ProfessionalService professionalService) {
@@ -94,6 +98,15 @@ public class MainViewController implements Initializable {
         mainViewCountProfessionals.setText(String.valueOf(professionalService.count()));
 
     }
+
+    @FXML
+    void onMainViewScheduleAppointmentBttnAction(ActionEvent event) {
+        loadView("appointment-view.fxml",(AppointmentViewController appointmentViewController) ->{
+            appointmentViewController.setAppointmentService(appointmentService);
+        });
+
+    }
+
 
     @FXML
     void onMainViewGeneralInfoBttnAction() {
@@ -123,8 +136,6 @@ public class MainViewController implements Initializable {
         loadView("pacient-view.fxml", (PacientViewController pacientViewController) -> {
             pacientViewController.setPacientService(new PacientService());
             pacientViewController.updateTableViewPacients();
-
-
         });
         mainViewGeneralInfo.setText("Informações dos pacientes");
     }
