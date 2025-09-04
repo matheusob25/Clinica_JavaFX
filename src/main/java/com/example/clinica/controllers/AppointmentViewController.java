@@ -7,15 +7,13 @@ import com.example.clinica.model.services.AppointmentService;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class AppointmentViewController {
+
     private AppointmentService appointmentService;
     @FXML
     private TableColumn<Appointment, Appointment> actionColumn;
@@ -31,6 +29,9 @@ public class AppointmentViewController {
 
     @FXML
     private Button newAppointmentBttn;
+
+    @FXML
+    private ComboBox<?> filterAppointmentComboBox;
 
     @FXML
     private TableColumn<Appointment, Pacient> pacientColumn;

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="250.0" minWidth="300.0" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clinica.controllers.LoginViewController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="250.0" minWidth="300.0" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clinica.controllers.LoginViewController">
     <children>
         <Label alignment="CENTER" layoutX="45.0" layoutY="105.0" prefHeight="30.0" prefWidth="310.0" text="Login de Usuário" textFill="#364ac9">
             <font>
@@ -24,17 +24,17 @@
             <String fx:value="textfield-1" />
             <String fx:value="radius" />
          </styleClass></TextField>
-        <Button fx:id="loginButton" layoutX="45.0" layoutY="339.0" mnemonicParsing="false" onAction="#onLoginButtonAction" prefHeight="39.0" prefWidth="310.0" stylesheets="@../../../design/pageDesign.css" text="Entrar">
-            <styleClass>
-                <String fx:value="btn-1" />
-                <String fx:value="radius" />
-            </styleClass></Button>
         <PasswordField fx:id="loginPassword" layoutX="45.0" layoutY="260.0" prefHeight="39.0" prefWidth="310.0" promptText="Digite a senha de usuário" stylesheets="@../../../design/pageDesign.css">
             <styleClass>
                 <String fx:value="textfield-1" />
                 <String fx:value="radius" />
             </styleClass>
       </PasswordField>
+        <Button fx:id="loginButton" layoutX="45.0" layoutY="339.0" mnemonicParsing="false" onAction="#onLoginButtonAction" prefHeight="39.0" prefWidth="310.0" stylesheets="@../../../design/pageDesign.css" text="Entrar">
+            <styleClass>
+                <String fx:value="btn-1" />
+                <String fx:value="radius" />
+            </styleClass></Button>
         <FontAwesomeIconView fill="#364ac9" glyphName="USER" layoutX="181.0" layoutY="73.0" size="50" text="" wrappingWidth="38.0" />
         <CheckBox fx:id="loginCheckBox" layoutX="45.0" layoutY="307.0" mnemonicParsing="false" onAction="#onLoginCheckBoxAction" styleClass="radius" stylesheets="@../../../design/pageDesign.css" text="Mostrar senha" />
         <MaterialDesignIconView fill="#2c4bc9" glyphName="TOOTH" layoutX="175.0" layoutY="499.0" size="50" />

@@ -72,7 +72,7 @@ public class PacientViewController implements Initializable, DataChangeListener 
                 }
 
                 String lowerCaseFilter = newValue.toLowerCase();
-                return item.getName().toLowerCase().contains(lowerCaseFilter) || item.getCpf().toLowerCase().contains(lowerCaseFilter); // Filtragem case-insensitive
+                return item.getName().toLowerCase().contains(lowerCaseFilter) || item.getCpf().toLowerCase().contains(lowerCaseFilter);
             });
         });
     }
