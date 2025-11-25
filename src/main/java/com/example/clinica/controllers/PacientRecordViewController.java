@@ -25,6 +25,7 @@ public class PacientRecordViewController implements Initializable {
     private NeighborHoodService neighborHoodService;
     private AnamneseService anamneseService;
     private Pacient entity;
+
     private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 
     @FXML

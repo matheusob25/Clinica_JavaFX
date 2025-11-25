@@ -42,7 +42,6 @@ public class LoginViewController implements Initializable {
         // Inicialmente, o campo loginVisiblePassword deve estar invisível e não gerenciado
         loginVisiblePassword.setVisible(false);
         loginVisiblePassword.setManaged(false);
-        authService = new AuthenticateService();
     }
 
     @FXML
@@ -82,6 +81,9 @@ public class LoginViewController implements Initializable {
 
     @FXML
     private void onLoginButtonAction(ActionEvent event) {
+        if(authService == null){
+            authService = new AuthenticateService();
+        }
         passwordVisibleOrInvisible();
         boolean login;
         if(loginPassword.getText().isEmpty() || loginName.getText().isEmpty()) {
