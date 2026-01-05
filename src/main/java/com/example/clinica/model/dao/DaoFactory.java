@@ -8,8 +8,8 @@ public class DaoFactory {
     public static PacientDao createPacienteDao() {
         return new PacientDaoJDBC(DB.getConnection());
     }
-    public static AdminDao createAdminDao() {
-        return new AdminDaoJDBC(DB.getConnection());
+    public static UserDao createUserDao() {
+        return new UserDaoJDBC(DB.getConnection());
     }
     public static AnamneseDao createAnamneseDao() {
         return new AnamneseDaoJDBC(DB.getConnection());

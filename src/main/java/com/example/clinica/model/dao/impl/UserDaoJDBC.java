@@ -2,27 +2,27 @@ package com.example.clinica.model.dao.impl;
 
 import com.example.clinica.db.DB;
 import com.example.clinica.db.DbException;
-import com.example.clinica.model.dao.AddressDao;
-import com.example.clinica.model.dao.AdminDao;
-import com.example.clinica.model.entities.Admin;
+import com.example.clinica.model.dao.UserDao;
+import com.example.clinica.model.entities.User;
+
 
 import java.sql.*;
 import java.util.List;
 
-public class AdminDaoJDBC implements AdminDao {
+public class UserDaoJDBC implements UserDao {
 
     private Connection connection;
 
-    public AdminDaoJDBC(Connection connection) {
+    public UserDaoJDBC(Connection connection) {
         this.connection = connection;
     }
     @Override
-    public List<Admin> findAll() {
+    public List<User> findAll() {
         return List.of();
     }
 
     @Override
-    public Admin findById(Long id) {
+    public User findById(Long id) {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -32,7 +32,7 @@ public class AdminDaoJDBC implements AdminDao {
             st.setLong(1, id);
             rs = st.executeQuery();
             if(rs.next()){
-                return instantiateAdmin(rs);
+                return instantiateUser(rs);
             }
             return null;
 
@@ -44,7 +44,7 @@ public class AdminDaoJDBC implements AdminDao {
         }
     }
     @Override
-    public Admin findByName(String name) {
+    public User findByName(String name) {
         PreparedStatement st = null;
         ResultSet rs = null;
         try {
@@ -54,7 +54,7 @@ public class AdminDaoJDBC implements AdminDao {
             st.setString(1, name);
             rs = st.executeQuery();
             if(rs.next()){
-                return instantiateAdmin(rs);
+                return instantiateUser(rs);
             }
             return null;
 
@@ -65,17 +65,17 @@ public class AdminDaoJDBC implements AdminDao {
             DB.closeResultSet(rs);
         }
     }
-    private Admin instantiateAdmin(ResultSet rs) throws SQLException {
-        Admin admin = new Admin();
-        admin.setId(rs.getLong("admin_id"));
-        admin.setName(rs.getString("admin_nome"));
-        admin.setPassword(rs.getString("admin_senha"));
-        return admin;
+    private User instantiateUser(ResultSet rs) throws SQLException {
+        User user = new User();
+        user.setId(rs.getLong("admin_id"));
+        user.setName(rs.getString("admin_nome"));
+        user.setPassword(rs.getString("admin_senha"));
+        return user;
 
     }
 
     @Override
-    public void insert(Admin admin) {
+    public void insert(User admin) {
         PreparedStatement st = null;
         try{
             st = connection.prepareStatement(
@@ -109,7 +109,7 @@ public class AdminDaoJDBC implements AdminDao {
     }
 
     @Override
-    public void update(Admin admin) {
+    public void update(User admin) {
         PreparedStatement st = null;
         try {
             st = connection.prepareStatement(

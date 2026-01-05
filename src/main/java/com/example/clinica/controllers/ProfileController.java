@@ -3,6 +3,7 @@ package com.example.clinica.controllers;
 import com.example.clinica.MainApplication;
 import com.example.clinica.alerts.AlertMessage;
 import com.example.clinica.model.entities.Admin;
+import com.example.clinica.model.entities.User;
 import com.example.clinica.model.services.AuthenticateService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -92,14 +93,14 @@ public class ProfileController implements Initializable{
             AlertMessage.errorMessage("Preencha todos os campos");
         }
     }
-    private void createDialogView(ActionEvent event, Admin admin){
+    private void createDialogView(ActionEvent event, User user){
         try {
             FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource("update-profile-view.fxml"));
             Pane dialogPane = loader.load();
             Stage stage = new Stage();
             UpdateProfileViewController controller = loader.getController();
             controller.setAuthenticateService(authenticateService);
-            controller.updateData(admin);
+            controller.updateData(user);
             stage.setTitle("Digite os novos dados do usuário");
             stage.setResizable(false);
             stage.initOwner(((Node)event.getSource()).getScene().getWindow());

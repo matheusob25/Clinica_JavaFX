@@ -3,6 +3,7 @@ package com.example.clinica.controllers;
 import com.example.clinica.alerts.AlertMessage;
 import com.example.clinica.db.DbException;
 import com.example.clinica.model.entities.Admin;
+import com.example.clinica.model.entities.User;
 import com.example.clinica.model.services.AuthenticateService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +20,7 @@ import java.util.ResourceBundle;
 
 public class UpdateProfileViewController implements Initializable {
     private AuthenticateService authenticateService;
-    private Admin admin;
+    private User user;
     @FXML
     private PasswordField confirmationPasswordField;
 
@@ -38,9 +39,9 @@ public class UpdateProfileViewController implements Initializable {
         this.authenticateService = authenticateService;
     }
 
-    public void updateData(Admin admin) {
-        this.admin = admin;
-        nameField.setText(admin.getName());
+    public void updateData(User user) {
+        this.user = user;
+        nameField.setText(user.getName());
     }
 
     @FXML
@@ -50,10 +51,10 @@ public class UpdateProfileViewController implements Initializable {
         }
         if (!nameField.getText().isEmpty() && !passwordField.getText().isEmpty() && !confirmationPasswordField.getText().isEmpty() ) {
             if (passwordField.getText().equals(confirmationPasswordField.getText())) {
-                admin.setName(nameField.getText());
-                admin.setPassword(passwordField.getText());
+                user.setName(nameField.getText());
+                user.setPassword(passwordField.getText());
                 try {
-                    authenticateService.update(admin);
+                    authenticateService.update(user);
                 } catch (DbException e) {
                     e.printStackTrace();
                 }

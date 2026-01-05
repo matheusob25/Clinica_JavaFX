@@ -1,14 +1,15 @@
 package com.example.clinica.model.dao;
 
-import com.example.clinica.model.entities.Admin;
+import com.example.clinica.model.entities.User;
+
 
 import java.util.List;
 
-public interface AdminDao {
-    List<Admin> findAll();
-    Admin findById(Long id);
-    void insert(Admin admin);
+public interface UserDao {
+    List<User> findAll();
+    User findById(Long id);
+    void insert(User admin);
     void deleteById(Long id);
-    void update(Admin admin);
-    Admin findByName(String name);
+    void update(User admin);
+    User findByName(String name);
 }
